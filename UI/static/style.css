@@ -107,13 +107,6 @@ nav ul li a:hover {
     color: #fff;
 }
 
-.active {
-    background: #d13239;
-    color: #fff;
-    border-radius: 6px;
-    border: #d13239 solid 3px;
-}
-
 .focus{
     border: #d13239 solid 3px;
     border-radius: 6px;
@@ -127,4 +120,34 @@ nav ul li a:hover {
 .focus:hover{
     background: #d13239;
     color: #fff
+}
+
+.section{
+    width: 100%;
+    height: 570px;
+    background-color: #717073;
+    background: url(../images/background.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.content {
+    margin-top: 80px;
+}
+
+.card-container{
+    width: 100%;
+}
+
+.card{
+    height: 400px;
+    width: 380px;
+    margin: 0;
+    float: left;
+    padding: 8px 12px;
+    margin: 15px 8px;
+}
+
+.card:hover{
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
