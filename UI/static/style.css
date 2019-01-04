@@ -43,6 +43,8 @@ body{
     transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
     box-sizing: border-box;
     border-top: 3px solid #d13239;
+    height: 100px;
+    padding: 10px 100px;
 }
 
 
@@ -77,9 +79,15 @@ nav ul{
     display: flex;
 }
 
+
 nav ul li{
     margin: 10px;
 }
+
+nav ul li a:hover{
+    border-bottom: #d13239 3px solid;
+}
+
 
 nav ul li a {
     line-height: 80px;
@@ -89,6 +97,14 @@ nav ul li a {
     text-transform: uppercase;
     transition: .3s;
     font-size: 18px;
+}
+
+nav ul li a:hover {
+    color: #d13239;
+}
+
+.black nav ul li a:hover {
+    color: #fff;
 }
 
 .active {
@@ -102,4 +118,13 @@ nav ul li a {
     border: #d13239 solid 3px;
     border-radius: 6px;
 
+}
+
+.black{
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.focus:hover{
+    background: #d13239;
+    color: #fff
 }
