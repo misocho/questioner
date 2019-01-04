@@ -1,0 +1,105 @@
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.book-regular.otf);
+}
+
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.bold-regular.otf);
+    font-weight: bold;
+}
+
+
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Quicksand;
+    background-color: #f4f4f4;
+    font-size: 100%;
+    color: #242729;
+    display: block;
+}
+
+.body-box{
+    display: block;
+}
+
+.container{
+    padding: 15px;
+    margin: 15px;
+}
+
+#header{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    min-width: auto;
+    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
+    top: 0;
+    left: 0;
+    transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
+    box-sizing: border-box;
+    border-top: 3px solid #d13239;
+}
+
+
+.logo{
+    text-align: center;
+    font-weight: bold;
+    color: #d13239;
+}
+
+#top-logo{
+    padding: 25px 20px;
+    transition: .3s;
+    font-size: 3em;
+    float: left;
+
+}
+
+#top-logo p{
+    padding: 10;
+    margin: 0;
+}
+nav{
+    float: right;
+    text-align: center;
+    transition: .3s;
+    font-weight: bold;
+}
+nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li{
+    margin: 10px;
+}
+
+nav ul li a {
+    line-height: 80px;
+    color: #d13239;
+    padding: 12px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: .3s;
+    font-size: 18px;
+}
+
+.active {
+    background: #d13239;
+    color: #fff;
+    border-radius: 6px;
+    border: #d13239 solid 3px;
+}
+
+.focus{
+    border: #d13239 solid 3px;
+    border-radius: 6px;
+
+}
