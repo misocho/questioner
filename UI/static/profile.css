@@ -1,0 +1,103 @@
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.book-regular.otf);
+}
+
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.bold-regular.otf);
+    font-weight: bold;
+}
+
+.page-body{
+    padding-top: 130px;
+}
+
+.page-wrapper{
+    position: relative;
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    height: max-content;
+    text-align: center;
+}
+
+#profile-section{
+    display: inline-block;
+    height: 100%;
+    width: 95%;
+}
+
+#left-box{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#right-box{
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+
+#profile-info{
+    padding: 20px;
+    margin: 0 15px;
+}
+
+.page-title{
+    font-size: 1.8em;
+    font-weight: 600;
+    padding: 15px;
+    font-family: Quicksand;
+    color: #242729;
+}
+
+.box-container{
+    padding: 10px;
+    height: -webkit-fill-available;
+}
+
+.box-content{
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+}
+
+#personal-details-box{
+    padding: 10px;
+}
+
+.box-title{
+    padding: 10px 0px;
+    padding-right: 5px;
+    display: inline-block;
+    margin: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    border-bottom: #d13239 solid 3px;
+}
+
+#email{
+    padding: 5px;
+    margin: 0;
+}
+#my-email{
+    padding: 5px;
+}
+
+#change-pass a{
+    line-height: 80px;
+    color: #d13239;
+    padding: 10px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: .3s;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#change-pass a:hover{
+    color: #f4f4f4;
+}
