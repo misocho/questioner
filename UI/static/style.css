@@ -193,7 +193,7 @@ nav ul li a:hover {
 .content {
     margin-top: 10px;
     background: #f4f4f4;
-    height: 700px;
+    height: 100%;
     width: 100%;
     text-align: center;
 }
@@ -205,10 +205,9 @@ nav ul li a:hover {
 }
 
 .card{
-    white-space: nowrap;
     overflow: auto;
     text-align: center;
-    height: 450px;
+    height: 430px;
     width: 33.3333%;
     margin: 0;
     float: left;
@@ -218,19 +217,109 @@ nav ul li a:hover {
 }
 .in-card{
     display: inline-block;
-    padding: 10px;
     margin: 20px;
     width: 350px;
     height: 380px;
-
+    border-radius: 6px;
 }
 
 .in-card:hover{
     box-shadow: 3px 3px 3px 3px #777;
     transition: 0.2s ease-out;
-    margin-bottom: 5px;
 }
 
 .card-content{
     margin: 0;
+}
+
+.in-card-upper{
+    height: auto;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.in-card-image{
+    background: url(../images/macbook.png);
+    width: 350px;
+    height: 233px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.lower-container{
+    display: block;
+    overflow: visible;
+    position: relative;
+    padding: 15px;
+}
+.in-card-lower{
+    height: 147px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex: 1 0 auto;
+}
+
+
+
+.in-card-date{
+    max-width: 48px;
+    flex: 0 0 auto;
+    font-family: Quicksand;
+    font-weight: 600;
+    font-size: 1.5em;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding-right: 15px;
+}
+
+.in-card-date .month{
+    color: #d13239;
+    margin: 5px;
+}
+
+.in-card-date .date{
+    color: #242729;
+    margin: 5px;
+}
+
+.in-card-text{
+    flex: 1 1 auto;
+    word-break: break-word;
+}
+
+.meetup-text{
+    text-align: justify;
+}
+
+.meetup-title{
+    display: block;
+    word-break: break-word;
+    text-align: left;
+    cursor: pointer;
+}
+
+.meetup-title a{
+   word-break: break-word;
+   font-size: 1.25em;
+   text-decoration: none;
+   text-transform: uppercase;
+}
+
+.meetup-details{
+    margin-top: 15px;
+    padding-top: 10px;
+
+}
+
+.meetup-details p{
+    color: #717073;
+    padding-top: 10px;
+    margin: 0;
+    font-size: 0.95em;
 }
