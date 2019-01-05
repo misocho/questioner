@@ -1,3 +1,14 @@
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.book-regular.otf);
+}
+
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.bold-regular.otf);
+    font-weight: bold;
+}
+
 .page-body{
     padding-top: 150px;
 }
@@ -27,7 +38,7 @@
     display: inline-block;
 }
 
-.create-account-text{
+.page-text{
     color: #6f7287;
     font-size: 1rem;
     font-weight: 550;
@@ -41,8 +52,9 @@
     padding-bottom: 0;
     padding-top: 10px;
     margin: 10px 0;
-    border-bottom: 1px solid #d13239;
+  
 }
+
 
 .textbox input{
     font-family: Quicksand;
@@ -52,10 +64,20 @@
     color: black;
     font-size: 18px;
     width: 100%;
+    height: 100%;
     margin: 8px;
     margin-bottom: 0;
     background: transparent;
+    border-bottom: 2px solid #6f7287;
 }
+
+input:focus{
+    border-bottom: 2px solid #d13239;
+    outline: none !important;
+    color: #d13239;
+    transition: .3s;
+}
+
 
 #left{
     width: 50%;
@@ -73,4 +95,31 @@
 
 .lastname{
     padding-left: 10px;
+}
+
+.account{
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.account a{
+    color: #d13239;
+    text-decoration: none;
+}
+
+.account a:hover{
+    border-bottom: #d13239 solid 1px;
+}
+
+.button{
+    padding: 0;
+    margin: 0;
+}
+
+.signup-btn{
+    padding: 10px;
+    background: #d13239;
+    color: #f4f4f4;
+    border: #d13239 solid 3px;
+    border-radius: 6px;
 }

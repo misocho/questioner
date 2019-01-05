@@ -33,6 +33,11 @@ body{
     position: relative;
 }
 
+.header-background{
+    background: #f4f4f4;
+    background-repeat: no-repeat;
+}
+
 .top-container{
     height: 580px;
     margin-bottom: 20px;
@@ -172,7 +177,7 @@ nav ul li a:hover {
     margin: 10px;
 }
 #signup-btn a{
-    background: #000f3d;
+    background: #d13239;
     padding: 0.5em 1.5em;
     color: #fff;
     border: 0;
@@ -309,7 +314,7 @@ nav ul li a:hover {
    text-decoration: none;
    text-transform: uppercase;
 }
-
+button
 .meetup-details{
     margin-top: 15px;
     padding-top: 10px;
@@ -343,5 +348,5 @@ nav ul li a:hover {
 .show-more:hover{
     color: #d13239;
     transition: .3s;
-
 }
+
