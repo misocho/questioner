@@ -98,7 +98,7 @@
     margin: 0;
 }
 
-.schedule-btn{
+.btn{
     padding: 10px;
     background: #d13239;
     font-size: 1rem;
@@ -122,6 +122,11 @@
     width: 90%;
 }
 
+.line{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+}
 #question-title{
     font-size: 1.8em;
     font-weight: 600;
