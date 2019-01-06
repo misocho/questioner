@@ -206,6 +206,7 @@
     position: relative;
     font-size: 16px;
     background: transparent;
+    line-height: 20px;
 }
 
 #ask-textarea:focus{
@@ -221,4 +222,72 @@
 
 #post-btn{
     width: auto;
+}
+
+.comments{
+    font-size: 12px;
+    font-family: Quicksand;
+    float: right;
+    padding: 1px 0;
+    height: 15px;
+    text-align: center;
+    margin: 1px 0;
+    font-weight: bold;
+}
+
+.comments a{
+    text-decoration: none;
+    color: rgba(111, 114, 135, 0.507);
+}
+
+.comment{
+    font-family:Quicksand;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.comment:hover{
+    cursor: pointer;
+    color: #d13239;
+}
+.comment-box{
+    margin-top: 10px;
+    display: flex;
+    border-radius: 16px;
+    background: #fff
+}
+.comment-area{
+    width: 80%;
+    float: left;
+    padding: 8px 15px;
+}
+
+.comment-textarea{
+    height: 25px;
+    width: 100%;
+    border: none;
+    float: left;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    position: relative;
+    font-family: Quicksand;
+    background: transparent;
+    outline: none;
+    resize: none;
+    padding: 0;
+    line-height: 20px;
+}
+
+.send-icon{
+    height: auto;
+    width: 50px;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+.send-img:hover{
+    cursor: pointer;
+    fill: #d13239
+    
 }
