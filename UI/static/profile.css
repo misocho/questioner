@@ -56,7 +56,8 @@
 
 .box-container{
     padding: 10px;
-    height: -webkit-fill-available;
+    height: 100%;
+    display: flex;
 }
 
 .box-content{
@@ -79,13 +80,16 @@
     border-bottom: #d13239 solid 3px;
 }
 
-#email{
-    padding: 5px;
+.details{
+    margin: 10px;
+}
+
+#user-details{
+    padding: 0;
     margin: 0;
 }
-#my-email{
-    padding: 5px;
-}
+
+
 
 #change-pass a{
     line-height: 80px;
@@ -105,23 +109,94 @@
 .sub-title{
     font-size: 18px;
     font-weight: 600;
+
 }
 
-#my-email{
+#user{
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.6rem;
 }
 
-#questions-title{
-    float: left;
-    padding-right: 15px; 
-    width: 70%;
+.my-count{
+    padding-left: 15px;
+    color: #d13239;
+    font-size: 1.8em;
+    font-weight: 600;
 }
 
-#no-questions{
-    float: left;
-    font-size: 20px;
-    font-weight: 600;
-    width: 30%;
+.space-content{
+    margin-bottom: 50px;
+}
+
+.min-content{
+    margin: auto;
+}
+
+#questions-section{
+   width: calc(100% - 300px - 24px);
+   float: left;
+}
+
+.q-list{
+    overflow: auto;
+    margin-bottom: 30px;
+    padding: 0 50px;
+}
+
+.q-summary{
+    overflow: hidden;
+    border-bottom: 1px solid #0a0a0a2f;
+    display: flex;
+    padding: 12px 30px;
+    float: none;
+    cursor: pointer;
+}
+
+.count{
+    padding-top: 13px;
+    padding-right: 10px;
+    padding-bottom: 13px;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+
+.side-count{
+    text-align: center;
+    color: #d13239;
+    display: inline-block;
+    margin: 0 3px 0 0;
+    min-width: 44px;
+    height: auto;
+    font-size: 11px;
+    padding: 6px;
+    border: 1px solid #d13239;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
+.total-counts{
+    font-size: 17px;
+    font-weight: 500;
+    color: #d13239;
+    margin-bottom: 4px;
+}
+
+.question{
+    text-decoration: none;
+    color: #242729;
+    text-align: justify;
+}
+
+#upcoming-meetups{
+    float: right;
+    width: 300px;
+    margin-left: 24px;
+    text-align: justify;
+}
+
+
+#meetups-container{
+    padding: 0;
+    margin-top: 30px;
 }
