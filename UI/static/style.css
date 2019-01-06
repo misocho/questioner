@@ -53,7 +53,6 @@ body{
     box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
     top: 0;
     left: 0;
-    transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
     box-sizing: border-box;
     border-top: 3px solid #d13239;
     height: 100px;
@@ -282,12 +281,12 @@ nav ul li a:hover {
     padding-right: 15px;
 }
 
-.in-card-date .month{
+.month{
     color: #d13239;
     margin: 5px;
 }
 
-.in-card-date .date{
+.date{
     color: #242729;
     margin: 5px;
 }
