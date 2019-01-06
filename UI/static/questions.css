@@ -192,13 +192,13 @@
     padding: 25px 25px;
     background: #fff;
     border-radius: 6px;
-    width: 100%;
 }
 #ask-textarea{
+    margin-right: 35px;
     border: none;
     resize: none;
     font-family: Quicksand;
-    width: 95%;
+    width: 85%;
     float: left;
     overflow: hidden;
     overflow-wrap: break-word;
@@ -210,4 +210,15 @@
 
 #ask-textarea:focus{
     outline: none;
+}
+
+#post-button{
+    display: -webkit-box;
+    margin-top:15px;
+    text-align: center;
+    width: auto;
+}
+
+#post-btn{
+    width: auto;
 }
