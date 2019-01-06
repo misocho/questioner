@@ -298,5 +298,14 @@
 }
 
 #Layer_1{
-    fill: #d13239;
+    fill: #6F7287;
 }
+
+#Layer_1:hover{
+    fill: #d13239;
+    cursor: pointer;
+}
+.comments-box{
+    margin-top: 10px;
+}
+
