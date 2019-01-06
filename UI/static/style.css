@@ -242,6 +242,10 @@ nav ul li a:hover {
     width: 100%;
 }
 
+a{
+    text-decoration: none;
+    color: #242729
+}
 .in-card-image{
     background: url(../images/macbook.png);
     width: 350px;
