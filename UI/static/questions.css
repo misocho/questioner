@@ -227,19 +227,46 @@
     font-size: 12px;
     font-family: Quicksand;
     float: right;
+    padding: 1px 0;
+    height: 15px;
+    text-align: center;
+    margin: 1px 0;
+    font-weight: bold;
 }
 
 .comments a{
     text-decoration: none;
-    color: #6F7287;
+    color: rgba(111, 114, 135, 0.507);
 }
 
 .comment{
     background: transparent;
     border: none;
+    outline: none;
 }
 
 .comment:hover{
     cursor: pointer;
     color: #d13239;
+}
+
+.comment-box{
+    display: flex;
+    background: #fff;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.comment-textarea{
+    height: 25px;
+    width: 100%;
+    border: none;
+    float: left;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    position: relative;
+    font-family: Quicksand;
+    background: transparent;
+    outline: none;
+    resize: none;
 }
