@@ -62,7 +62,7 @@
     padding: 10px;
     height: 100%;
     margin-left: 10px;
-    text-align:justify;
+    text-align:left;
     font-weight: 600;
     font-size: 1.5em;
 }
@@ -71,4 +71,39 @@
     display: inline-block;
     padding: 10px;
     text-align: center;
+}
+
+#meetup-title{
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+#meetup-by{
+    color: #6F7287;
+    font-size: 15px;
+    margin-top: 15px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+#meetup-by:hover{
+    text-decoration: #6F7287 solid 1px;
+}
+#host-name{
+    text-transform: capitalize;
+}
+
+.button{
+    padding: 15px;
+    margin: 0;
+}
+
+.schedule-btn{
+    padding: 10px;
+    background: #d13239;
+    font-size: 1rem;
+    color: #f4f4f4;
+    border: #d13239 solid 3px;
+    border-radius: 6px;
+    width: 100%;
 }
