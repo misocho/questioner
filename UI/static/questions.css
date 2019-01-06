@@ -187,3 +187,27 @@
     color: #242729;
     text-align: justify;
 }
+#ask-question{
+    display: flex;
+    padding: 25px 25px;
+    background: #fff;
+    border-radius: 6px;
+    width: 100%;
+}
+#ask-textarea{
+    border: none;
+    resize: none;
+    font-family: Quicksand;
+    width: 95%;
+    float: left;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    height: 78px;
+    position: relative;
+    font-size: 16px;
+    background: transparent;
+}
+
+#ask-textarea:focus{
+    outline: none;
+}
