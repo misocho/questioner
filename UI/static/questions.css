@@ -222,3 +222,24 @@
 #post-btn{
     width: auto;
 }
+
+.comments{
+    font-size: 12px;
+    font-family: Quicksand;
+    float: right;
+}
+
+.comments a{
+    text-decoration: none;
+    color: #6F7287;
+}
+
+.comment{
+    background: transparent;
+    border: none;
+}
+
+.comment:hover{
+    cursor: pointer;
+    color: #d13239;
+}
