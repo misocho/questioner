@@ -30,11 +30,12 @@
     width: 80%;
     margin: 30px;
     border-radius: 6px; 
-    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
+    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(21, 91, 161, 0.1);
     transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
 }
 
 #posted-meetups-title{
+    display: inline-block;
     padding: 20px; 
     margin: 0 20px;
     padding-left: 0;
@@ -43,9 +44,10 @@
     font-weight: 600;
     font-family: Quicksand;
     color: #242729;
+    border-bottom: #d13239 3px solid;
+    border-radius: 3px;
 }
 #posted-meetups-container{
-    border: 1px solid black;
     padding: 20px; 
     margin:20px;
     padding-left: 0;
@@ -53,7 +55,7 @@
 }
 
 .meetup-container{
-    border-bottom: 1px solid black;
+    
     padding: 10px 0;
      
     margin:10px 20px;
@@ -66,4 +68,25 @@
     list-style: none;
     padding-left: 0;
     flex-direction: column;
+}
+
+.delete-meetup{
+    width: 30px;
+    float: right;
+    height: 30px;
+}
+
+.delete-meetup:hover{
+    box-shadow:  0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(21, 91, 161, 0.1);
+}
+
+.list-item{
+    border-bottom:1px solid #0a0a0a2f;
+    padding: 9px;
+    float: left;
+    width: 80%;
+}
+
+#Layer_1:hover{
+    fill: #d13239
 }
