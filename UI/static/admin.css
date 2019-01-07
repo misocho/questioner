@@ -1,0 +1,34 @@
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.book-regular.otf);
+}
+
+@font-face{
+    font-family: Quicksand;
+    src: url(../fonts/quicksand.bold-regular.otf);
+    font-weight: bold;
+}
+
+#page-body{
+    padding-top: 100px;
+}
+
+.page-wrapper{
+    position: relative;
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    height: max-content;
+    text-align: center;
+}
+
+#content{
+    display: inline-block;
+    height: 500px;
+    width: 80%;
+    margin: 30px;
+    border-radius: 6px; 
+    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
+    transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
+}
