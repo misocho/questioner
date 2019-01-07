@@ -291,3 +291,21 @@
     fill: #d13239
     
 }
+
+.like-btn{
+    background: none;
+    border: none;
+}
+
+#Layer_1{
+    fill: #6F7287;
+}
+
+#Layer_1:hover{
+    fill: #d13239;
+    cursor: pointer;
+}
+.comments-box{
+    margin-top: 10px;
+}
+
