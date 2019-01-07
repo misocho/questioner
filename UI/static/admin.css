@@ -24,6 +24,7 @@
 }
 
 #content{
+    text-align: center;
     display: inline-block;
     height: 500px;
     width: 80%;
@@ -31,4 +32,38 @@
     border-radius: 6px; 
     box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
     transition:box-shadow cubic-bezier(.165, .84, .44, 1) .25s;
+}
+
+#posted-meetups-title{
+    padding: 20px; 
+    margin: 0 20px;
+    padding-left: 0;
+    text-align: left;
+    font-size: 1.8em;
+    font-weight: 600;
+    font-family: Quicksand;
+    color: #242729;
+}
+#posted-meetups-container{
+    border: 1px solid black;
+    padding: 20px; 
+    margin:20px;
+    padding-left: 0;
+    text-align: left;
+}
+
+.meetup-container{
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+     
+    margin:10px 20px;
+}
+
+#posted-meetups-container ul{
+    text-decoration: none;
+    text-align: left;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    flex-direction: column;
 }
