@@ -90,3 +90,15 @@
 #Layer_1:hover{
     fill: #d13239
 }
+
+#add-button{
+    width: 30px;
+    float: right;
+    height: 30px;
+
+}
+
+
+#svg_1:hover{
+    fill:#d13239;
+}
