@@ -1,10 +1,10 @@
 from flask import Flask, Blueprint, request, jsonify, make_response
 from ..models import meetup_models
 
-app = Blueprint('app', __name__, url_prefix='/api/v1')
+auth = Blueprint('auth', __name__, url_prefix='/api/v1')
 meetups = meetup_models.MeetupModels()
 
-@app.route('/create_meetup', methods=['POST'])
+@auth.route('/create_meetup', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
 
