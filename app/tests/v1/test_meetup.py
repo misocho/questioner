@@ -51,7 +51,7 @@ class TestMeetup(unittest.TestCase):
 
     def test_no_getOne_meetup(self):
         """ tests when meetup does not exist """
-        response = self.client.get("api/v1/meetups/10")
+        response = self.client.get("api/v1/meetups/3")
         res = json.loads(response.data.decode())
         self.assertEqual(res["message"], "meetup not found")
         self.assertEqual(response.status_code, 404)
