@@ -28,5 +28,7 @@ class TestMeetup(unittest.TestCase):
 
     det test_getall_meetups(self):
     """ tests get all meetups """
-    resonse = self.client.get("api/v1/meetups")
-    res = json.loads()
+        response = self.client.get("api/v1/meetups")
+        res = json.loads(reponse.data.decode())
+        self.assertEqual(res["message"], "Success")
+        self.assertEqual(res.status_code, 200)
