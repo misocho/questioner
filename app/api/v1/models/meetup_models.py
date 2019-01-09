@@ -1,6 +1,21 @@
 from datetime import datetime
 
-meetups = []
+meetups = [
+    {
+    "createdOn": "Wed, 09 Jan 2019 07:44:28 GMT",
+    "from_date": "Fri, 01 Feb 2019 08:00:00 GMT",
+    "from_time": "Fri, 01 Feb 2019 17:00:00 GMT",
+    "location": "Nairobi kenya",
+    "meetup_id": 1,
+    "organizer": "Andela",
+    "tags": [
+        "andela",
+        "flutter"
+    ],
+    "title": "flutter study jam",
+    "to_date": "Fri, 01 Feb 2019 17:00:00 GMT"
+}
+]
 
 
 class MeetupModels():

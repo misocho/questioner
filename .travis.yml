@@ -3,9 +3,6 @@ language: python
 python:
   -"3.5.2"
 
-matrix:
-  include:
-    sudo:true
 install:
   -pip install -r reqirements.txt
 
