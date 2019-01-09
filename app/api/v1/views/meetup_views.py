@@ -37,5 +37,7 @@ def getOne(meetupId):
     """ endpoint for get specific meetup """
     meetup = meetups.get_meetup(meetupId)
     if meetup:
-        return make_response(jsonify({'meetup' : meetup[0]}), 200)
+        return make_response(jsonify({
+            'message' : 'Success',
+            'meetup' : meetup[0]}), 200)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
