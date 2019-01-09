@@ -20,4 +20,4 @@ def create_meetup():
 
     res = jsonify(meetups.create_meetup(title, organizer, location, from_date, to_date, tags))
     res.status_code = 201
-    return res
+    return res 
