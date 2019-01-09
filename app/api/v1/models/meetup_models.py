@@ -39,7 +39,7 @@ class MeetupModels():
         }
 
         self.db.append(payload)
-        return payload, {"message":"meetup was created successfilly"}
+        return payload, {"message":"meetup was created successfully"}
 
     def getall_meetups(self):
-        return meetups
+        return self.db
