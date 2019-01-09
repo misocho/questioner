@@ -2,7 +2,10 @@ language: python
 
 python:
   -"3.6.7"
-
+  
+matrix:
+  include:
+    sudo:true
 install:
   -pip install -r reqirements.txt
 
