@@ -1,33 +1,17 @@
 from datetime import datetime
 
-meetups = [
-    {
-    "createdOn": "Wed, 09 Jan 2019 07:44:28 GMT",
-    "from_date": "Fri, 01 Feb 2019 08:00:00 GMT",
-    "from_time": "Fri, 01 Feb 2019 17:00:00 GMT",
-    "location": "Nairobi kenya",
-    "meetup_id": 1,
-    "organizer": "Andela",
-    "tags": [
-        "andela",
-        "flutter"
-    ],
-    "title": "flutter study jam",
-    "to_date": "Fri, 01 Feb 2019 17:00:00 GMT"
-}
-]
+meetups = []
 
 
 class MeetupModels():
     def __init__(self):
         self.db = meetups
-        self.id = len(meetups) + 1
         self.now = datetime.now()
 
     def create_meetup(self, title, organizer, location, from_date, to_date, tags):
         """ method to add meetup """
         payload = {
-            "meetup_id" : self.id,
+            "meetup_id" : str(len(meetups) + 1),
             "title" : title,
             "organizer" : organizer,
             "createdOn" : self.now,
@@ -43,3 +27,7 @@ class MeetupModels():
 
     def getall_meetups(self):
         return self.db
+
+    def get_meetup(self, meetupId):
+        meetup = [meetup for meetup in meetups if meetup["meetup_id"] == meetupId]
+        return meetup

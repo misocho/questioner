@@ -23,7 +23,10 @@ class TestMeetup(unittest.TestCase):
 
     def test_new_meetup(self):
         """ tests create new meetup endpoint"""
+        
         res = self.client.post("api/v1/create_meetup", data = json.dumps(self.meetup), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("meetup was created successfully", str(res_data))
         self.assertEqual(res.status_code, 201)
 
     def test_getall_meetups(self):
@@ -35,7 +38,20 @@ class TestMeetup(unittest.TestCase):
 
     def test_getOne_meetup(self):
         """ tests get one meetup endpoint """
-        response = self.client.get("api/v1/meetups/<meetupId>")
+         # post a meetup
+        post_response = self.client.post("api/v1/create_meetup", data = json.dumps(self.meetup), content_type='application/json')
+        post_response_data = json.loads(post_response.data.decode())
+        self.assertIn("meetup was created successfully", str(post_response_data))
+        self.assertEqual(post_response.status_code, 201)
+        # feach a specific meetup
+        response = self.client.get("api/v1/meetups/1")
         res = json.loads(response.data.decode())
         self.assertEqual(res["message"], "Success")
         self.assertEqual(response.status_code, 200)
+
+    def test_no_getOne_meetup(self):
+        """ tests when meetup does not exist """
+        response = self.client.get("api/v1/meetups/3")
+        res = json.loads(response.data.decode())
+        self.assertEqual(res["message"], "meetup not found")
+        self.assertEqual(response.status_code, 404)
