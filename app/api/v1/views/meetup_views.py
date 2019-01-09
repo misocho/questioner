@@ -26,8 +26,8 @@ def create_meetup():
 def getall():
     """ endpoint for get all meetups """
 
-    data = make_response(meetups.getall_meetups())
-    res_data = data.json()
-    
-    return jsonify(res_data)
-     
+    data = meetups.getall_meetups()
+    return make_response (jsonify({
+        "message" : "Success",
+        "meetups" : data
+    }), 200)
