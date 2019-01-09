@@ -6,10 +6,10 @@ matrix:
     sudo: true
 
 install:
-  pip install -r reqirements.txt
+  - pip install -r reqirements.txt
 
 script:
-  -pytest --cov=app/
+  - pytest --cov=app/
   
 after_success:
   - coveralls
