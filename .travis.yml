@@ -1,7 +1,9 @@
 language: python
 
-python:
-  -"3.5.2"
+matrix:
+  include:
+    python: 3.5
+    sudo: true
 
 install:
   -pip install -r reqirements.txt
@@ -11,3 +13,5 @@ script:
   
 after_success:
   - coveralls
+
+cache: pip
