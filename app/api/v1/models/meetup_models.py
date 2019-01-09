@@ -29,5 +29,5 @@ class MeetupModels():
         return self.db
 
     def get_meetup(self, meetupId):
-        meetup = [meetup for meetup in meetupss if meetup["meetup_id"] == meetupId]
+        meetup = [meetup for meetup in meetups if meetup["meetup_id"] == meetupId]
         return meetup

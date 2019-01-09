@@ -31,3 +31,10 @@ def getall():
         "message" : "Success",
         "meetups" : data
     }), 200)
+
+@meetup_blueprint.route('/meetups/<meetupId>', methods=['GET'])
+def getOne(meetupId):
+    """ endpoint for get specific meetup """
+    meetup = make_response(jsonify(meetups.get_meetup(meetupId)))
+    meetup_data = meetup.json()
+    return meetup_data["meetupId"]
