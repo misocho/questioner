@@ -6,7 +6,7 @@ matrix:
     sudo: true
 
 install:
-  pip install -r --user reqirements.txt
+  pip install -r reqirements.txt
 
 script:
   -pytest --cov=app/
