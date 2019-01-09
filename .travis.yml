@@ -2,11 +2,11 @@ language: python
 
 matrix:
   include:
-    python: 3.5
+    python: 3.5.2
     sudo: true
 
 install:
-  -pip install -r --user reqirements.txt
+  pip install -r --user reqirements.txt
 
 script:
   -pytest --cov=app/
