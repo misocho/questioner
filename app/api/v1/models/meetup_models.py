@@ -11,7 +11,7 @@ class MeetupModels():
     def create_meetup(self, title, organizer, location, from_date, to_date, tags):
         """ method to add meetup """
         payload = {
-            "meetup_id" : len(self.db) + 1,
+            "meetup_id" : str(len(meetups) + 1),
             "title" : title,
             "organizer" : organizer,
             "createdOn" : self.now,
