@@ -31,4 +31,4 @@ class TestMeetup(unittest.TestCase):
         response = self.client.get("api/v1/meetups")
         res = json.loads(response.data.decode())
         self.assertEqual(res["message"], "Success")
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(response.status_code, 200)

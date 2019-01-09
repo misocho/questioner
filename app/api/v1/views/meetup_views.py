@@ -21,3 +21,13 @@ def create_meetup():
     res = jsonify(meetups.create_meetup(title, organizer, location, from_date, to_date, tags))
     res.status_code = 201
     return res 
+
+@auth.route('/meetups', methods=['GET'])
+def getall():
+    """ endpoint for get all meetups """
+
+    data = meetups.getall_meetups()
+    return make_response (jsonify({
+        "message" : "Success",
+        "meetups" : data
+    }), 200)
