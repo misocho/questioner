@@ -32,3 +32,17 @@ class QuestionModels():
             }
 
             return payload, {"message": "upvote successfull"}
+
+    def downvote_question(self, question_id):
+        """ method to downvote question """
+
+        question = [
+            question for question in self.db if question["question_id"] == question_id]
+        if question:
+            payload = {
+                "meetupId": question[0]["meetup"],
+                "body": question[0]["body"],
+                "votes": self.votes - 1
+            }
+
+            return payload, {"message": "upvote successfull"}
