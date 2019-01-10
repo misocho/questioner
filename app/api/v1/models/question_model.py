@@ -16,4 +16,4 @@ class QuestionModels():
         }
 
         self.db.append(payload)
-        return payload, {"message" : "meetup wad created succeccfilly"}
+        return payload, {"message" : "question was successsfully posted"}
