@@ -26,3 +26,11 @@ def upvote(question_id):
     res = jsonify(questions.upvote_question(question_id))
     res.status_code = 201
     return res
+
+@question_blueprint.route('/questions/<question_id>/downvote', methods=['POST'])
+def downvote(question_id):
+    """ endpoint for downvote question """
+    question_id = question_id
+    res = jsonify(questions.downvote_question(question_id))
+    res.status_code = 201
+    return res
