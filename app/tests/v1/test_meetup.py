@@ -55,3 +55,11 @@ class TestMeetup(unittest.TestCase):
         res = json.loads(response.data.decode())
         self.assertEqual(res["message"], "meetup not found")
         self.assertEqual(response.status_code, 404)
+
+    def test_rsvp_meetup(self):
+        """ creates test for rsvp meetup """
+        # rsvp meetup
+        response = self.client.get("api/v1/meetups/1/rsvp")
+        res = json.loads(response.data.decode())
+        self.assertEqual(res["message"], "rsvp seccessfull")
+        self.assertEqual(response.status_code, 200)
