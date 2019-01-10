@@ -18,3 +18,12 @@ def post_question():
     res = jsonify(questions.post_question(meetup_id, postedby, body))
     res.status_code = 201
     return res
+
+@question_blueprint.route('/questions/<question_id>/upvote', methods=['POST'])
+def upvote(question_id):
+    """ endpoint for upvote question """
+
+    question_id = question_id
+    res = jsonify(questions.upvote_question(question_id))
+    res.status_code = 201
+    return res
