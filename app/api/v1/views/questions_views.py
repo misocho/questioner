@@ -22,7 +22,6 @@ def post_question():
 @question_blueprint.route('/questions/<question_id>/upvote', methods=['POST'])
 def upvote(question_id):
     """ endpoint for upvote question """
-
     question_id = question_id
     res = jsonify(questions.upvote_question(question_id))
     res.status_code = 201

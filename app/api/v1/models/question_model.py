@@ -2,12 +2,10 @@ questions = []
 
 
 class QuestionModels():
-
-    votes = 0
+    
     def __init__(self):
         self.db = questions
-        self.votes = QuestionModels.votes
-        QuestionModels.votes + 1
+        self.votes = 0
     def post_question(self, meetup_id, postedby, body):
         """ method to post question """
         payload = {
@@ -30,7 +28,7 @@ class QuestionModels():
             payload = {
                 "meetupId": question[0]["meetup"],
                 "body": question[0]["body"],
-                "votes": self.votes
+                "votes": self.votes + 1
             }
 
             return payload, {"message": "upvote successfull"}
