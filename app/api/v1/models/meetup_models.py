@@ -31,3 +31,15 @@ class MeetupModels():
     def get_meetup(self, meetupId):
         meetup = [meetup for meetup in meetups if meetup["meetup_id"] == meetupId]
         return meetup
+
+    def post_rsvp(self, userId, meetupId, response):
+        """ method for rsvp meetup """
+        payload = {
+            "rsvpId" : str(len(self.rsvp) + 1),
+            "userId" : userId,
+            "meetupId" : meetupId,
+            "response" : response
+        }
+
+        self.rsvp.append(payload)
+        return payload, {"message" : "rsvp successfull"}
