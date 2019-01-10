@@ -1,13 +1,13 @@
 from datetime import datetime
 
 meetups = []
-
+rsvp = []
 
 class MeetupModels():
     def __init__(self):
         self.db = meetups
         self.now = datetime.now()
-
+        self.rsvp = rsvp
     def create_meetup(self, title, organizer, location, from_date, to_date, tags):
         """ method to add meetup """
         payload = {
@@ -31,3 +31,15 @@ class MeetupModels():
     def get_meetup(self, meetupId):
         meetup = [meetup for meetup in meetups if meetup["meetup_id"] == meetupId]
         return meetup
+
+    def post_rsvp(self, userId, meetupId, response):
+        """ method for rsvp meetup """
+        payload = {
+            "rsvpId" : str(len(self.rsvp) + 1),
+            "userId" : userId,
+            "meetupId" : meetupId,
+            "response" : response
+        }
+
+        self.rsvp.append(payload)
+        return payload, {"message" : "rsvp successfull"}
