@@ -21,6 +21,11 @@ class TestMeetup(unittest.TestCase):
             "tags": ["andela", "flutter"]
         }
 
+        self.rsvp = {
+            "userId" : "1",
+            "response" : "attending"
+        }
+
     def test_new_meetup(self):
         """ tests create new meetup endpoint"""
         
@@ -59,7 +64,7 @@ class TestMeetup(unittest.TestCase):
     def test_rsvp_meetup(self):
         """ creates test for rsvp meetup """
         # rsvp meetup
-        response = self.client.get("api/v1/meetups/1/rsvp")
+        response = self.client.post("api/v1/meetups/1/rsvp", data = json.dumps(self.rsvp), content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertEqual(res["message"], "rsvp seccessfull")
-        self.assertEqual(response.status_code, 200)
+        self.assertIn("rsvp successfull", str(res))
+        self.assertEqual(response.status_code, 201)
