@@ -45,4 +45,4 @@ class QuestionModels():
                 "votes": self.votes - 1
             }
 
-            return payload, {"message": "upvote successfull"}
+            return payload, {"message": "downvote successfull"}
