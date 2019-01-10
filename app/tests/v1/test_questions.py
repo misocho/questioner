@@ -15,6 +15,11 @@ class TestQusetion(unittest.TestCase):
             "body" : "How can we get to the venue?",
         }
 
+        self.upvote = {
+            "meetupId" : "1",
+            "question-body" : "How can we get to the venue?"
+        }
+
     def test_post_question(self):
         """ tests post question """
 
@@ -22,3 +27,11 @@ class TestQusetion(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("question was successsfully posted", str(res_data))
         self.assertEqual(res.status_code, 201)
+
+    def test_upvote_question(self):
+        """" test for upvote question """
+        ### upvote question
+        response = self.client.post("api/v1/questions/1/upvote", data = json.dumps(self.upvote), content_type='app')
+        res = json.loads(response.data.decode())
+        self.assertIn("upvote successfull", str(res))
+        self.assertEqual(response.status_code, 201)
