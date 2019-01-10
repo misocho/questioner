@@ -15,5 +15,10 @@ class TestQusetion(unittest.TestCase):
             "body" : "How can we get to the venue?",
         }
 
-        def test_post_question(self):
-            
+    def test_post_question(self):
+        """ tests post question """
+
+        res = self.client.post("api/v1/questions", data = json.dumps(self.questions), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("question was successsfully posted", str(res_data))
+        self.assertEqual(res.status_code, 201)
