@@ -1,7 +1,8 @@
+from .base_model import BaseModels
 questions = []
 
 
-class QuestionModels():
+class QuestionModels(BaseModels):
     
     def __init__(self):
         self.db = questions
@@ -21,8 +22,7 @@ class QuestionModels():
     def upvote_question(self, question_id):
         """ method to upvote question """
 
-        question = [
-            question for question in self.db if question["question_id"] == question_id]
+        question = self.check_item(question_id, "question_id", self.db)
         if question:
             question[0]["votes"] += 1
 
@@ -31,8 +31,7 @@ class QuestionModels():
     def downvote_question(self, question_id):
         """ method to downvote question """
 
-        question = [
-            question for question in self.db if question["question_id"] == question_id]
+        question = self.check_item(question_id, "question_id", self.db)
         if question:
             question[0]["votes"] -= 1
 
