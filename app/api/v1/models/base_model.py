@@ -7,7 +7,7 @@ class BaseModels(object):
     """ contains methods common to other models """
 
     def __init__(self):
-        self.meetups = meetups
+        self.meetups  = meetups
         self.rsvp = rsvp
         self.questions = questions
 
