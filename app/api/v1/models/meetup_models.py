@@ -1,9 +1,9 @@
 from datetime import datetime
-
+from .base_model import BaseModels
 meetups = []
 rsvp = []
 
-class MeetupModels():
+class MeetupModels(BaseModels):
     def __init__(self):
         self.db = meetups
         self.now = datetime.now()
@@ -29,7 +29,7 @@ class MeetupModels():
         return self.db
 
     def get_meetup(self, meetupId):
-        meetup = [meetup for meetup in meetups if meetup["meetup_id"] == meetupId]
+        meetup = self.check_item(meetupId, "meetup_id", meetups)
         return meetup
 
     def post_rsvp(self, userId, meetupId, response):
