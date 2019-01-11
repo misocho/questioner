@@ -19,7 +19,7 @@ def post_question():
     res.status_code = 201
     return res
 
-@question_blueprint.route('/questions/<question_id>/upvote', methods=['POST'])
+@question_blueprint.route('/questions/<question_id>/upvote', methods=['PATCH'])
 def upvote(question_id):
     """ endpoint for upvote question """
     question_id = question_id
@@ -27,7 +27,7 @@ def upvote(question_id):
     res.status_code = 201
     return res
 
-@question_blueprint.route('/questions/<question_id>/downvote', methods=['POST'])
+@question_blueprint.route('/questions/<question_id>/downvote', methods=['PATCH'])
 def downvote(question_id):
     """ endpoint for downvote question """
     question_id = question_id
