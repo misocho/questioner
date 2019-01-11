@@ -36,7 +36,7 @@ class TestQusetion(unittest.TestCase):
     def test_upvote_question(self):
         """" test for upvote question """
         ### upvote question
-        response = self.client.post("api/v1/questions/1/upvote", data = json.dumps(self.upvote), content_type='application/json')
+        response = self.client.patch("api/v1/questions/1/upvote", data = json.dumps(self.upvote), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("upvote successfull", str(res))
         self.assertEqual(response.status_code, 201)
@@ -46,7 +46,7 @@ class TestQusetion(unittest.TestCase):
         ### Post question
         res = self.client.post("api/v1/questions", data = json.dumps(self.questions), content_type='application/json')
         ### downvote question
-        response = self.client.post("api/v1/questions/1/downvote", data = json.dumps(self.downvote), content_type='application/json')
+        response = self.client.patch("api/v1/questions/1/downvote", data = json.dumps(self.downvote), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("downvote successfull", str(res))
         self.assertEqual(response.status_code, 201)
