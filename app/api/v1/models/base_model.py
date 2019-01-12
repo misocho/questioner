@@ -17,6 +17,6 @@ class BaseModels(object):
         data = [record for record in db if record[key] == item]
         return data
 
-    def save_data(self, **kwargs):
+    def save_data(self, payload):
         self.db = self.check_db()
-        self.db.append(kwargs)
+        self.db.append(payload)
