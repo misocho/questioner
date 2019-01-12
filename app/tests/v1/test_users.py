@@ -23,3 +23,18 @@ class TestUsers(unittest.TestCase):
             "username" : "misocho",
             "password" : "scorpion234"
         }
+
+    def test_signup_user(self):
+        """ tests signup user """
+
+        res = self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("sign up was successfull", str(res_data))
+        self.assertEqual(res.status_code, 201)
+
+    def test_signin_user(self):
+        """ tests signin user """
+        res = self.client.get("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("sign in wass successfull", str(res_data))
+        self.assertEqual(res.status_code, 200)
