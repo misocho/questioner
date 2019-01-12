@@ -10,7 +10,7 @@ def singup():
 
     data = request.get_json()
     if not data:
-        return jsonify({"message" : "Data set cannot be empty"})
+        return(jsonify({"message" : "Data set cannot be empty"}), 404)
     first_name = data.get('first_name')
     last_name = data.get('last_name')
     account_type = data.get('account_type')
