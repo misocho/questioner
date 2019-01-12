@@ -14,6 +14,7 @@ class TestUsers(unittest.TestCase):
         self.singup_user = {
             "first_name": "Brian",
             "last_name" : "misocho",
+            "account_type" : "user",
             "username" : "misocho",
             "email" : "misochobrian@gmail.com",
             "password" : "scorpion234"
