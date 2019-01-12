@@ -4,7 +4,7 @@ from .base_model import BaseModels
 class UserModels(BaseModels):
     """ contains methods for user models """
 
-    def __init__(self, db):
+    def __init__(self):
         self.db = 'user'
 
 
@@ -17,7 +17,7 @@ class UserModels(BaseModels):
             "username": username,
             "email": email,
             "password": password
-        }
+        } , {"message" : 'sign up was successfull'}
 
         self.check_db()
-        self.save_data(payload)
+        return self.save_data(payload)

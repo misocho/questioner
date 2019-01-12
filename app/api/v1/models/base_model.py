@@ -1,4 +1,4 @@
-users_list = []
+users_list = {"userdb":[]}
 
 
 class BaseModels(object):
@@ -6,11 +6,10 @@ class BaseModels(object):
 
     def __init__(self, db):
         self.db = db
-        self.user_db = users_list
 
     def check_db(self):
         if self.db == 'user':
-            db = self.user_db
+            db = users_list["userdb"]
             return db
 
     def check_item(self, item, key, db):
@@ -18,5 +17,7 @@ class BaseModels(object):
         return data
 
     def save_data(self, payload):
-        self.db = self.check_db()
-        self.db.append(payload)
+        db = self.check_db()
+        db.append(payload)
+
+        return db
