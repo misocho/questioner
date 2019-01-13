@@ -3,14 +3,14 @@ from ..models import meetup_models
 
 meetup_blueprint = Blueprint('meetup_blueprint', __name__, url_prefix='/api/v1')
 meetups = meetup_models.MeetupModels()
-
+rsvp = meetup_models.RsvpModels()
 @meetup_blueprint.route('/create_meetup', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
 
     data = request.get_json()
     if not data:
-        return jsonify({"message": "Data set cannot be empty"})
+        return jsonify({"message": "Data set cannot be empty"}) , 202
     title = data.get('title')
     organizer = data.get('organizer')
     location = data.get('location')
@@ -39,7 +39,7 @@ def getOne(meetupId):
     if meetup:
         return make_response(jsonify({
             'message' : 'Success',
-            'meetup' : meetup[0]}), 200)
+            'meetup' : meetup}), 200)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
 
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
@@ -51,6 +51,5 @@ def rsvp_meetup(meetupId):
     meetupId = meetupId
     response  = data.get('response')
 
-    res = jsonify(meetups.post_rsvp(userId, meetupId, response))
-    res.status_code = 201
+    res = rsvp.post_rsvp(userId, meetupId, response)
     return res

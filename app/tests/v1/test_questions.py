@@ -15,15 +15,7 @@ class TestQusetion(unittest.TestCase):
             "body" : "How can we get to the venue?",
         }
 
-        self.upvote = {
-            "meetupId" : "1",
-            "question-body" : "How can we get to the venue?"
-        }
-
-        self.downvote = {
-            "meetupId" : "2",
-            "question-body" : "While meals be provided"
-        }
+        self.questions_nodata = {}
 
     def test_post_question(self):
         """ tests post question """
@@ -33,20 +25,40 @@ class TestQusetion(unittest.TestCase):
         self.assertIn("question was successsfully posted", str(res_data))
         self.assertEqual(res.status_code, 201)
 
+    def test_no_question(self):
+        """ tests post question """
+
+        res = self.client.post("api/v1/questions", data = json.dumps(self.questions_nodata), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Data set cannot be empty", str(res_data))
+        self.assertEqual(res.status_code, 202)
+
     def test_upvote_question(self):
         """" test for upvote question """
         ### upvote question
-        response = self.client.patch("api/v1/questions/1/upvote", data = json.dumps(self.upvote), content_type='application/json')
+        response = self.client.patch("api/v1/questions/1/upvote",content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("upvote successfull", str(res))
         self.assertEqual(response.status_code, 201)
+
+    def test_noquestion_upvote(self):
+        response = self.client.patch("api/v1/questions/3/upvote", content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("question not found", str(res))
+        self.assertEqual(response.status_code, 404)
 
     def test_downvote_question(self):
         """" test for downvote question """
         ### Post question
         res = self.client.post("api/v1/questions", data = json.dumps(self.questions), content_type='application/json')
         ### downvote question
-        response = self.client.patch("api/v1/questions/1/downvote", data = json.dumps(self.downvote), content_type='application/json')
+        response = self.client.patch("api/v1/questions/1/downvote", content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("downvote successfull", str(res))
         self.assertEqual(response.status_code, 201)
+
+    def test_noquestion_downvote(self):
+        response = self.client.patch("api/v1/questions/3/downvote", content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("question not found", str(res))
+        self.assertEqual(response.status_code, 404)

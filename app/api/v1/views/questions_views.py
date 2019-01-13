@@ -10,7 +10,7 @@ def post_question():
 
     data = request.get_json()
     if not data:
-        return jsonify({"message" : "Data set cannot be empty"})
+        return jsonify({"message" : "Data set cannot be empty"}), 202
     meetup_id = data.get('meetup_id')
     postedby = data.get('postedby')
     body = data.get('body')
@@ -23,14 +23,14 @@ def post_question():
 def upvote(question_id):
     """ endpoint for upvote question """
     question_id = question_id
-    res = jsonify(questions.upvote_question(question_id))
-    res.status_code = 201
+    res = questions.upvote_question(question_id)
+
     return res
 
 @question_blueprint.route('/questions/<question_id>/downvote', methods=['PATCH'])
 def downvote(question_id):
     """ endpoint for downvote question """
     question_id = question_id
-    res = jsonify(questions.downvote_question(question_id))
-    res.status_code = 201
+    res = questions.downvote_question(question_id)
+
     return res
