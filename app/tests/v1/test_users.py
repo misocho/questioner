@@ -14,11 +14,12 @@ class TestUsers(unittest.TestCase):
         self.singup_user = {
             "first_name": "Brian",
             "last_name" : "misocho",
+            "account_type" : "user",
             "username" : "misocho",
             "email" : "misochobrian@gmail.com",
             "password" : "scorpion234"
             }
-
+        self.nouser = {}
         self.signin_user = {
             "username" : "misocho",
             "password" : "scorpion234"
@@ -31,6 +32,12 @@ class TestUsers(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("sign up was successfull", str(res_data))
         self.assertEqual(res.status_code, 201)
+
+    def test_nodata_signup(self):
+        res = self.client.post("api/v1/signup", data = json.dumps(self.nouser), content_type='application/json')
+        res_data = json.loads(res.data.decode())       
+        self.assertIn("Data set cannot be empty", str(res_data))
+        self.assertEqual(res.status_code, 404)
 
     def test_signin_user(self):
         """ tests signin user """
