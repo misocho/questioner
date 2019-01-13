@@ -44,4 +44,4 @@ class TestUsers(unittest.TestCase):
         res = self.client.get("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("sign in wass successfull", str(res_data))
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 201)
