@@ -31,6 +31,6 @@ def upvote(question_id):
 def downvote(question_id):
     """ endpoint for downvote question """
     question_id = question_id
-    res = questions.upvote_question(question_id)
+    res = questions.downvote_question(question_id)
 
     return res

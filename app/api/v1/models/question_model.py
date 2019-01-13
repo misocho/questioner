@@ -38,6 +38,6 @@ class QuestionModels(BaseModels):
         if question:
             question["votes"] -= 1
 
-            return jsonify(question, {"message": "upvote successfull"}) , 201
+            return jsonify(question, {"message": "downvote successfull"}) , 201
 
         return jsonify({"message": "question not found"}), 404
