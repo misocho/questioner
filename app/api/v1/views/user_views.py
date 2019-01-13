@@ -33,6 +33,6 @@ def signin():
     username = data.get('username')
     password = data.get('password')
 
-    res = jsonify(user.singin_user(username, password))
-    res.status_code = 200
-    return res
+    response = user.singin_user(username, password)
+    return response
+    

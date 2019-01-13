@@ -1,5 +1,5 @@
 from .base_model import BaseModels, users_list
-
+from flask import jsonify
 
 class UserModels(BaseModels):
     """ contains methods for user models """
@@ -18,14 +18,15 @@ class UserModels(BaseModels):
             "password": password
         }
 
-        return self.save_data(payload)
+        self.save_data(payload)
+        return payload, {"message" : "sign up was successfull"}
 
     def singin_user(self, username, password):
         """ method to signin user """
         data = self.search_db("username", username)
         if data:
             if data["password"] == password:
-                return {'message':'signin was successfull'}
-            return {"message" : "invalid username or password"}
-        return {"message" : "user {} does not exist".format(username)}
+                return jsonify({"message" : "successfully signed in as {}".format(username)}), 200
+            return jsonify({"message" : "invalid username or password"}), 403
+        return jsonify({"message" :"user {} was not found".format(username)}) , 404
        
