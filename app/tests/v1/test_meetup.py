@@ -21,18 +21,30 @@ class TestMeetup(unittest.TestCase):
             "tags": ["andela", "flutter"]
         }
 
+        self.meetup_nodata = {}
+
         self.rsvp = {
-            "userId" : "1",
-            "response" : "attending"
+            "userId": "1",
+            "response": "attending"
         }
 
     def test_new_meetup(self):
         """ tests create new meetup endpoint"""
-        
-        res = self.client.post("api/v1/create_meetup", data = json.dumps(self.meetup), content_type='application/json')
+
+        res = self.client.post(
+            "api/v1/create_meetup", data=json.dumps(self.meetup), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("meetup was created successfully", str(res_data))
         self.assertEqual(res.status_code, 201)
+
+    def test_no_meetup(self):
+        """ tests create new meetup endpoint"""
+
+        res = self.client.post(
+            "api/v1/create_meetup", data=json.dumps(self.meetup_nodata), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Data set cannot be empty", str(res_data))
+        self.assertEqual(res.status_code, 202)
 
     def test_getall_meetups(self):
         """ tests get all meetups """
@@ -43,11 +55,9 @@ class TestMeetup(unittest.TestCase):
 
     def test_getOne_meetup(self):
         """ tests get one meetup endpoint """
-         # post a meetup
-        post_response = self.client.post("api/v1/create_meetup", data = json.dumps(self.meetup), content_type='application/json')
-        post_response_data = json.loads(post_response.data.decode())
-        self.assertIn("meetup was created successfully", str(post_response_data))
-        self.assertEqual(post_response.status_code, 201)
+        # post a meetup
+        self.client.post("api/v1/create_meetup",
+                         data=json.dumps(self.meetup), content_type='application/json')
         # feach a specific meetup
         response = self.client.get("api/v1/meetups/1")
         res = json.loads(response.data.decode())
@@ -63,8 +73,19 @@ class TestMeetup(unittest.TestCase):
 
     def test_rsvp_meetup(self):
         """ creates test for rsvp meetup """
+        # post meetup
+        self.client.post("api/v1/create_meetup",
+                         data=json.dumps(self.meetup), content_type='application/json')
         # rsvp meetup
-        response = self.client.post("api/v1/meetups/1/rsvp", data = json.dumps(self.rsvp), content_type='application/json')
+        response = self.client.post(
+            "api/v1/meetups/1/rsvp", data=json.dumps(self.rsvp), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("rsvp successfull", str(res))
         self.assertEqual(response.status_code, 201)
+
+    def test_rsvp_nomeetup(self):
+        response = self.client.post(
+            "api/v1/meetups/6/rsvp", data=json.dumps(self.rsvp), content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("meetup not found", str(res))
+        self.assertEqual(response.status_code, 404)

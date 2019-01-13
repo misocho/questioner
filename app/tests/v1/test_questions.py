@@ -15,6 +15,7 @@ class TestQusetion(unittest.TestCase):
             "body" : "How can we get to the venue?",
         }
 
+        self.questions_nodata = {}
 
     def test_post_question(self):
         """ tests post question """
@@ -23,6 +24,14 @@ class TestQusetion(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("question was successsfully posted", str(res_data))
         self.assertEqual(res.status_code, 201)
+
+    def test_no_question(self):
+        """ tests post question """
+
+        res = self.client.post("api/v1/questions", data = json.dumps(self.questions_nodata), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Data set cannot be empty", str(res_data))
+        self.assertEqual(res.status_code, 202)
 
     def test_upvote_question(self):
         """" test for upvote question """
