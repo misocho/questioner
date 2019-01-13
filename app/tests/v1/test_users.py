@@ -25,6 +25,8 @@ class TestUsers(unittest.TestCase):
             "password" : "scorpion234"
         }
 
+    def post_user(self):
+       return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
     def test_signup_user(self):
         """ tests signup user """
 
@@ -40,8 +42,11 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
 
     def test_signin_user(self):
+        """ post user """
+        self.post_user()
         """ tests signin user """
-        res = self.client.get("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
+        res = self.client.post("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.assertIn("sign in wass successfull", str(res_data))
-        self.assertEqual(res.status_code, 201)
+        self.assertIn("successfully signed in as {}".format(self.signin_user["username"]), str(res_data))
+        self.assertEqual(res.status_code, 200)
+
