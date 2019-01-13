@@ -25,6 +25,17 @@ class TestUsers(unittest.TestCase):
             "password" : "scorpion234"
         }
 
+        self.invalid_password = {
+            "username" : "misocho", 
+            "password" : "iduhciu"
+        }
+
+        self.user_notfound = {
+            "username" : "brian",
+            "password" : "23798792"
+        }
+    def post_user(self):
+       return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
     def test_signup_user(self):
         """ tests signup user """
 
@@ -40,8 +51,30 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
 
     def test_signin_user(self):
+        """ post user """
+        self.post_user()
         """ tests signin user """
-        res = self.client.get("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
+        res = self.client.post("api/v1/signin", data = json.dumps(self.signin_user), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.assertIn("sign in wass successfull", str(res_data))
+        self.assertIn("successfully signed in as {}".format(self.signin_user["username"]), str(res_data))
         self.assertEqual(res.status_code, 200)
+
+    def test_invalid_password(self):
+        """ post user """
+        self.post_user()
+
+        """ test invalid password """
+        res = self.client.post("api/v1/signin", data = json.dumps(self.invalid_password), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("invalid username or password", str(res_data))
+        self.assertEqual(res.status_code, 403) 
+
+    def test_usernotfound(self):
+        """ post user """
+        self.post_user()
+
+        """ test user not found """
+        res = self.client.post("api/v1/signin", data = json.dumps(self.user_notfound), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("user {} was not found".format(self.user_notfound["username"]), str(res_data))
+        self.assertEqual(res.status_code, 404) 
