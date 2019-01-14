@@ -15,6 +15,11 @@ class TestQusetion(unittest.TestCase):
             "body" : "How can we get to the venue?",
         }
 
+        self.no_questions = {
+            "postedBy" : "1",
+            "body" : "",
+        }
+
         self.questions_nodata = {}
 
     def test_post_question(self):
@@ -62,3 +67,9 @@ class TestQusetion(unittest.TestCase):
         res = json.loads(response.data.decode())
         self.assertIn("question not found", str(res))
         self.assertEqual(response.status_code, 404)
+
+    def test_nobody(self):
+        response = self.client.patch("api/v1/questions", datta=self.no_questions, content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide question body", str(res))
+        self.assertEqual(response.status_code, 400)
