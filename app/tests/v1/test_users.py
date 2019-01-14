@@ -71,19 +71,18 @@ class TestUsers(unittest.TestCase):
             "email" : "misochobrian@gmail.com",
             "password" : "scorpion"
         }
-    def post_user(self, data):
-       return self.client.post("api/v1/signup", data = data, content_type='application/json')
-    
+    def post_user(self):
+       return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
     def test_signup_user(self):
         """ tests signup user """
 
-        res = self.post_user(self.signin_user)
+        res = self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("sign up was successfull", str(res_data))
         self.assertEqual(res.status_code, 201)
 
     def test_nodata_signup(self):
-        res = self.post_user(self.nouser)
+        res = self.client.post("api/v1/signup", data = json.dumps(self.nouser), content_type='application/json')
         res_data = json.loads(res.data.decode())       
         self.assertIn("Data set cannot be empty", str(res_data))
         self.assertEqual(res.status_code, 404)
@@ -102,7 +101,7 @@ class TestUsers(unittest.TestCase):
         self.post_user()
 
         """ test invalid password """
-        res = self.post_user(self.invalid_password)
+        res = self.client.post("api/v1/signin", data = json.dumps(self.invalid_password), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("invalid username or password", str(res_data))
         self.assertEqual(res.status_code, 403) 
@@ -112,7 +111,7 @@ class TestUsers(unittest.TestCase):
         self.post_user()
 
         """ test user not found """
-        res = self.post_user(self.user_notfound)
+        res = self.client.post("api/v1/signin", data = json.dumps(self.user_notfound), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("user {} was not found".format(self.user_notfound["username"]), str(res_data))
         self.assertEqual(res.status_code, 404) 
@@ -120,7 +119,7 @@ class TestUsers(unittest.TestCase):
     def test_no_username(self):
         """ test for missing username """
 
-        res = self.post_user(self.no_username)
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_username), content_type="application/json")
         res_data = json.loads(res.data.decode())
         self.assertIn("Please provide username", str(res_data))
         self.assertEqual(res.status_code, 400)
@@ -128,7 +127,7 @@ class TestUsers(unittest.TestCase):
     def test_password(self):
         """ test is password is strong """
 
-        res = self.post_user(self.strng_pass)
+        res = self.client.post("api/v1/signup", data = json.dumps(self.strng_pass), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("Password should have atleast one uppercase, special character and digit", str(res_data))
         self.assertEqual(res.status_code, 202)
@@ -136,12 +135,16 @@ class TestUsers(unittest.TestCase):
     def test_no_firstname(self):
         """ test if first name is not provided """
 
-        res = self.post_user(self.no_firstname)
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_firstname), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("Please provide first_name", str(res_data))
         self.assertEqual(res.status_code, 400)
 
     def test_no_secondname(self):
-        """ test if no second name """carried
+        """ test if no second name """
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_lastname), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.asserIn("Please provide last_name", str(res_data))
+        self.assertEqual(res.status_code, 400)
 
-        res = self.client.post("api/v1/singup")
+    
