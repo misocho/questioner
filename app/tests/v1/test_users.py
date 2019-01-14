@@ -90,6 +90,23 @@ class TestUsers(unittest.TestCase):
             "password" : "@Scorpion234"
         }
 
+        self.invalid_email = {
+            "first_name": "brian",
+            "last_name" : "misocho",
+            "account_type" : "user",
+            "username" : "misocho",
+            "email" : "misochobriangmail",
+            "password" : "@Scorpion234"
+        }
+
+        self.short_password = {
+            "first_name": "brian",
+            "last_name" : "misocho",
+            "account_type" : "user",
+            "username" : "misocho",
+            "email" : "misochobriangmail",
+            "password" : "corp"
+        }
 
     def post_user(self):
        return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
