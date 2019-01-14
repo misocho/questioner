@@ -183,3 +183,14 @@ class TestUsers(unittest.TestCase):
 
     def test_valid_email(self):
         """ tests if email is valid"""
+        res = self.client.post("api/v1/signup", data = json.dumps(self.invalid_email), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide a valid email address", str(res_data))
+        self.assertEqual(res.status_code, 202)
+
+    def test_password_lengh(self):
+        """ tests if password is short """
+        res = self.client.post("api/v1/signup", data = json.dumps(self.short_pass), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Password dhould have a minimum of 6 characters", str(res_data))
+        self.assertEqual(res.status_code, 202)
