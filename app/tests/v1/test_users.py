@@ -17,12 +17,12 @@ class TestUsers(unittest.TestCase):
             "account_type" : "user",
             "username" : "misocho",
             "email" : "misochobrian@gmail.com",
-            "password" : "scorpion234"
+            "password" : "@Scorpion234"
             }
         self.nouser = {}
         self.signin_user = {
             "username" : "misocho",
-            "password" : "scorpion234"
+            "password" : "@Scorpion234"
         }
 
         self.invalid_password = {
@@ -32,7 +32,7 @@ class TestUsers(unittest.TestCase):
 
         self.user_notfound = {
             "username" : "brian",
-            "password" : "23798792"
+            "password" : "@Scorpion234"
         }
 
         self.no_username = {
@@ -41,7 +41,7 @@ class TestUsers(unittest.TestCase):
             "account_type" : "user",
             "username" : "",
             "email" : "misochobrian@gmail.com",
-            "password" : "scorpion234"
+            "password" : "@Scorpion234"
         }
 
         self.strng_pass = {
@@ -60,7 +60,7 @@ class TestUsers(unittest.TestCase):
             "account_type" : "user",
             "username" : "misocho",
             "email" : "misochobrian@gmail.com",
-            "password" : "scorpion"
+            "password" : "s@Scorpion234"
         }
 
         self.no_lastname = {
@@ -69,8 +69,28 @@ class TestUsers(unittest.TestCase):
             "account_type" : "user",
             "username" : "misocho",
             "email" : "misochobrian@gmail.com",
-            "password" : "scorpion"
+            "password" : "@Scorpion234"
         }
+
+        self.no_password = {
+            "first_name": "brian",
+            "last_name" : "misocho",
+            "account_type" : "user",
+            "username" : "misocho",
+            "email" : "misochobrian@gmail.com",
+            "password" : ""
+        }
+
+        self.no_email = {
+            "first_name": "brian",
+            "last_name" : "misocho",
+            "account_type" : "user",
+            "username" : "misocho",
+            "email" : "misochobrian@gmail.com",
+            "password" : "@Scorpion234"
+        }
+
+
     def post_user(self):
        return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
     def test_signup_user(self):
@@ -144,7 +164,22 @@ class TestUsers(unittest.TestCase):
         """ test if no second name """
         res = self.client.post("api/v1/signup", data = json.dumps(self.no_lastname), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.asserIn("Please provide last_name", str(res_data))
+        self.assertIn("Please provide last_name", str(res_data))
         self.assertEqual(res.status_code, 400)
 
-    
+    def test_no_password(self):
+        """ test if no password """
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_password), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide password", str(res_data))
+        self.assertEqual(res.status_code, 400)
+
+    def test_no_email(self):
+        """ test if no email """
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_email), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide an email", str(res_data))
+        self.assertEqual(res.status_code, 400)
+
+    def test_valid_email(self):
+        """ tests if email is valid"""
