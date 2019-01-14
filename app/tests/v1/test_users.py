@@ -35,7 +35,7 @@ class TestUsers(unittest.TestCase):
             "password" : "23798792"
         }
 
-        self.noValue = {
+        self.no_username = {
             "first_name": "Brian",
             "last_name" : "misocho",
             "account_type" : "user",
@@ -52,6 +52,8 @@ class TestUsers(unittest.TestCase):
             "email" : "misochobrian@gmail.com",
             "password" : "scorpion"
         }
+
+        self.missing
     def post_user(self):
        return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
     def test_signup_user(self):
@@ -97,10 +99,10 @@ class TestUsers(unittest.TestCase):
         self.assertIn("user {} was not found".format(self.user_notfound["username"]), str(res_data))
         self.assertEqual(res.status_code, 404) 
 
-    def test_novalue(self):
+    def test_no_username(self):
         """ test for missing username """
 
-        res = self.client.post("api/v1/signup", data = json.dumps(self.noValue), content_type="application/json")
+        res = self.client.post("api/v1/signup", data = json.dumps(self.no_username), content_type="application/json")
         res_data = json.loads(res.data.decode())
         self.assertIn("Please provide username", str(res_data))
         self.assertEqual(res.status_code, 400)
@@ -112,3 +114,13 @@ class TestUsers(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("Password should have atleast one uppercase, special character and digit", str(res_data))
         self.assertEqual(res.status_code, 202)
+
+    def test_no_firstname(self):
+        """ test if first name is not provided """
+
+        res = self.client.post("spi/v1/signup", data = json.dumps(self.no_username), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide first_name", str(res_data))
+        self.assertEqual(res.status_code, 400)
+
+    def test_no_secondname
