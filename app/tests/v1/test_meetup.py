@@ -16,8 +16,8 @@ class TestMeetup(unittest.TestCase):
             "title": "flutter study jam",
             "organizer": "Andela",
             "location": "Nairobi kenya",
-            "from_date": "02 01 2019 8:00am",
-            "to_date":  "02 01 2019 5:00pm",
+            "from_date": "02-01-2019 8:00am",
+            "to_date":  "02-01-2019 5:00pm",
             "tags": ["andela", "flutter"]
         }
 
