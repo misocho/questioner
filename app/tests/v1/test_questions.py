@@ -17,7 +17,7 @@ class TestQusetion(unittest.TestCase):
 
         self.no_questions = {
             "postedBy" : "1",
-            "body" : "",
+            "body" : ""
         }
 
         self.questions_nodata = {}
@@ -69,7 +69,7 @@ class TestQusetion(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_nobody(self):
-        response = self.client.patch("api/v1/questions", datta=self.no_questions, content_type='application/json')
+        response = self.client.post("api/v1/questions", data=json.dumps(self.no_questions), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("Please provide question body", str(res))
         self.assertEqual(response.status_code, 400)
