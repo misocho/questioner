@@ -4,7 +4,7 @@ from ..models import meetup_models
 meetup_blueprint = Blueprint('meetup_blueprint', __name__, url_prefix='/api/v1')
 meetups = meetup_models.MeetupModels()
 rsvp = meetup_models.RsvpModels()
-@meetup_blueprint.route('/create_meetup', methods=['POST'])
+@meetup_blueprint.route('/meetups', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
     try:
