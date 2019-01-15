@@ -72,23 +72,6 @@ class TestMeetup(unittest.TestCase):
             "tags": ["Ihub", "javascript"]
         }
 
-        self.meetup_no_fromdate = {
-            "title": "The book club",
-            "organizer": "Stacy Wangiru",
-            "location": "Stacy's bookshop",
-            "from_date": "",
-            "to_date":  "06-13-2019 5:00pm",
-            "tags": ["books"]
-        }
-
-        self.meetup_no_todate = {
-            "title": "Flat earth belivers",
-            "organizer": "The CBD social hall",
-            "location": "Benson Omondi",
-            "from_date": "06-13-2019 10:00am",
-            "to_date":  "",
-            "tags": [],
-        }
 
         self.time_format = {
             "title": "Bootcamp",
@@ -175,31 +158,20 @@ class TestMeetup(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_no_location(self):
-        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_location), conten_type='application/json')
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_location), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("Please provide meetup location", str(res))
         self.assertEqual(response.status_code, 400)
 
     def test_no_organizer(self):
-        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_organizer), conten_type='application/json')
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_organizer), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("Please provide meetup organizer", str(res))
         self.assertEqual(response.status_code, 400)
 
-    def test_no_fromtime(self):
-        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_fromdate), conten_type='application/json')
-        res = json.loads(response.data.decode())
-        self.assertIn("Please provide meetup from date and time", str(res))
-        self.assertEqual(response.status_code, 400)
-
-    def test_no_todate(self):
-        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_todate), conten_type='application/json')
-        res = json.loads(response.data.decode())
-        self.assertIn("Please provide meetup to date and time", str(res))
-        self.assertEqual(response.status_code, 400)
 
     def test_time_format(self):
-        response = self.client.post('api/v1/meetups', data=json.dumps(self.time_format), conten_type='application/json')
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.time_format), content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertIn("Please provide date in the format %", str(res))
+        self.assertIn("Please provide date in the format %m-%d-%Y %I:%M%p", str(res))
         self.assertEqual(response.status_code, 400)
