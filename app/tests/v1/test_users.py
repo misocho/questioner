@@ -27,7 +27,7 @@ class TestUsers(unittest.TestCase):
 
         self.invalid_password = {
             "username" : "misocho", 
-            "password" : "iduhciu"
+            "password" : "@sdjYkjh23547"
         }
 
         self.user_notfound = {
@@ -99,14 +99,6 @@ class TestUsers(unittest.TestCase):
             "password" : "@Scorpion234"
         }
 
-        self.short_pass = {
-            "first_name": "brian",
-            "last_name" : "misocho",
-            "account_type" : "user",
-            "username" : "misocho",
-            "email" : "misochobrian@gmail.com",
-            "password" : "corp"
-        }
 
     def post_user(self):
        return self.client.post("api/v1/signup", data = json.dumps(self.singup_user), content_type='application/json')
@@ -203,12 +195,5 @@ class TestUsers(unittest.TestCase):
         res = self.client.post("api/v1/signup", data = json.dumps(self.invalid_email), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("Please provide a valid email address", str(res_data))
-        self.assertEqual(res.status_code, 202)
-
-    def test_password_length(self):
-        """ tests if password is short """
-        res = self.client.post("api/v1/signup", data = json.dumps(self.short_pass), content_type='application/json')
-        res_data = json.loads(res.data.decode())
-        self.assertIn("Password should have a minimum of 6 characters", str(res_data))
         self.assertEqual(res.status_code, 202)
 

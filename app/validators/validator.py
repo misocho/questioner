@@ -26,9 +26,12 @@ class BaseValidations():
     @classmethod
     def strong_pass(cls, password):
         """ Class to check if password is strong """
-        rgex = re.compile(r"[A-Za-z0-9@#$%^&+=]")
-        match = re.match(rgex, password)
-        if match:
-            return True
-        return False
+        uppercase_regex = re.compile(r'[A-Z]')
+        lowercase_regex = re.compile(r'[a-z]')
+        digit_regex = re.compile(r'[0-9]')
+
+        return (uppercase_regex.search(password) is not None
+                and lowercase_regex.search(password) is not None
+                and digit_regex.search(password) is not None)
+
 

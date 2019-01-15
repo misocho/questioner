@@ -42,15 +42,15 @@ def singup():
     if not user_validation.input_provided(password):
         return jsonify({"message" : "Please provide password"}) , 400
 
-    if len(password) < 6:
-        return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 202
 
-    if not user_validation.strong_pass(password):
-        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 202
     if not user_validation.input_provided(username):
         return jsonify({"message" : "Please provide username"}) , 400
-    
-    
+    if len(password) < 6:
+        return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 202
+        
+    if not user_validation.strong_pass(password):
+        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 202
+
     res = jsonify(user.signup_user(first_name, last_name,
                                    account_type, username, email, password))
     
