@@ -51,10 +51,11 @@ def singup():
     if not user_validation.strong_pass(password):
         return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 202
 
-    res = jsonify(user.signup_user(first_name, last_name,
-                                   account_type, username, email, password))
     
-    res.status_code = 201
+
+    res = user.signup_user(first_name, last_name,
+                                   account_type, username, email, password)
+    
     return res
 
 

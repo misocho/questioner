@@ -18,8 +18,11 @@ class UserModels(BaseModels):
             "password": password
         }
 
+        if self.search_db("username", username):
+            return jsonify({"message" : "username is already taken"}) , 400
+       
         self.save_data(payload)
-        return payload, {"message" : "sign up was successfull"}
+        return jsonify(payload, {"message" : "sign up was successfull"}), 201
 
     def singin_user(self, username, password):
         """ method to signin user """
