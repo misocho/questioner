@@ -14,7 +14,8 @@ class QuestionModels(BaseModels):
             "question_id": str(len(questions_list) + 1),
             "postedby": postedby,
             "body": body,
-            "votes": 0
+            "up-votes": 0,
+            "down-votes" : 0
         }
         for record in meetups_list:
              if record["meetup_id"]== meetup_id:
