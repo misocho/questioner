@@ -3,7 +3,7 @@ from ..models import users_model
 from ....validators import validator
 
 
-user_blueprint = Blueprint('user_blueprint', __name__, url_prefix='/api/v1')
+user_blueprint = Blueprint('user_blueprint', __name__, url_prefix='/api/v1/auth')
 user = users_model.UserModels()
 user_validation = validator.BaseValidations()
 

@@ -1,4 +1,4 @@
-from .base_model import BaseModels, questions_list
+from .base_model import BaseModels, questions_list, meetups_list
 from flask import jsonify
 
 
@@ -16,9 +16,11 @@ class QuestionModels(BaseModels):
             "body": body,
             "votes": 0
         }
-
+        for record in meetups_list:
+             if record["meetup_id"]== meetup_id:
+                return jsonify({"message" : "meetup does not exist"}), 404
         self.save_data(payload)
-        return payload, {"message": "question was successsfully posted"}
+        return jsonify(payload, {"message": "question was successsfully posted"}), 201
 
     def upvote_question(self, question_id):
         """ method to upvote question """

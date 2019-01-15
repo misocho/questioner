@@ -1,10 +1,14 @@
 from flask import Flask, Blueprint, request, jsonify, make_response
 from ..models import meetup_models
+from ....validators import validator
+
 
 meetup_blueprint = Blueprint('meetup_blueprint', __name__, url_prefix='/api/v1')
 meetups = meetup_models.MeetupModels()
 rsvp = meetup_models.RsvpModels()
-@meetup_blueprint.route('/create_meetup', methods=['POST'])
+meetup_validations = validator.BaseValidations()
+
+@meetup_blueprint.route('/meetups', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
     try:
@@ -17,12 +21,21 @@ def create_meetup():
     title = meetup_data.get('title')
     organizer = meetup_data.get('organizer')
     location = meetup_data.get('location')
+    tags = meetup_data.get('tags')
     from_date = meetup_data.get('from_date')
     to_date = meetup_data.get('to_date')
-    tags = meetup_data.get('tags')
 
-    res = jsonify(meetups.create_meetup(title, organizer, location, from_date, to_date, tags))
-    res.status_code = 201
+    if not meetup_validations.input_provided(title):
+        return jsonify({"message" : "Please provide meetup title"}) , 400
+
+    if not meetup_validations.input_provided(organizer):
+        return jsonify({"message" : "Please provide meetup organizer"}) , 400
+
+    if not meetup_validations.input_provided(location):
+        return jsonify({"message" : "Please provide meetup location"}) , 400
+        
+    res = meetups.create_meetup(title, organizer, location, from_date, to_date, tags)
+    
     return res 
 
 @meetup_blueprint.route('/meetups', methods=['GET'])

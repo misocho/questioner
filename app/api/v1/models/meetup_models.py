@@ -15,17 +15,19 @@ class MeetupModels(BaseModels):
             "organizer": organizer,
             "createdOn": self.now,
             "location": location,
-            "from_date": datetime.strptime(from_date, '%m %d %Y %I:%M%p'),
-            "to_date":  datetime.strptime(to_date, '%m %d %Y %I:%M%p'),
-            "from_time":  datetime.strptime(to_date, '%m %d %Y %I:%M%p'),
+            "from_date": datetime.strptime(from_date, r'%m-%d-%Y %I:%M%p'),
+            "to_date":  datetime.strptime(to_date, r'%m-%d-%Y %I:%M%p'),
             "tags": tags
         }
 
+        if self.search_db("title", title):
+            return jsonify({"message" : "Meetup exists"}) , 400
+            
         self.save_data(payload)
-        return payload, {"message": "meetup was created successfully"}
+        return jsonify(payload, {"message": "meetup was created successfully"}) , 201
 
     def getall_meetups(self):
-        return self.check_db()
+       return self.questions_meetups()
 
     def get_meetup(self, meetupId):
         meetup = self.search_db("meetup_id", meetupId)
