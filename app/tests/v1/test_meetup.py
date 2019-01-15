@@ -46,7 +46,7 @@ class TestMeetup(unittest.TestCase):
         }
 
         self.meetup_no_title = {
-            "title": " ",
+            "title": "",
             "organizer": "Strathmore GDG",
             "location": "Nairobi kenya",
             "from_date": "06-12-2019 10:00am",
