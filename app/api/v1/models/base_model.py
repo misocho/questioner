@@ -66,3 +66,11 @@ class BaseModels(object):
                 list.append(data)
 
         return data
+
+    def count_rsvp(self, meetupId):
+        count = 0
+        for data in rsvp_list:
+            if data["meetupId"] == meetupId:
+                count += 1
+
+        return count

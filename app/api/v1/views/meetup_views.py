@@ -43,7 +43,7 @@ def getall():
     """ endpoint for get all meetups """
 
     data = meetups.getall_meetups()
-    rsvp = meetups.get_rsvp_no(data)
+    
     
     return make_response (jsonify({
         "message" : "Success",
@@ -56,11 +56,13 @@ def getOne(meetupId):
     """ endpoint for get specific meetup """
     meetup = meetups.get_meetup(meetupId)
     questions = meetups.get_meetup_questions(meetupId)
+    rsvp = meetups.count_rsvp(meetupId)
     if meetup:
         return make_response(jsonify({
             'message' : 'Success',
             'meetup' : meetup, 
-            'questions' : questions
+            'questions' : questions,
+            'rsvp' : rsvp
             }), 200)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
 
