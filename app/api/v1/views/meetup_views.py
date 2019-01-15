@@ -43,19 +43,25 @@ def getall():
     """ endpoint for get all meetups """
 
     data = meetups.getall_meetups()
+    rsvp = meetups.get_rsvp_no(data)
+    
     return make_response (jsonify({
         "message" : "Success",
-        "meetups" : data
+        "meetups" : data, 
+        "rsvp" : rsvp
     }), 200)
 
 @meetup_blueprint.route('/meetups/<meetupId>', methods=['GET'])
 def getOne(meetupId):
     """ endpoint for get specific meetup """
     meetup = meetups.get_meetup(meetupId)
+    questions = meetups.get_meetup_questions(meetupId)
     if meetup:
         return make_response(jsonify({
             'message' : 'Success',
-            'meetup' : meetup}), 200)
+            'meetup' : meetup, 
+            'questions' : questions
+            }), 200)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
 
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
@@ -65,7 +71,7 @@ def rsvp_meetup(meetupId):
         data = request.get_json() if request.is_json else None
     except Exception:
         return jsonify({"message": "data not in json"}), 400
-
+        
     userId = data.get('userId')
     meetupId = meetupId
     response  = data.get('response')

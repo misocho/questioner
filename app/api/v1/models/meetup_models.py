@@ -30,12 +30,15 @@ class MeetupModels(BaseModels):
     def getall_meetups(self):
        return self.check_db()
 
+    def get_meetup_questions(self, meetupId):
+        return self.meetup_question(meetupId)
+
     def get_meetup(self, meetupId):
         meetup = self.search_db("meetup_id", meetupId)
         return meetup
     
-    def get_rsvp_no(self):
-        return len(rsvp_list)
+    def get_rsvp_no(self, meetupId):
+        return self.return_rsvp("meetupId", meetupId)
 
 class RsvpModels(BaseModels):
     def __init__(self):

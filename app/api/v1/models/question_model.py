@@ -1,4 +1,4 @@
-from .base_model import BaseModels, questions_list, meetups_list
+from .base_model import BaseModels, questions_list, meetups_list, qlist
 from flask import jsonify
 
 
@@ -18,18 +18,19 @@ class QuestionModels(BaseModels):
             "down-votes" : 0
         }
         for record in meetups_list:
-             if record["meetup_id"]== meetup_id:
-                return jsonify({"message" : "meetup does not exist"}), 404
-        self.save_data(payload)
-        return jsonify(payload, {"message": "question was successsfully posted"}), 201
+            if record["meetup_id"] == meetup_id:
+                qlist.append(payload)
+                self.save_data(payload)
+                return jsonify(payload, {"message": "question was successsfully posted"}), 201
+        return jsonify({"message" : "meetup does not exist"}), 404
+        
 
     def upvote_question(self, question_id):
         """ method to upvote question """
 
         question = self.search_db("question_id", question_id)
         if question:
-            question["votes"] += 1
-
+            question["up-votes"] += 1
             return jsonify(question, {"message": "upvote successfull"}) , 201
 
         return jsonify({"message": "question not found"}), 404
@@ -39,7 +40,7 @@ class QuestionModels(BaseModels):
 
         question = self.search_db("question_id", question_id)
         if question:
-            question["votes"] -= 1
+            question["down-votes"] -= 1
 
             return jsonify(question, {"message": "downvote successfull"}) , 201
 
