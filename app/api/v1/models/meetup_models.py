@@ -17,7 +17,8 @@ class MeetupModels(BaseModels):
             "location": location,
             "from_date": datetime.strptime(from_date, r'%m-%d-%Y %I:%M%p'),
             "to_date":  datetime.strptime(to_date, r'%m-%d-%Y %I:%M%p'),
-            "tags": tags
+            "tags": tags,
+           
         }
 
         if self.search_db("title", title):
@@ -27,12 +28,14 @@ class MeetupModels(BaseModels):
         return jsonify(payload, {"message": "meetup was created successfully"}) , 201
 
     def getall_meetups(self):
-       return self.questions_meetups()
+       return self.check_db()
 
     def get_meetup(self, meetupId):
         meetup = self.search_db("meetup_id", meetupId)
         return meetup
-
+    
+    def get_rsvp_no(self):
+        return len(rsvp_list)
 
 class RsvpModels(BaseModels):
     def __init__(self):
