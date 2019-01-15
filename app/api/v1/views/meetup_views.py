@@ -17,12 +17,12 @@ def create_meetup():
     title = meetup_data.get('title')
     organizer = meetup_data.get('organizer')
     location = meetup_data.get('location')
+    tags = meetup_data.get('tags')
     from_date = meetup_data.get('from_date')
     to_date = meetup_data.get('to_date')
-    tags = meetup_data.get('tags')
 
-    res = jsonify(meetups.create_meetup(title, organizer, location, from_date, to_date, tags))
-    res.status_code = 201
+    res = meetups.create_meetup(title, organizer, location, from_date, to_date, tags)
+    
     return res 
 
 @meetup_blueprint.route('/meetups', methods=['GET'])
