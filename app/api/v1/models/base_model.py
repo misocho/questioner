@@ -51,12 +51,7 @@ class BaseModels(object):
 
         return db
     
-    def search_questions(self):
-        for meetup in meetups_list:
-            for questions in questions_list:
-                if questions["meetup"] == meetup["meetup_id"]:
-                    qlist.append(questions)
-        return qlist
+
 
     def meetup_question(self, meetupId):
         list = []
@@ -67,10 +62,11 @@ class BaseModels(object):
 
         return data
 
+
     def count_rsvp(self, meetupId):
         count = 0
         for data in rsvp_list:
-            if data["meetupId"] == meetupId:
+            if data["meetupId"] == meetupId and data["response"] == 'yes':
                 count += 1
 
         return count

@@ -47,8 +47,7 @@ def getall():
     
     return make_response (jsonify({
         "message" : "Success",
-        "meetups" : data, 
-        "rsvp" : rsvp
+        "meetups" : data
     }), 200)
 
 @meetup_blueprint.route('/meetups/<meetupId>', methods=['GET'])
@@ -69,14 +68,22 @@ def getOne(meetupId):
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
 def rsvp_meetup(meetupId):
     """ endpoint for rsvp meetup """
-    try:
-        data = request.get_json() if request.is_json else None
-    except Exception:
-        return jsonify({"message": "data not in json"}), 400
+
         
+    
+    data = request.get_json() 
+    if not data:
+        return jsonify({"message" : "Please provide response data"}) , 400
     userId = data.get('userId')
     meetupId = meetupId
     response  = data.get('response')
+
+    if not meetup_validations.input_provided(userId):
+        return jsonify({"message" : "Please provide user id"}) , 400
+    if not meetup_validations.input_provided(response):
+        return jsonify({"message" : "Please provide a response"}) , 400
+    elif response not in ['yes', 'no', 'maybe']:
+        return jsonify({"message" : "Response should be either yes, no, maybe"})
 
     res = rsvp.post_rsvp(userId, meetupId, response)
     return res

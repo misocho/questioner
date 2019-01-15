@@ -54,8 +54,8 @@ class RsvpModels(BaseModels):
             "response": response
         }
         data = self.search_meetup("meetup_id", meetupId)
-        if data : 
-            self.save_data(payload)
+        if data:
+            rsvp_list.append(payload)
             return jsonify(payload, {"message": "rsvp successfull"}) , 201
         else:
             return jsonify({"message" : "meetup not found"}) , 404
