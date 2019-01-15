@@ -25,4 +25,13 @@ def create_app():
             "message" : "internal server error",
             "status" : 500
         })
+
+    @app.errorhandler(404)
+    def internal_server_error(error):
+        """ handles not found error """
+        return jsonify({
+            "message" : "Not Found",
+            "status" : 404
+        })
+        
     return app
