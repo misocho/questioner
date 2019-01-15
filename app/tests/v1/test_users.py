@@ -209,6 +209,6 @@ class TestUsers(unittest.TestCase):
         """ tests if password is short """
         res = self.client.post("api/v1/signup", data = json.dumps(self.short_pass), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.assertIn("Password dhould have a minimum of 6 characters", str(res_data))
+        self.assertIn("Password should have a minimum of 6 characters", str(res_data))
         self.assertEqual(res.status_code, 202)
 
