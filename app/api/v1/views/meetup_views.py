@@ -7,16 +7,20 @@ rsvp = meetup_models.RsvpModels()
 @meetup_blueprint.route('/create_meetup', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
+try:
+        meetup_data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
 
     data = request.get_json()
     if not data:
         return jsonify({"message": "Data set cannot be empty"}) , 202
-    title = data.get('title')
-    organizer = data.get('organizer')
-    location = data.get('location')
-    from_date = data.get('from_date')
-    to_date = data.get('to_date')
-    tags = data.get('tags')
+    title = meetup_data.get('title')
+    organizer = meetup_data.get('organizer')
+    location = meetup_data.get('location')
+    from_date = meetup_data.get('from_date')
+    to_date = meetup_data.get('to_date')
+    tags = meetup_data.get('tags')
 
     res = jsonify(meetups.create_meetup(title, organizer, location, from_date, to_date, tags))
     res.status_code = 201
@@ -45,7 +49,10 @@ def getOne(meetupId):
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
 def rsvp_meetup(meetupId):
     """ endpoint for rsvp meetup """
-    data = request.get_json()
+    try:
+        data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
 
     userId = data.get('userId')
     meetupId = meetupId
