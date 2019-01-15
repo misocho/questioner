@@ -73,3 +73,4 @@ class TestQusetion(unittest.TestCase):
         res = json.loads(response.data.decode())
         self.assertIn("Please provide question body", str(res))
         self.assertEqual(response.status_code, 400)
+        
