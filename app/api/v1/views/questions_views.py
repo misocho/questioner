@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify, make_response
-from ..models import question_model
 from ....validators import validator
+from ..models import question_model
 
 question_validation = validator.BaseValidations()
 
@@ -26,9 +26,12 @@ def post_question():
 
     if not question_validation.input_provided(body):
         return jsonify ({"message" : "Please provide question body"}) , 400
-    res = jsonify(questions.post_question(meetup_id, postedby, body))
-    res.status_code = 201
-    return res
+
+    if not question_validation.input_provided(meetup_id):
+            return jsonify ({"message" : "Please provide meetup_id"}), 400
+        
+    return questions.post_question(meetup_id, postedby, body)
+    
 
 @question_blueprint.route('/questions/<question_id>/upvote', methods=['PATCH'])
 def upvote(question_id):
