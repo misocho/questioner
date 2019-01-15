@@ -7,13 +7,12 @@ rsvp = meetup_models.RsvpModels()
 @meetup_blueprint.route('/create_meetup', methods=['POST'])
 def create_meetup():
     """ endpoint for creating meetup"""
-try:
+    try:
         meetup_data = request.get_json() if request.is_json else None
     except Exception:
         return jsonify({"message": "data not in json"}), 400
 
-    data = request.get_json()
-    if not data:
+    if not meetup_data:
         return jsonify({"message": "Data set cannot be empty"}) , 202
     title = meetup_data.get('title')
     organizer = meetup_data.get('organizer')
