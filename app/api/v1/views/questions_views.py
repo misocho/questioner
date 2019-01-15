@@ -8,6 +8,12 @@ questions = question_model.QuestionModels()
 def post_question():
     """ endpoint for posting question """
 
+
+    try:
+        data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
+        
     data = request.get_json()
     if not data:
         return jsonify({"message" : "Data set cannot be empty"}), 202
