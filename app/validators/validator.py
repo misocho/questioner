@@ -22,3 +22,13 @@ class BaseValidations():
             return False
         else: 
             return True
+
+    @classmethod
+    def strong_pass(cls, password):
+        """ Class to check if password is strong """
+        rgex = re.compile(r"[A-Za-z0-9@#$%^&+=]")
+        match = re.match(rgex, password)
+        if match:
+            return True
+        return False
+
