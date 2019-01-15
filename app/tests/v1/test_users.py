@@ -86,7 +86,7 @@ class TestUsers(unittest.TestCase):
             "last_name" : "misocho",
             "account_type" : "user",
             "username" : "misocho",
-            "email" : "misochobrian@gmail.com",
+            "email" : "",
             "password" : "@Scorpion234"
         }
 
@@ -104,7 +104,7 @@ class TestUsers(unittest.TestCase):
             "last_name" : "misocho",
             "account_type" : "user",
             "username" : "misocho",
-            "email" : "misochobriangmail",
+            "email" : "misochobrian@gmail.com",
             "password" : "corp"
         }
 
