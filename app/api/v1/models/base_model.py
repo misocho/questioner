@@ -44,3 +44,11 @@ class BaseModels(object):
         db.append(payload)
 
         return db
+    
+    @classmethod
+    def questions_meetups(cls):
+        for meetup in meetups_list:
+            for question in questions_list:
+                if meetup["meetup_id"] == question["meetup"]:
+                    meetups = meetups_list.append(question)
+                    return meetups

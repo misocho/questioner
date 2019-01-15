@@ -27,7 +27,7 @@ class MeetupModels(BaseModels):
         return jsonify(payload, {"message": "meetup was created successfully"}) , 201
 
     def getall_meetups(self):
-        return self.check_db()
+       return self.questions_meetups()
 
     def get_meetup(self, meetupId):
         meetup = self.search_db("meetup_id", meetupId)

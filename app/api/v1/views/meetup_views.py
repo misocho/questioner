@@ -25,6 +25,15 @@ def create_meetup():
     from_date = meetup_data.get('from_date')
     to_date = meetup_data.get('to_date')
 
+    if not meetup_validations.input_provided(title):
+        return jsonify({"message" : "Please provide meetup title"}) , 400
+
+    if not meetup_validations.input_provided(organizer):
+        return jsonify({"message" : "Please provide meetup organizer"}) , 400
+
+    if not meetup_validations.input_provided(location):
+        return jsonify({"message" : "Please provide meetup location"}) , 400
+        
     res = meetups.create_meetup(title, organizer, location, from_date, to_date, tags)
     
     return res 
