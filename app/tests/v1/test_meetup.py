@@ -45,9 +45,60 @@ class TestMeetup(unittest.TestCase):
             "response": "attending"
         }
 
-    
-    
-    
+        self.meetup_no_title = {
+            "title": " ",
+            "organizer": "Strathmore GDG",
+            "location": "Nairobi kenya",
+            "from_date": "06-12-2019 10:00am",
+            "to_date":  "06-13-2019 5:00pm",
+            "tags": ["Strathmore", "GDG"]
+        }
+
+        self.meetup_no_location = {
+            "title": "Kotlin meetup",
+            "organizer": "Strathmore GDG",
+            "location": "",
+            "from_date": "06-12-2019 10:00am",
+            "to_date":  "06-13-2019 5:00pm",
+            "tags": ["Strathmore", "GDG"]
+        }
+
+        self.meetup_no_organizer = {
+            "title": "Javascript developers meetup",
+            "organizer": "",
+            "location": "Ihub",
+            "from_date": "06-12-2019 10:00am",
+            "to_date":  "06-13-2019 5:00pm",
+            "tags": ["Ihub", "javascript"]
+        }
+
+        self.meetup_no_fromdate = {
+            "title": "The book club",
+            "organizer": "Stacy Wangiru",
+            "location": "Stacy's bookshop",
+            "from_date": "",
+            "to_date":  "06-13-2019 5:00pm",
+            "tags": ["books"]
+        }
+
+        self.meetup_no_todate = {
+            "title": "Flat earth belivers",
+            "organizer": "The CBD social hall",
+            "location": "Benson Omondi",
+            "from_date": "06-13-2019 10:00am",
+            "to_date":  "",
+            "tags": [],
+        }
+
+        self.time_format = {
+            "title": "Bootcamp",
+            "organizer": "Andela",
+            "location": "Andela kenya",
+            "from_date": "06 13 2019 09:a0pm",
+            "to_date":  "06-20-2019 5:00pm",
+            "tags": [],
+        }
+
     def test_new_meetup(self):
         """ tests create new meetup endpoint"""
 
@@ -92,7 +143,7 @@ class TestMeetup(unittest.TestCase):
         res = json.loads(response.data.decode())
         self.assertIn("Meetup exists", str(res))
         self.assertEqual(response.status_code, 400)
-        
+
     def test_no_getOne_meetup(self):
         """ tests when meetup does not exist """
         response = self.client.get("api/v1/meetups/3")
@@ -117,4 +168,38 @@ class TestMeetup(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
 
     
-    
+    def test_no_title(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_title), content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide meetup title", str(res))
+        self.assertEqual(response.status_code, 400)
+
+    def test_no_location(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_location), conten_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide meetup location", str(res))
+        self.assertEqual(response.status_code, 400)
+
+    def test_no_organizer(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_organizer), conten_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide meetup organizer", str(res))
+        self.assertEqual(response.status_code, 400)
+
+    def test_no_fromtime(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_fromdate), conten_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide meetup from date and time", str(res))
+        self.assertEqual(response.status_code, 400)
+
+    def test_no_todate(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.meetup_no_todate), conten_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide meetup to date and time", str(res))
+        self.assertEqual(response.status_code, 400)
+
+    def test_time_format(self):
+        response = self.client.post('api/v1/meetups', data=json.dumps(self.time_format), conten_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Please provide date in the format %", str(res))
+        self.assertEqual(response.status_code, 400)
