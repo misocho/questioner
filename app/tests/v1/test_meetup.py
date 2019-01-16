@@ -10,7 +10,6 @@ class TestMeetup(unittest.TestCase):
         """set up method for tests"""
         self.app = create_app()
         self.client = self.app.test_client()
-        self.app_context = self.app
 
         self.newMeetup = {
             "title": "Comicon",
@@ -42,7 +41,7 @@ class TestMeetup(unittest.TestCase):
 
         self.rsvp = {
             "userId": "1",
-            "response": "attending"
+            "response": "yes"
         }
 
         self.meetup_no_title = {
@@ -91,6 +90,13 @@ class TestMeetup(unittest.TestCase):
         self.assertIn("meetup was created successfully", str(res_data))
         self.assertEqual(res.status_code, 201)
 
+    def test_duplicate_meetup(self):
+        response = self.client.post(
+            'api/v1/meetups', data=json.dumps(self.duplicate), content_type='application/json')
+        res = json.loads(response.data.decode())
+        self.assertIn("Meetup exists", str(res))
+        self.assertEqual(response.status_code, 400)
+
     
    
     def test_no_meetup(self):
@@ -120,13 +126,7 @@ class TestMeetup(unittest.TestCase):
         self.assertEqual(res["message"], "Success")
         self.assertEqual(response.status_code, 200)
 
-    def test_duplicate_meetup(self):
-        response = self.client.post(
-            'api/v1/meetups', data=json.dumps(self.duplicate), content_type='application/json')
-        res = json.loads(response.data.decode())
-        self.assertIn("Meetup exists", str(res))
-        self.assertEqual(response.status_code, 400)
-
+ 
     def test_no_getOne_meetup(self):
         """ tests when meetup does not exist """
         response = self.client.get("api/v1/meetups/3")

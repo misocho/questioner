@@ -2,7 +2,8 @@ users_list = []
 questions_list = []
 meetups_list = []
 rsvp_list = []
-
+votes = []
+qlist = []
 
 class BaseModels(object):
     """ contains methods common to other models """
@@ -39,16 +40,33 @@ class BaseModels(object):
             return data[0]
         else:
             return False
+
+    def return_rsvp(self, key, item):
+        rsvp = [record for record in rsvp_list if record[key] == item]
+        rsvp.append(rsvp)
+
     def save_data(self, payload):
         db = self.check_db()
         db.append(payload)
 
         return db
     
-    @classmethod
-    def questions_meetups(cls):
-        for meetup in meetups_list:
-            for question in questions_list:
-                if meetup["meetup_id"] == question["meetup"]:
-                    meetups = meetups_list.append(question)
-                    return meetups
+
+
+    def meetup_question(self, meetupId):
+        list = []
+        data = None
+        for data in qlist:
+            if data["meetup"] == meetupId:
+                list.append(data)
+
+        return data
+
+
+    def count_rsvp(self, meetupId):
+        count = 0
+        for data in rsvp_list:
+            if data["meetupId"] == meetupId and data["response"] == 'yes':
+                count += 1
+
+        return count
