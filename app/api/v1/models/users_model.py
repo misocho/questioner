@@ -22,7 +22,7 @@ class UserModels(BaseModels):
             return jsonify({"message" : "username is already taken"}) , 400
        
         self.save_data(payload)
-        return jsonify(payload, {"message" : "sign-up was successfull"}), 201
+        return jsonify(payload, {"message" : "sign-up was successful"}), 201
 
     def singin_user(self, username, password):
         """ method to signin user """

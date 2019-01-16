@@ -142,7 +142,7 @@ class TestMeetup(unittest.TestCase):
         response = self.client.post(
             "api/v1/meetups/1/rsvp", data=json.dumps(self.rsvp), content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertIn("rsvp successfull", str(res))
+        self.assertIn("rsvp successful", str(res))
         self.assertEqual(response.status_code, 201)
 
     def test_rsvp_nomeetup(self):

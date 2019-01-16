@@ -136,7 +136,7 @@ class TestUsers(unittest.TestCase):
         res = self.client.post(
             "api/v1/auth/signup", data=json.dumps(self.signup_user), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.assertIn("sign-up was successfull", str(res_data))
+        self.assertIn("sign-up was successful", str(res_data))
         self.assertEqual(res.status_code, 201)
 
     def test_duplicate_user(self):

@@ -67,7 +67,7 @@ class TestQusetion(unittest.TestCase):
         ### upvote question
         response = self.client.patch("api/v1/questions/1/upvote",content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertIn("upvote successfull", str(res))
+        self.assertIn("upvote successful", str(res))
         self.assertEqual(response.status_code, 201)
 
     
@@ -79,7 +79,7 @@ class TestQusetion(unittest.TestCase):
         ### downvote question
         response = self.client.patch("api/v1/questions/1/downvote", content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertIn("downvote successfull", str(res))
+        self.assertIn("downvote successful", str(res))
         self.assertEqual(response.status_code, 201)
 
     def test_no_question(self):
