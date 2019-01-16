@@ -14,8 +14,7 @@ class TestQusetion(unittest.TestCase):
         self.questions = {
             "postedBy" : "1",
             "body" : "How can we get to the venue?",
-            "meetup_id" : "3",
-            "meetup" : "3"
+            "meetup_id" : "3"
         }
 
         self.no_questions = {
@@ -26,7 +25,7 @@ class TestQusetion(unittest.TestCase):
 
         self.questions_nodata = {}
 
-        self.post_meetup = {
+        self.meetup = {
             "title": "Anime fun fest",
             "organizer": "Anime hub",
             "location": "Animehub, Nairobi, kenya",
@@ -36,26 +35,23 @@ class TestQusetion(unittest.TestCase):
         }
 
         self.question2 = {
-             "postedBy" : "1",
+            "postedBy" : "1",
             "body" : "Will there be internet",
-            "meetup_id" : "3",
-            "meetup" : "3"
+            "meetup_id" : "3"
         }
 
 
-    def rest_meetup(self):
+    def post_meetup(self):
         """ post meetup """
         res = self.client.post(
-            "api/v1/meetups", data=json.dumps(self.post_meetup), content_type='application/json')
-        
-        res_data = json.loads(res.data.decode())
-        print(res_data)
+            "api/v1/meetups", data=json.dumps(self.meetup), content_type='application/json')
+        return res
 
         
             
     def test_post_question(self):
         """ tests post question """
-        self.rest_meetup()
+        self.post_meetup()
         res = self.client.post("api/v1/questions", data = json.dumps(self.questions), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("question was successsfully posted", str(res_data))
@@ -68,19 +64,19 @@ class TestQusetion(unittest.TestCase):
         response = self.client.patch("api/v1/questions/1/upvote",content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("upvote successful", str(res))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     
     def test_downvote_question(self):
         """" test for downvote question """
         ### Post question
-        self.rest_meetup()
+        self.post_meetup()
         res = self.client.post("api/v1/questions", data = json.dumps(self.question2), content_type='application/json')
         ### downvote question
         response = self.client.patch("api/v1/questions/1/downvote", content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("downvote successful", str(res))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_no_question(self):
         """ tests post question """
@@ -88,7 +84,7 @@ class TestQusetion(unittest.TestCase):
         res = self.client.post("api/v1/questions", data = json.dumps(self.questions_nodata), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("Data set cannot be empty", str(res_data))
-        self.assertEqual(res.status_code, 202)
+        self.assertEqual(res.status_code, 400)
 
     
     def test_noquestion_upvote(self):

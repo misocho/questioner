@@ -64,16 +64,18 @@ def getOne(meetupId):
             'meetup' : meetup, 
             'questions' : questions,
             'rsvp' : rsvp
-            }), 204)
+            }), 200)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
 
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
 def rsvp_meetup(meetupId):
     """ endpoint for rsvp meetup """
+   
+    try:
+        data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
 
-        
-    
-    data = request.get_json() 
     if not data:
         return jsonify({"message" : "Please provide response data"}) , 400
     userId = data.get('userId')

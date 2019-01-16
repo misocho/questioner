@@ -34,7 +34,7 @@ def singup():
         return jsonify({"message": "Please provide an email"}), 400
 
     if not user_validation.valid_email(email):
-        return jsonify({"message": "Please provide a valid email address"}), 400
+        return jsonify({"message": "Please provide a valid email address"}), 409
     
     if not user_validation.input_provided(last_name):
         return jsonify({"message" : "Please provide last_name"}) , 400
@@ -46,10 +46,10 @@ def singup():
     if not user_validation.input_provided(username):
         return jsonify({"message" : "Please provide username"}) , 400
     if len(password) < 6:
-        return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 202
+        return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 409
         
     if not user_validation.strong_pass(password):
-        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 400
+        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 409
 
     
 

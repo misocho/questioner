@@ -97,7 +97,7 @@ class TestMeetup(unittest.TestCase):
             'api/v1/meetups', data=json.dumps(self.duplicate), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("Meetup exists", str(res))
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 409)
 
     
    
@@ -108,7 +108,7 @@ class TestMeetup(unittest.TestCase):
             "api/v1/meetups", data=json.dumps(self.meetup_nodata), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("Data set cannot be empty", str(res_data))
-        self.assertEqual(res.status_code, 202)
+        self.assertEqual(res.status_code, 400)
 
     def test_getall_meetups(self):
         """ tests get all meetups """
@@ -143,7 +143,7 @@ class TestMeetup(unittest.TestCase):
             "api/v1/meetups/1/rsvp", data=json.dumps(self.rsvp), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("rsvp successful", str(res))
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_rsvp_nomeetup(self):
         response = self.client.post(
