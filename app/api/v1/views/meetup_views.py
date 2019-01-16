@@ -85,7 +85,7 @@ def rsvp_meetup(meetupId):
     if not meetup_validations.input_provided(response):
         return jsonify({"message" : "Please provide a response"}) , 400
     elif response not in ['yes', 'no', 'maybe']:
-        return jsonify({"message" : "Response should be either yes, no, maybe"})
+        return jsonify({"message" : "Response should be either yes, no, maybe"}) , 400
 
     res = rsvp.post_rsvp(userId, meetupId, response)
     return res
