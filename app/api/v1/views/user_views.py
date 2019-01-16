@@ -67,5 +67,11 @@ def signin():
     username = data.get('username')
     password = data.get('password')
 
-    response = user.singin_user(username, password)
-    return response
+    if not user_validation.input_provided(username):
+        return jsonify({"message":"Please provide username"}) , 400
+
+    if not user_validation.input_provided(password):
+        return jsonify({"message":"Please provide a password"}), 400
+        
+    res = user.singin_user(username, password)
+    return res

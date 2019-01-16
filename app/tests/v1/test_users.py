@@ -118,6 +118,16 @@ class TestUsers(unittest.TestCase):
             "password": "@Scorpion234"
         }
 
+        self.no_User = {
+           "username": "",
+            "password": "@sdjYkjh23547"
+        }
+
+        self.no_pass = {
+           "username": "Ken",
+            "password": ""
+        }
+
         self.invalid_email = {
             "first_name": "brian",
             "last_name": "misocho",
@@ -146,7 +156,7 @@ class TestUsers(unittest.TestCase):
             "api/v1/auth/signup", data=json.dumps(self.user3), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn("username is already taken", str(res_data))
-        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.status_code, 409)
 
 
     def test_nodata_signup(self):
@@ -249,3 +259,16 @@ class TestUsers(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("Please provide a valid email address", str(res_data))
         self.assertEqual(res.status_code, 202)
+
+    def test_no_signin_username(self):
+        res = self.client.post("api/v1/auth/signin", data=json.dumps(self.no_username), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide username", str(res_data))
+        self.assertEqual(res.status_code, 400)
+
+    def test_no_signin_password(self):
+        res = self.client.post("api/v1/auth/signin", data=json.dumps(self.no_password), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("Please provide a password", str(res_data))
+        self.assertEqual(res.status_code, 400)
+    
