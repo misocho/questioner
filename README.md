@@ -1,7 +1,7 @@
 # Questioner
 Questioner is a web application that crowd-sources questions for a meetup. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.
 
-[![Build Status](https://travis-ci.org/misocho/questioner.svg?branch=develop)](https://travis-ci.org/misocho/questioner)           [![Coverage Status](https://coveralls.io/repos/github/misocho/questioner/badge.svg?branch=ch-api-update-readme-163131793)](https://coveralls.io/github/misocho/questioner?branch=ch-api-update-readme-163131793)  [![Maintainability](https://api.codeclimate.com/v1/badges/7ee445560f8a76810e01/maintainability)](https://codeclimate.com/github/misocho/questioner/maintainability)
+[![Build Status](https://travis-ci.org/misocho/questioner.svg?branch=develop)](https://travis-ci.org/misocho/questioner)           [![Coverage Status](https://coveralls.io/repos/github/misocho/questioner/badge.svg)](https://coveralls.io/github/misocho/questioner)  [![Maintainability](https://api.codeclimate.com/v1/badges/7ee445560f8a76810e01/maintainability)](https://codeclimate.com/github/misocho/questioner/maintainability)
 
 # The required API endpoints that enable one:
 * Create a meetup record.
@@ -15,15 +15,15 @@ Questioner is a web application that crowd-sources questions for a meetup. Quest
 
 | Method | Endpoint | Functionality |
 |--------|----------|---------------|
-| POST | /api/v1/create_meetup | Creates a meetup record|
+| POST | /api/v1/meetups | Creates a meetup record|
 | POST | /api/v1/questions | Creates a question record|
 | PATCH | /api/v1/meetups/<meetup_id>/rsvp |Rsvp for a meetup |
 | PATCH | /api/v1/questions/<question_id>/upvote | Upvote a question |
 | POST | api/v1/questions/<question_id>/downvote | Downvote a question |
 | GET | api/v1/meetups | Get all upcoming meetups |
 | GET | api/v1/meetups/<meeutp_id>/ | Get a specific meetup |
-| POST | api/v1/signup | Signup user |
-| POST | api/v1/signin | Signin user |
+| POST | api/v1/auth/signup | Signup user |
+| POST | api/v1/auth/signin | Signin user |
 
 # Installation
  Make sure you have git, python3 and pip installed
