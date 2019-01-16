@@ -29,7 +29,7 @@ def post_question():
 
     if not question_validation.input_provided(meetup_id):
             return jsonify ({"message" : "Please provide meetup_id"}), 400
-     if not question_validation.input_provided(postedby):
+    if not question_validation.input_provided(postedby):
             return jsonify ({"message" : "Please provide postedby field"}), 400
         
     return questions.post_question(meetup_id, postedby, body)

@@ -14,8 +14,8 @@ class QuestionModels(BaseModels):
             "question_id": str(len(questions_list) + 1),
             "postedby": postedby,
             "body": body,
-            "up-votes": 0,
-            "down-votes" : 0
+            "up_votes": 0,
+            "down_votes" : 0
         }
         for record in meetups_list:
             if record["meetup_id"] == meetup_id:
@@ -30,7 +30,7 @@ class QuestionModels(BaseModels):
 
         question = self.search_db("question_id", question_id)
         if question:
-            question["up-votes"] += 1
+            question["up_votes"] += 1
             return jsonify(question, {"message": "upvote successful"}) , 204
 
         return jsonify({"message": "question not found"}), 404
@@ -40,7 +40,7 @@ class QuestionModels(BaseModels):
 
         question = self.search_db("question_id", question_id)
         if question:
-            question["down-votes"] += 1
+            question["down_votes"] += 1
 
             return jsonify(question, {"message": "downvote successful"}) , 204
 
