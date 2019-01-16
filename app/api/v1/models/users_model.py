@@ -19,7 +19,10 @@ class UserModels(BaseModels):
         }
 
         if self.search_db("username", username):
-            return jsonify({"message" : "username is already taken"}) , 400
+            return jsonify({"message" : "username is already taken"}) , 409
+
+        if self.search_db("email", email):
+            return jsonify({"message" : "email already exists"}) , 409
        
         self.save_data(payload)
         return jsonify(payload, {"message" : "sign-up was successful"}), 201
