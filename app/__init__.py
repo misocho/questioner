@@ -6,9 +6,12 @@ from .api.v1.views.user_views import user_blueprint
 def create_app():
     app = Flask(__name__)
 
+    app.url_map.strict_slashes = False
+    
     app.register_blueprint(meetup_blueprint)
     app.register_blueprint(question_blueprint)
     app.register_blueprint(user_blueprint)
+    
 
     @app.errorhandler(405)
     def handle_method_not_allowed(error):
@@ -16,7 +19,7 @@ def create_app():
         return jsonify({
             "message" : "method not allowed",
             "status" : 405
-        })
+        }) , 405
     
     @app.errorhandler(500)
     def internal_server_error(error):
@@ -24,7 +27,7 @@ def create_app():
         return jsonify({
             "message" : "internal server error",
             "status" : 500
-        })
+        }) , 500
 
     @app.errorhandler(404)
     def not_found_error(error):
@@ -32,6 +35,6 @@ def create_app():
         return jsonify({
             "message" : "Not Found",
             "status" : 404
-        })
+        }) , 404
 
     return app

@@ -19,7 +19,7 @@ def post_question():
 
     data = request.get_json()
     if not data:
-        return jsonify({"message" : "Data set cannot be empty"}), 202
+        return jsonify({"message" : "Data set cannot be empty"}), 400
     meetup_id = data.get('meetup_id')
     postedby = data.get('postedby')
     body = data.get('body')
@@ -29,6 +29,8 @@ def post_question():
 
     if not question_validation.input_provided(meetup_id):
             return jsonify ({"message" : "Please provide meetup_id"}), 400
+    if not question_validation.input_provided(postedby):
+            return jsonify ({"message" : "Please provide postedby field"}), 400
         
     return questions.post_question(meetup_id, postedby, body)
     

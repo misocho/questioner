@@ -16,7 +16,7 @@ def create_meetup():
         return jsonify({"message": "data not in json"}), 400
 
     if not meetup_data:
-        return jsonify({"message": "Data set cannot be empty"}) , 202
+        return jsonify({"message": "Data set cannot be empty"}) , 400
     title = meetup_data.get('title')
     organizer = meetup_data.get('organizer')
     location = meetup_data.get('location')
@@ -70,10 +70,12 @@ def getOne(meetupId):
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])
 def rsvp_meetup(meetupId):
     """ endpoint for rsvp meetup """
+   
+    try:
+        data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
 
-        
-    
-    data = request.get_json() 
     if not data:
         return jsonify({"message" : "Please provide response data"}) , 400
     userId = data.get('userId')
@@ -85,7 +87,7 @@ def rsvp_meetup(meetupId):
     if not meetup_validations.input_provided(response):
         return jsonify({"message" : "Please provide a response"}) , 400
     elif response not in ['yes', 'no', 'maybe']:
-        return jsonify({"message" : "Response should be either yes, no, maybe"})
+        return jsonify({"message" : "Response should be either yes, no, maybe"}) , 400
 
     res = rsvp.post_rsvp(userId, meetupId, response)
     return res
