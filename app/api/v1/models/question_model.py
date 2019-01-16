@@ -10,7 +10,7 @@ class QuestionModels(BaseModels):
     def post_question(self, meetup_id, postedby, body):
         """ method to post question """
         payload = {
-            "meetup": meetup_id,
+            "meetup_id": meetup_id,
             "question_id": str(len(questions_list) + 1),
             "postedby": postedby,
             "body": body,
@@ -31,7 +31,7 @@ class QuestionModels(BaseModels):
         question = self.search_db("question_id", question_id)
         if question:
             question["up_votes"] += 1
-            return jsonify(question, {"message": "upvote successful"}) , 204
+            return jsonify(question, {"message": "upvote successful"}) , 200
 
         return jsonify({"message": "question not found"}), 404
 
@@ -42,6 +42,6 @@ class QuestionModels(BaseModels):
         if question:
             question["down_votes"] += 1
 
-            return jsonify(question, {"message": "downvote successful"}) , 204
+            return jsonify(question, {"message": "downvote successful"}) , 200
 
         return jsonify({"message": "question not found"}), 404

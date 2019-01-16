@@ -57,7 +57,7 @@ class BaseModels(object):
         list = []
         data = None
         for data in qlist:
-            if data["meetup"] == meetupId:
+            if data["meetup_id"] == meetupId:
                 list.append(data)
 
         return data
@@ -66,7 +66,7 @@ class BaseModels(object):
     def count_rsvp(self, meetupId):
         count = 0
         for data in rsvp_list:
-            if data["meetupId"] == meetupId and data["response"] == 'yes':
+            if data["meetup_id"] == meetupId and data["response"] == 'yes':
                 count += 1
 
         return count
