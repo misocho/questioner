@@ -29,6 +29,25 @@ class TestUsers(unittest.TestCase):
             "password": "@Andela34875"
 
         }
+
+        self.user2 = {
+            "first_name": "Lilian",
+            "last_name": "Okello",
+            "account_type": "user",
+            "username": "okellolilian",
+            "email": "lilian@gmail.com",
+            "password": "@Andela34875"
+        }
+
+        self.user3 = {
+            "first_name": "Lilian",
+            "last_name": "Okello",
+            "account_type": "user",
+            "username": "okellolilian",
+            "email": "lilian@gmail.com",
+            "password": "@Andela34875"
+        }
+
         self.nouser = {}
         self.signin_user = {
             "username": "misocho",
@@ -119,6 +138,16 @@ class TestUsers(unittest.TestCase):
         res_data = json.loads(res.data.decode())
         self.assertIn("sign-up was successfull", str(res_data))
         self.assertEqual(res.status_code, 201)
+
+    def test_duplicate_user(self):
+        self.client.post(
+            "api/v1/auth/signup", data=json.dumps(self.user2), content_type='application/json')
+        res = self.client.post(
+            "api/v1/auth/signup", data=json.dumps(self.user3), content_type='application/json')
+        res_data = json.loads(res.data.decode())
+        self.assertIn("username is already taken", str(res_data))
+        self.assertEqual(res.status_code, 400)
+
 
     def test_nodata_signup(self):
         res = self.client.post(
