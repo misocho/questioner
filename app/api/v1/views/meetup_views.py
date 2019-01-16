@@ -1,8 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify, make_response
 from ..models import meetup_models
 from ....validators import validator
-from datetime import datetime
-
 
 meetup_blueprint = Blueprint('meetup_blueprint', __name__, url_prefix='/api/v1')
 meetups = meetup_models.MeetupModels()
