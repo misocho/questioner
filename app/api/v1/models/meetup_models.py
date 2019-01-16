@@ -22,7 +22,7 @@ class MeetupModels(BaseModels):
         }
 
         if self.search_db("title", title):
-            return jsonify({"message" : "Meetup exists"}) , 400
+            return jsonify({"message" : "Meetup exists"}) , 409
             
         self.save_data(payload)
         return jsonify(payload, {"message": "meetup was created successfully"}) , 201
@@ -56,6 +56,6 @@ class RsvpModels(BaseModels):
         data = self.search_meetup("meetup_id", meetupId)
         if data:
             rsvp_list.append(payload)
-            return jsonify(payload, {"message": "rsvp successful"}) , 201
+            return jsonify(payload, {"message": "rsvp successful"}) , 204
         else:
             return jsonify({"message" : "meetup not found"}) , 404

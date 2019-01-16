@@ -16,7 +16,7 @@ def create_meetup():
         return jsonify({"message": "data not in json"}), 400
 
     if not meetup_data:
-        return jsonify({"message": "Data set cannot be empty"}) , 202
+        return jsonify({"message": "Data set cannot be empty"}) , 400
     title = meetup_data.get('title')
     organizer = meetup_data.get('organizer')
     location = meetup_data.get('location')
@@ -64,7 +64,7 @@ def getOne(meetupId):
             'meetup' : meetup, 
             'questions' : questions,
             'rsvp' : rsvp
-            }), 200)
+            }), 204)
     return make_response(jsonify({'message' : 'meetup not found'}), 404)
 
 @meetup_blueprint.route('/meetups/<meetupId>/rsvp', methods=['POST'])

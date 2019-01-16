@@ -33,6 +33,6 @@ class UserModels(BaseModels):
         if data:
             if data["password"] == password:
                 return jsonify({"message" : "successfully signed-in as {}".format(username)}), 200
-            return jsonify({"message" : "invalid username or password"}), 403
+            return jsonify({"message" : "invalid username or password"}), 401
         return jsonify({"message" :"user {} was not found".format(username)}) , 404
        

@@ -9,6 +9,7 @@ def create_app():
     app.register_blueprint(meetup_blueprint)
     app.register_blueprint(question_blueprint)
     app.register_blueprint(user_blueprint)
+    app.url_map.strict_slashes = False
 
     @app.errorhandler(405)
     def handle_method_not_allowed(error):

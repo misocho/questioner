@@ -18,7 +18,7 @@ def singup():
         return jsonify({"message": "data not in json"}), 400
 
     if not data:
-        return(jsonify({"message": "Data set cannot be empty"}), 404)
+        return(jsonify({"message": "Data set cannot be empty"}), 400)
 
     first_name = data.get('first_name')
     last_name = data.get('last_name')
@@ -34,7 +34,7 @@ def singup():
         return jsonify({"message": "Please provide an email"}), 400
 
     if not user_validation.valid_email(email):
-        return jsonify({"message": "Please provide a valid email address"}), 202
+        return jsonify({"message": "Please provide a valid email address"}), 400
     
     if not user_validation.input_provided(last_name):
         return jsonify({"message" : "Please provide last_name"}) , 400
@@ -49,7 +49,7 @@ def singup():
         return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 202
         
     if not user_validation.strong_pass(password):
-        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 202
+        return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 400
 
     
 
@@ -63,15 +63,22 @@ def singup():
 def signin():
     """ endpoint for signing in user """
 
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    try:
+        data = request.get_json() if request.is_json else None
+    except Exception:
+        return jsonify({"message": "data not in json"}), 400
 
-    if not user_validation.input_provided(username):
-        return jsonify({"message":"Please provide username"}) , 400
+    if data:
+        username = data.get('username')
+        password = data.get('password')
 
-    if not user_validation.input_provided(password):
-        return jsonify({"message":"Please provide a password"}), 400
-        
+    
+        if not user_validation.input_provided(username):
+            return jsonify({"message":"Please provide username"}) , 400
+
+        if not user_validation.input_provided(password):
+            return jsonify({"message":"Please provide a password"}), 400
+    else:
+       return jsonify({"message" : "Data set cannot be empty"}), 400
     res = user.singin_user(username, password)
     return res
