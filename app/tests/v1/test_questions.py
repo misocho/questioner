@@ -35,6 +35,13 @@ class TestQusetion(unittest.TestCase):
             "tags": ["andela", "flutter"]
         }
 
+        self.question2 = {
+             "postedBy" : "1",
+            "body" : "Will there be internet",
+            "meetup_id" : "3",
+            "meetup" : "3"
+        }
+
 
     def rest_meetup(self):
         """ post meetup """
@@ -66,6 +73,9 @@ class TestQusetion(unittest.TestCase):
     
     def test_downvote_question(self):
         """" test for downvote question """
+        ### Post question
+        self.rest_meetup()
+        res = self.client.post("api/v1/questions", data = json.dumps(self.question2), content_type='application/json')
         ### downvote question
         response = self.client.patch("api/v1/questions/1/downvote", content_type='application/json')
         res = json.loads(response.data.decode())

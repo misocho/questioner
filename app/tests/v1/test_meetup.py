@@ -92,6 +92,8 @@ class TestMeetup(unittest.TestCase):
 
     def test_duplicate_meetup(self):
         response = self.client.post(
+            'api/v1/meetups', data=json.dumps(self.meetup2), content_type='application/json')
+        response = self.client.post(
             'api/v1/meetups', data=json.dumps(self.duplicate), content_type='application/json')
         res = json.loads(response.data.decode())
         self.assertIn("Meetup exists", str(res))
@@ -173,5 +175,5 @@ class TestMeetup(unittest.TestCase):
     def test_time_format(self):
         response = self.client.post('api/v1/meetups', data=json.dumps(self.time_format), content_type='application/json')
         res = json.loads(response.data.decode())
-        self.assertIn("Please provide date in the format %m-%d-%Y %I:%M%p", str(res))
+        self.assertIn("Date time should be in the format mm-dd-yyyy H:m:s", str(res))
         self.assertEqual(response.status_code, 400)

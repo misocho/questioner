@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify, make_response
 from ..models import meetup_models
 from ....validators import validator
+from datetime import datetime
 
 
 meetup_blueprint = Blueprint('meetup_blueprint', __name__, url_prefix='/api/v1')
@@ -33,10 +34,13 @@ def create_meetup():
 
     if not meetup_validations.input_provided(location):
         return jsonify({"message" : "Please provide meetup location"}) , 400
-        
-    res = meetups.create_meetup(title, organizer, location, from_date, to_date, tags)
     
-    return res 
+    try:
+        res = meetups.create_meetup(title, organizer, location, from_date, to_date, tags)
+    
+        return res 
+    except ValueError:
+        return jsonify({"message" : "Date time should be in the format mm-dd-yyyy H:m:s"}), 400
 
 @meetup_blueprint.route('/meetups', methods=['GET'])
 def getall():
