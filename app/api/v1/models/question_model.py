@@ -1,4 +1,4 @@
-from .base_model import BaseModels, questions_list, meetups_list, qlist
+from .base_model import BaseModels, questions_list, meetups_list
 from flask import jsonify
 from ....validators import validator
 
@@ -27,6 +27,7 @@ class QuestionModels(BaseModels):
         payload = {
             "meetup_id": meetup_id,
             "question_id": str(len(questions_list) + 1),
+            "title" : title, 
             "postedby": postedby,
             "body": body,
             "up_votes": 0,
@@ -34,7 +35,6 @@ class QuestionModels(BaseModels):
         }
         for record in meetups_list:
             if record["meetup_id"] == meetup_id:
-                qlist.append(payload)
                 self.save_data(payload)
                 return jsonify(payload, {"message": "question was successsfully posted"}), 201
         return jsonify({"message" : "meetup does not exist"}), 404

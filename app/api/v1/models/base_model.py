@@ -3,7 +3,7 @@ questions_list = []
 meetups_list = []
 rsvp_list = []
 votes = []
-qlist = []
+
 
 class BaseModels(object):
     """ contains methods common to other models """
@@ -54,13 +54,17 @@ class BaseModels(object):
 
 
     def meetup_question(self, meetupId):
-        list = []
-        data = None
-        for data in qlist:
-            if data["meetup_id"] == meetupId:
-                list.append(data)
+        if len(questions_list) == 0:
+            return False
 
-        return data
+        for question in questions_list:
+            qlist = []
+            if question['meetup_id'] == meetupId:
+                qlist.append(question)
+
+                return qlist
+            return False
+
 
 
     def count_rsvp(self, meetupId):
