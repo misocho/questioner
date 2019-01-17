@@ -1,9 +1,8 @@
 import psycopg2
 from flask import current_app
-import migrations
+from app.database import migrations
 import os
 
-#db_url = current_app.config['DATABASE_URL']
 
 def connect():
     try:
