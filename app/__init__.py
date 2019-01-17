@@ -3,10 +3,13 @@ from config import app_config
 from .api.v1.views.meetup_views import meetup_blueprint
 from .api.v1.views.questions_views import question_blueprint
 from .api.v1.views.user_views import user_blueprint
+from .database import db_con
+
 
 def create_app(config_name):
     app = Flask(__name__)
 
+    db_con.create_tables()
     app.url_map.strict_slashes = False
     app.config.from_object(app_config[config_name])
     
