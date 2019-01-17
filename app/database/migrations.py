@@ -12,13 +12,13 @@ def tables():
         registered timestamp default current_timestamp
     );"""
 
-    meetups = """"CREATE TABLE IF NOT EXIST meetups(
+    meetups = """CREATE TABLE IF NOT EXISTS meetups(
         id serial PRIMARY KEY NOT NULL,
         happenningOn date NOT NULL,
         location character varying(50) NULL,
         images text NULL,
         title character varying(200) NOT NULL,
-        organizer character varying(50) NOT NUL,
+        organizer character varying(50) NOT NULL,
         tags text NULL,
         createdOn timestamp default current_timestamp
     );"""
@@ -37,7 +37,7 @@ def tables():
         id serial PRIMARY KEY NOT NULL,
         meetup_id numeric NOT NULL,
         user_id numeric NOT NULL,
-        response character varying(30) NOT NULL,
+        response character varying(30) NOT NULL
     );"""
 
     tables =[users,meetups,questions,rsvps]
