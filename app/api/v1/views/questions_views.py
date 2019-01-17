@@ -24,12 +24,12 @@ def post_question():
     postedby = data.get('postedby')
     body = data.get('body')
 
-    if not question_validation.input_provided(body):
+    if not question_validation.input_provided(body) or body.isspace():
         return jsonify ({"message" : "Please provide question body"}) , 400
 
-    if not question_validation.input_provided(meetup_id):
+    if not question_validation.input_provided(meetup_id) or meetup_id.isspace():
             return jsonify ({"message" : "Please provide meetup_id"}), 400
-    if not question_validation.input_provided(postedby):
+    if not question_validation.input_provided(postedby) or postedby.isspace():
             return jsonify ({"message" : "Please provide postedby field"}), 400
         
     return questions.post_question(meetup_id, postedby, body)

@@ -24,13 +24,13 @@ def create_meetup():
     from_date = meetup_data.get('from_date')
     to_date = meetup_data.get('to_date')
 
-    if not meetup_validations.input_provided(title):
+    if not meetup_validations.input_provided(title) or title.isspace():
         return jsonify({"message" : "Please provide meetup title"}) , 400
 
-    if not meetup_validations.input_provided(organizer):
+    if not meetup_validations.input_provided(organizer) or organizer.isspace():
         return jsonify({"message" : "Please provide meetup organizer"}) , 400
 
-    if not meetup_validations.input_provided(location):
+    if not meetup_validations.input_provided(location) or location.isspace():
         return jsonify({"message" : "Please provide meetup location"}) , 400
     
     try:
@@ -82,9 +82,9 @@ def rsvp_meetup(meetupId):
     meetupId = meetupId
     response  = data.get('response')
 
-    if not meetup_validations.input_provided(userId):
+    if not meetup_validations.input_provided(userId) or userId.isspace():
         return jsonify({"message" : "Please provide user id"}) , 400
-    if not meetup_validations.input_provided(response):
+    if not meetup_validations.input_provided(response) or response.isspace():
         return jsonify({"message" : "Please provide a response"}) , 400
     elif response not in ['yes', 'no', 'maybe']:
         return jsonify({"message" : "Response should be either yes, no, maybe"}) , 400
