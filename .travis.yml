@@ -13,9 +13,9 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'create database questioner_db'; -U postgres
-  - psql - 'create database test_questioner'; -U postgres
-  - psql -c 'create user postgres with password 'scorpion234''
+  - psql -c 'create database questioner_db;' -U postgres
+  - psql - 'create database test_questioner;' -U postgres
+  - psql -c "create user postgres with password 'scorpion234';" -U postgres
 script:
   - pytest --cov=app/
   
