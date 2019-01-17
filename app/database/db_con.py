@@ -68,3 +68,5 @@ def init_test_db():
     for query in tables:
         cursor.execute(query)
     con.commit()
+
+    return con
