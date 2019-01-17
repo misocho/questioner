@@ -12,13 +12,13 @@ class TestQusetion(unittest.TestCase):
         
     
         self.questions = {
-            "postedBy" : "1",
+            "postedby" : "1",
             "body" : "How can we get to the venue?",
             "meetup_id" : "3"
         }
 
         self.no_questions = {
-            "postedBy" : "1",
+            "postedby" : "1",
             "body" : "",
             "meetup_id" : "3"
         }
@@ -35,7 +35,7 @@ class TestQusetion(unittest.TestCase):
         }
 
         self.question2 = {
-            "postedBy" : "1",
+            "postedby" : "1",
             "body" : "Will there be internet",
             "meetup_id" : "3"
         }
