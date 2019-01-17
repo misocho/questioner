@@ -1,14 +1,29 @@
 from .base_model import BaseModels, questions_list, meetups_list, qlist
 from flask import jsonify
+from ....validators import validator
 
+question_validation = validator.BaseValidations()
 
 class QuestionModels(BaseModels):
 
     def __init__(self):
         self.db = 'questions'
 
-    def post_question(self, meetup_id, postedby, body):
+    def post_question(self, meetup_id, title, postedby, body):
         """ method to post question """
+
+        if not question_validation.verifyinput(title):
+            return jsonify ({"message" : "Please provide question title"}) , 400
+
+        if not question_validation.verifyinput(body):
+            return jsonify ({"message" : "Please provide question body"}) , 400
+
+        if not question_validation.verifyinput(meetup_id):
+            return jsonify ({"message" : "Please provide meetup_id"}), 400
+
+        if not question_validation.verifyinput(postedby):
+            return jsonify ({"message" : "Please provide postedby field"}), 400
+        
         payload = {
             "meetup_id": meetup_id,
             "question_id": str(len(questions_list) + 1),

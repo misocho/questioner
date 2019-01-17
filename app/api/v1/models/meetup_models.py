@@ -1,6 +1,8 @@
 from datetime import datetime
 from .base_model import BaseModels, meetups_list, rsvp_list
 from flask import jsonify
+from ....validators import validator
+meetup_validations = validator.BaseValidations()
 
 class MeetupModels(BaseModels):
     def __init__(self):
@@ -9,6 +11,16 @@ class MeetupModels(BaseModels):
 
     def create_meetup(self, title, organizer, location, from_date, to_date, tags):
         """ method to add meetup """
+
+        if not meetup_validations.verifyinput(title):
+            return jsonify({"message" : "Please provide meetup title"}) , 400
+
+        if not meetup_validations.verifyinput(organizer):
+            return jsonify({"message" : "Please provide meetup organizer"}) , 400
+
+        if not meetup_validations.verifyinput(location):
+            return jsonify({"message" : "Please provide meetup location"}) , 400
+    
         payload = {
             "meetup_id": str(len(meetups_list) + 1),
             "title": title,
@@ -47,13 +59,22 @@ class RsvpModels(BaseModels):
 
     def post_rsvp(self, userId, meetupId, response):
         """ method for rsvp meetup """
+        
+        if not meetup_validations.verifyinput(userId):
+            return jsonify({"message" "Please provide userid"}) , 400
+
+        if not response:
+            return jsonify({"message" : "response should be yes, no, or maybe"}) , 400
+
+        data = self.search_meetup("meetup_id", meetupId)
+
         payload = {
             "rsvpId": str(len(rsvp_list) + 1),
             "userId": userId,
             "meetup_id": meetupId,
             "response": response
         }
-        data = self.search_meetup("meetup_id", meetupId)
+       
         if data:
             rsvp_list.append(payload)
             return jsonify(payload, {"message": "rsvp successful"}) , 200

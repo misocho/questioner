@@ -14,7 +14,6 @@ class TestUsers(unittest.TestCase):
         self.user = {
             "first_name": "Brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobrian@gmail.com",
             "password": "@Scorpion234"
@@ -23,7 +22,6 @@ class TestUsers(unittest.TestCase):
         self.signup_user = {
             "first_name": "Kelvin",
             "last_name": "Ochieng",
-            "account_type": "user",
             "username": "kelninoch",
             "email": "ochiengkelvin@gmail.com",
             "password": "@Andela34875"
@@ -33,7 +31,6 @@ class TestUsers(unittest.TestCase):
         self.user2 = {
             "first_name": "Lilian",
             "last_name": "Okello",
-            "account_type": "user",
             "username": "okellolilian",
             "email": "lilian@gmail.com",
             "password": "@Andela34875"
@@ -42,7 +39,6 @@ class TestUsers(unittest.TestCase):
         self.user3 = {
             "first_name": "Lilian",
             "last_name": "Okello",
-            "account_type": "user",
             "username": "okellolilian",
             "email": "lilian@gmail.com",
             "password": "@Andela34875"
@@ -67,7 +63,6 @@ class TestUsers(unittest.TestCase):
         self.no_username = {
             "first_name": "Brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "",
             "email": "misochobrian@gmail.com",
             "password": "@Scorpion234"
@@ -76,7 +71,6 @@ class TestUsers(unittest.TestCase):
         self.strng_pass = {
             "first_name": "Brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobrian@gmail.com",
             "password": "scorpion"
@@ -85,7 +79,6 @@ class TestUsers(unittest.TestCase):
         self.no_firstname = {
             "first_name": "",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobrian@gmail.com",
             "password": "s@Scorpion234"
@@ -94,7 +87,6 @@ class TestUsers(unittest.TestCase):
         self.no_lastname = {
             "first_name": "brian",
             "last_name": "",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobrian@gmail.com",
             "password": "@Scorpion234"
@@ -103,7 +95,6 @@ class TestUsers(unittest.TestCase):
         self.no_password = {
             "first_name": "brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobrian@gmail.com",
             "password": ""
@@ -112,7 +103,6 @@ class TestUsers(unittest.TestCase):
         self.no_email = {
             "first_name": "brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "",
             "password": "@Scorpion234"
@@ -131,7 +121,6 @@ class TestUsers(unittest.TestCase):
         self.invalid_email = {
             "first_name": "brian",
             "last_name": "misocho",
-            "account_type": "user",
             "username": "misocho",
             "email": "misochobriangmail",
             "password": "@Scorpion234"
