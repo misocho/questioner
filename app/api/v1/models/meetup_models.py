@@ -11,27 +11,37 @@ class MeetupModels(BaseModels):
 
     def create_meetup(self, title, organizer, location, from_date, to_date, tags):
         """ method to add meetup """
-
+        payload = {}
         if not meetup_validations.verifyinput(title):
             return jsonify({"message" : "Please provide meetup title"}) , 400
 
-        if not meetup_validations.verifyinput(organizer):
+        elif not meetup_validations.verifyinput(organizer):
             return jsonify({"message" : "Please provide meetup organizer"}) , 400
 
-        if not meetup_validations.verifyinput(location):
+        elif not meetup_validations.verifyinput(location):
             return jsonify({"message" : "Please provide meetup location"}) , 400
-    
+
+        elif not meetup_validations.verifyinput(from_date):
+            return jsonify({"message" : "Please provide meetup from_date"}) , 400
+
+        elif not meetup_validations.verifyinput(to_date):
+            return jsonify({"message" : "Please provide meetup to_date"}) , 400
+
+        elif not tags:
+            tags = []
+
+
         payload = {
-            "meetup_id": str(len(meetups_list) + 1),
-            "title": title,
-            "organizer": organizer,
-            "createdOn": self.now,
-            "location": location,
-            "from_date": datetime.strptime(from_date, r'%m-%d-%Y %I:%M%p'),
-            "to_date":  datetime.strptime(to_date, r'%m-%d-%Y %I:%M%p'),
-            "tags": tags,
-           
-        }
+        "meetup_id": str(len(meetups_list) + 1),
+        "title": title,
+        "organizer": organizer,
+        "createdOn": self.now,
+        "location": location,
+        "from_date": datetime.strptime(from_date, r'%m-%d-%Y %I:%M%p'),
+        "to_date":  datetime.strptime(to_date, r'%m-%d-%Y %I:%M%p'),
+        "tags": tags,
+        
+    }
 
         if self.search_db("title", title):
             return jsonify({"message" : "Meetup exists"}) , 409
