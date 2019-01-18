@@ -62,8 +62,7 @@ class BaseModels(object):
             if question['meetup_id'] == meetupId:
                 qlist.append(question)
 
-                return qlist
-            return False
+            return qlist
 
 
 
