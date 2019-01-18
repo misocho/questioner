@@ -39,8 +39,34 @@ def create_tables():
                     con.close()
                     print("PostgreSQL connection is closed")
 
-def main():
-    create_tables()
 
-if __name__==('__main__'):
-    main()
+
+
+def destroy_database():
+    """ Drops all tables """
+
+    con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
+    cursor = con.cursor()
+
+    cursor.execute("DROP SCHEMA public CASCADE;")
+    cursor.execute("CREATE SCHEMA public;")
+    cursor.execute("GRANT USAGE ON SCHEMA public To postgres;")
+
+    con.commit()
+
+def init_test_db():
+    ''' sets up database for testing '''
+
+    destroy_database()
+
+    con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
+
+    cursor = con.cursor()
+
+    tables = migrations.tables()
+    
+    for query in tables:
+        cursor.execute(query)
+    con.commit()
+
+    return con
