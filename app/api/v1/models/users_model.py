@@ -36,16 +36,14 @@ class UserModels(BaseModels):
             return jsonify({"message" : "Please provide username"}) , 400
         username = username.replace(' ', '')
 
-        if len(password) < 6:
-            return jsonify({"message" : "Password should have a minimum of 6 characters"}) , 409
-
         if not isAdmin:
             isAdmin = False 
         if str(isAdmin) not in ['true', 'false', 'True', 'False']:
             return jsonify({"message" : "Please fill True or False"})
-            
-        if not user_validation.strong_pass(password):
-            return jsonify({"message" : "Password should have atleast one uppercase, special character and digit"}) , 409
+
+
+        if not user_validation.strong_pass(password) or len(password) < 6:
+            return jsonify({"message" : "Password should have  atleast 6 characters, one uppercase, special character and digit"}) , 409
 
     
         if self.search_db("username", username):
@@ -82,6 +80,6 @@ class UserModels(BaseModels):
         if data:
             if data["password"] == password:
                 return jsonify({"message" : "successfully signed-in as {}".format(username)}), 200
-            return jsonify({"message" : "invalid username or password"}), 401
+            return jsonify({"message" : "Incorrect password"}), 401
         return jsonify({"message" :"user {} was not found".format(username)}) , 404
        

@@ -18,7 +18,7 @@ def post_question():
     data = request.get_json()
     if not data:
         return jsonify({"message" : "Data set cannot be empty"}), 400
-    meetup_id = data.get('meetup_id')
+    meetup_id = str(data.get('meetup_id'))
     postedby = data.get('postedby')
     body = data.get('body')
     title = data.get('title')

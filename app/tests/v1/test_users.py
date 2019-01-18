@@ -174,7 +174,7 @@ class TestUsers(unittest.TestCase):
         res = self.client.post("api/v1/auth/signin", data=json.dumps(
             self.invalid_password), content_type='application/json')
         res_data = json.loads(res.data.decode())
-        self.assertIn("invalid username or password", str(res_data))
+        self.assertIn("Incorrect password", str(res_data))
         self.assertEqual(res.status_code, 401)
 
     def test_usernotfound(self):
@@ -205,7 +205,7 @@ class TestUsers(unittest.TestCase):
             "api/v1/auth/signup", data=json.dumps(self.strng_pass), content_type='application/json')
         res_data = json.loads(res.data.decode())
         self.assertIn(
-            "Password should have atleast one uppercase, special character and digit", str(res_data))
+            "Password should have  atleast 6 characters, one uppercase, special character and digit", str(res_data))
         self.assertEqual(res.status_code, 409)
 
     def test_no_firstname(self):
