@@ -8,7 +8,7 @@ class TestUsers(unittest.TestCase):
 
     def setUp(self):
         """ set up method for tests """
-        self.app = create_app()
+        self.app = create_app("testing")
         self.client = self.app.test_client()
 
         self.user = {
