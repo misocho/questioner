@@ -54,19 +54,32 @@ def destroy_database():
 
     con.commit()
 
-def init_test_db():
+def create_test_tables():
     ''' sets up database for testing '''
 
-    destroy_database()
-
-    con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
-
-    cursor = con.cursor()
-
-    tables = migrations.tables()
+    try:
     
-    for query in tables:
-        cursor.execute(query)
-    con.commit()
+        con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
+        cursor = con.cursor()
+        tables = migrations.tables()
 
-    return con
+        for query in tables:
+                cursor.execute(query)
+        con.commit()
+
+        print("test tables created successfully in PostgreSQL ")
+    except (Exception, psycopg2.DatabaseError) as error :
+            print ("Error while creating PostgreSQL table", error)
+    finally:
+        #closing database connection.
+        if(con):
+                cursor.close()
+                con.close()
+                print("PostgreSQL connection is closed")
+
+def connect_test_db():
+    try:
+        con = psycopg2.connect("dbname='test_questioner' host='localhost'user='postgres' password='scorpion234' port=5432")
+        return con
+    except (Exception, psycopg2.DatabaseError) as error:
+        raise error

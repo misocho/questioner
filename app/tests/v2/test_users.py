@@ -1,7 +1,7 @@
 import unittest
 from ... import create_app
 import json
-from ...database.db_con import init_test_db, destroy_database
+from ...database.db_con import connect_test_db, destroy_database
 
 
 class TestUsers(unittest.TestCase):
@@ -11,14 +11,15 @@ class TestUsers(unittest.TestCase):
         """ set up method for tests """
         self.app = create_app("testing")
         self.client = self.app.test_client()
-        self.db = init_test_db()
+        self.db = connect_test_db()
 
         self.user = {
-            "first_name": "Brian",
-            "last_name": "misocho",
-            "account_type": "user",
+            "firstname" : "Brian",
+            "lastname" : "misocho",
+            "othername" : "morang'a",
+            "email" : "misochobrian@gmail.com",
+            "phoneNumber" : "+254798734967",
             "username": "misocho",
-            "email": "misochobrian@gmail.com",
             "password": "@Scorpion234"
         }
 
