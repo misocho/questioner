@@ -14,13 +14,34 @@ class Users:
 
         if isAdmin == None:
             isAdmin = False
-            
+
         cursor = self.db.cursor()
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
-                username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING username"""
-        
-        cursor.execute(query, (firstname, lastname, othername, email, phoneNumber, username, password, isAdmin))
+                username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING registered"""
 
+        cursor.execute(query, (firstname, lastname, othername, email, phoneNumber, username, password, isAdmin))
+        registered = cursor.fetchone()[0]
         self.db.commit()
         cursor.close()
-        return username
+
+
+        user = {
+            "firstname" : firstname,
+            "lastname" : lastname,
+            "othername" : othername,
+            "email" : email,
+            "phonenumber" : phoneNumber,
+            "username" : username,
+            "password" : password,
+            "isAdmin" : isAdmin,
+            "registered" : registered
+        }
+        
+        return user
+
+    def signin(self, userdata, username):
+        """ creates user signin model """
+
+        query = " SELECT {} FROM users WHERE username = '{}' ".format(userdata, username)
+
+        return query
