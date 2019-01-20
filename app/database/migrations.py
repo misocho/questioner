@@ -3,11 +3,13 @@ def tables():
 
     users = """CREATE TABLE IF NOT EXISTS users(
         id serial PRIMARY KEY NOT NULL,
-        firstname character varying(50) NOT NULL,
-        lastname  character varying(50) NOT NULL,
-        email  character varying(50) UNIQUE,
-        username character varying(50) NOT NULL,
-        password character varying(50) NOT NULL,
+        firstname character varying(100) NOT NULL,
+        lastname  character varying(100) NOT NULL,
+        othername character varying(100) NOT NULL,
+        email  character varying(100) UNIQUE,
+        phoneNumber character varying(100) UNIQUE,
+        username character varying(100) NOT NULL,
+        password character varying(250) NOT NULL,
         isAdmin boolean,
         registered timestamp default current_timestamp
     );"""
