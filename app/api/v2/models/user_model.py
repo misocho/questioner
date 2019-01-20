@@ -9,10 +9,12 @@ class Users:
     def __init__(self):
         self.db = connect()
 
-    def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=False):
+    def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
 
-
+        if isAdmin == None:
+            isAdmin = False
+            
         cursor = self.db.cursor()
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
                 username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING username"""
