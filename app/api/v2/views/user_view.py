@@ -8,7 +8,7 @@ auth = Blueprint('auth', __name__, url_prefix='/api/v2/auth')
 user = Users()
 
 
-auth.route('/signup', methods=['POST'])
+@auth.route('/signup', methods=['POST'])
 def signup():
     try:
         data = request.get_json()
