@@ -28,7 +28,7 @@ def signup():
     isAdmin = data.get('isAdmin')
     password = data.get('password')
 
-    password = generate_password_hash(password, )
+    password = generate_password_hash(password)
 
     res = user.signup(firstname, lastname, othername, email, phoneNumber, username, password, isAdmin)
     
