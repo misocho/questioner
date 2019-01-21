@@ -11,6 +11,7 @@ def create_app(config_name):
     app = Flask(__name__)
 
     db_con.create_tables()
+    db_con.create_test_tables()
     app.url_map.strict_slashes = False
     app.config.from_object(app_config[config_name])
     
