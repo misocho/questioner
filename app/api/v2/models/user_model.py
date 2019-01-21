@@ -1,14 +1,18 @@
 from datetime import datetime
+import os
 
-from ....database.db_con import connect
+from ....database.db_con import connect , connect_test
 from psycopg2.extras import RealDictCursor
 
 
 class Users:
     """ Contains methods for user models """
-
+    
     def __init__(self):
-        self.db = connect()
+        if os.getenv('FLASK_ENV') == 'development':
+            self.db = connect()
+        else:
+            self.db = connect_test()
 
     def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
@@ -31,7 +35,7 @@ class Users:
     def signin(self, userdata, username):
         """ creates user signin model """
 
-        cursor = self.db.cursor(cursor_factory=RealDictCursor)
+        cursor = connect().cursor(cursor_factory=RealDictCursor)
         query = " SELECT {} FROM users WHERE username = '{}' ".format(userdata, username)
         cursor.execute(query)
         data = cursor.fetchone()

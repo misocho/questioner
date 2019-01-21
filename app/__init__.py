@@ -7,11 +7,10 @@ from .api.v2.views.user_view import auth
 from .database import db_con
 
 
-def create_app(config_name):
+def create_app(config_name="development"):
     app = Flask(__name__)
 
     db_con.create_tables()
-    db_con.create_test_tables()
     app.url_map.strict_slashes = False
     app.config.from_object(app_config[config_name])
     

@@ -1,7 +1,8 @@
 import unittest
+import os
 from ... import create_app
 import json
-from ...database.db_con import connect_test_db, destroy_database
+from ...database.db_con import connect_test, destroy_database
 
 
 class TestUsers(unittest.TestCase):
@@ -9,9 +10,12 @@ class TestUsers(unittest.TestCase):
 
     def setUp(self):
         """ set up method for tests """
-        self.app = create_app("testing")
+        self.app = create_app(config_name="testing")
         self.client = self.app.test_client()
-        self.db = connect_test_db()
+        self.app_context = self.app
+        self.db = connect_test()
+        print(os.getenv('FLASK_ENV'))
+      
 
         self.user = {
             "firstname" : "Brian",
@@ -53,3 +57,6 @@ class TestUsers(unittest.TestCase):
         """ Destroys data before rinnung each test """
         destroy_database()
         self.db.close()
+
+if __name__ == "__main__":
+    unittest.main()
