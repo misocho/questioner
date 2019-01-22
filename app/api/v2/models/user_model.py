@@ -41,3 +41,14 @@ class Users:
         cursor.execute(query)
         data = cursor.fetchone()
         return data
+
+    @classmethod
+    def check_isAdmin(cls, username):
+        """ checks if user is an admin """
+        db = connect()
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+        query = "SELECT isAdmin FROM users WHERE username = '{}'".format(
+            username)
+        cursor.execute(query)
+        isAdmin = cursor.fetchone()
+        return isAdmin
