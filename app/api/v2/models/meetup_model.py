@@ -20,3 +20,13 @@ class Meetups:
         cursor.close()
 
         return meetup_data 
+
+
+    def getall(self):
+
+        cursor = connect().cursor(cursor_factory=RealDictCursor)
+
+        query = """ SELECT * FROM meetups  """
+        cursor.execute(query)
+        meetups = cursor.fetchall()
+        return data
