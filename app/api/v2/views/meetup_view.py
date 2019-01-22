@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, make_response, request
-from app.api.v2.utils.auth import login_required
-
+from app.api.v2.utils.auth import login_required, admin_required
+from flask_restful.reqparse import RequestParser
 from ..models.meetup_model import Meetups
 
 meetup_v2 = Blueprint('meetup_v2', __name__, url_prefix='/api/v2')
@@ -10,7 +10,8 @@ meetup = Meetups()
 
 
 @meetup_v2.route('/meetups', methods=['POST'])
-def create_meetup():
+@admin_required
+def create_meetup(current_user, isAdmin):
     """ endpoint for posting a meetup"""
     try:
         data = request.get_json()
@@ -21,7 +22,7 @@ def create_meetup():
             "message": "Data not injson"
         }), 400
 
-    username = data.get('username')
+    username = current_user
     title = data.get('title')
     organizer = data.get('organizer')
     location = data.get('location')
@@ -33,6 +34,7 @@ def create_meetup():
                              location, happeningOn, tags, images)
 
     return jsonify({
+        "isAdmin": isAdmin,
         "data": [res],
         "status": 201,
         "message": "meetup was successfully posted"
@@ -46,14 +48,14 @@ def all_meetups(current_user):
     res = meetup.getall()
 
     return jsonify({
-        "user": current_user,
         "data": res,
         "status": 200
     }), 200
 
 
 @meetup_v2.route('/meetups/<meetup_id>')
-def get_one(meetup_id):
+@login_required
+def get_one(meetup_id, current_user):
     """ endpoint for getting one meetup """
 
     meetupdata = "id, title, location, happeningOn, tags"
