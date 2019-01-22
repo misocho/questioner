@@ -10,7 +10,7 @@ meetup = Meetups()
 
 
 @meetup_v2.route('/meetups', methods=['POST'])
-def create():
+def create_meetup():
     try:
         data = request.get_json()
 
@@ -33,5 +33,15 @@ def create():
     return jsonify({
         "data" : [res],
         "status" : 201,
-        "message" : "registration was successful"
+        "message" : "meetup was successfully posted"
     }) , 201
+
+@meetup_v2.route('/meetups')
+def all_meetups():
+
+    res = meetup.getall()
+
+    return jsonify({
+        "data" : res,
+        "status" : 200
+    }) , 200
