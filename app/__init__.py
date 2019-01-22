@@ -4,6 +4,7 @@ from .api.v1.views.meetup_views import meetup_blueprint
 from .api.v1.views.questions_views import question_blueprint
 from .api.v1.views.user_views import user_blueprint
 from .api.v2.views.user_view import auth
+from .api.v2.views.meetup_view import meetup_v2
 from .database import db_con
 
 
@@ -18,6 +19,7 @@ def create_app(config_name="development"):
     app.register_blueprint(question_blueprint)
     app.register_blueprint(user_blueprint)
     app.register_blueprint(auth)
+    app.register_blueprint(meetup_v2)
     
 
     @app.errorhandler(405)
