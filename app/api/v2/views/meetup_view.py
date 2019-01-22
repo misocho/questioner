@@ -41,13 +41,12 @@ def create_meetup():
 
 @meetup_v2.route('/meetups')
 @login_required
-def all_meetups(current_user, isAdmin):
+def all_meetups(current_user):
     """ endpoint for getting all meetups """
     res = meetup.getall()
 
     return jsonify({
         "user": current_user,
-        "isAdmin" : isAdmin,
         "data": res,
         "status": 200
     }), 200
