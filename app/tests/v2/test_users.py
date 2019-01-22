@@ -21,14 +21,14 @@ class TestUsers(unittest.TestCase):
             "firstname" : "Brian",
             "lastname" : "misocho",
             "othername" : "morang'a",
-            "email" : "misochobrian@gmail.com",
+            "email" : "misochofelix@gmail.com",
             "phoneNumber" : "+254798734967",
-            "username": "misocho",
+            "username": "felix",
             "password": "@Scorpion234"
         }
 
         self.signin_user = {
-            "username": "misocho",
+            "username": "felix",
             "password": "@Scorpion234"
         }
 
