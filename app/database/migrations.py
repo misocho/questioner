@@ -16,11 +16,12 @@ def tables():
 
     meetups = """CREATE TABLE IF NOT EXISTS meetups(
         id serial PRIMARY KEY NOT NULL,
-        happenningOn date NOT NULL,
-        location character varying(50) NULL,
+        username character varying(100) NOT NULL,
+        happeningOn timestamp NOT NULL,
+        location character varying(100) NULL,
         images text NULL,
         title character varying(200) NOT NULL,
-        organizer character varying(50) NOT NULL,
+        organizer character varying(100) NOT NULL,
         tags text NULL,
         createdOn timestamp default current_timestamp
     );"""
