@@ -11,6 +11,7 @@ meetup = Meetups()
 
 @meetup_v2.route('/meetups', methods=['POST'])
 def create_meetup():
+    """ endpoint for posting a meetup"""
     try:
         data = request.get_json()
 
@@ -28,20 +29,40 @@ def create_meetup():
     tags = data.get('tags')
     images = data.get('images')
 
-    res = meetup.post_meetup(username, title, organizer, location, happeningOn, tags, images)
-    
+    res = meetup.post_meetup(username, title, organizer,
+                             location, happeningOn, tags, images)
+
     return jsonify({
-        "data" : [res],
-        "status" : 201,
-        "message" : "meetup was successfully posted"
-    }) , 201
+        "data": [res],
+        "status": 201,
+        "message": "meetup was successfully posted"
+    }), 201
+
 
 @meetup_v2.route('/meetups')
 def all_meetups():
-
+    """ endpoint for getting all meetups """
     res = meetup.getall()
 
     return jsonify({
-        "data" : res,
-        "status" : 200
-    }) , 200
+        "data": res,
+        "status": 200
+    }), 200
+
+
+@meetup_v2.route('/meetups/<meetup_id>')
+def get_one(meetup_id):
+    """ endpoint for getting one meetup """
+
+    meetupdata = "id, title, location, happeningOn, tags"
+    res = meetup.getOne(meetup_id, meetupdata)
+    if res:
+        return jsonify({
+            "status": 200,
+            "data": res
+        }), 200
+    else:
+        return jsonify({
+            "status": 404,
+            "message": "Meetup does not exist"
+        }), 404

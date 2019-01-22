@@ -8,13 +8,15 @@ from psycopg2.extras import RealDictCursor
 class Meetups:
     """ contains methods for meetup models """
 
-    def post_meetup(self, username, title, organizer, location, happeningOn, tags, images):
+    def post_meetup(self, username, title, organizer, location,
+                    happeningOn, tags, images):
         db = connect()
 
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        query = """ INSERT INTO meetups (username, happeningOn, location, images, title, organizer,
-                tags) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING * """
+        query = """INSERT INTO meetups (username, happeningOn, location,
+        images, title, organizer,tags) VALUES (%s, %s, %s, %s, %s, %s, %s)
+        RETURNING * """
 
         cursor.execute(query, (username, happeningOn, location,
                                images, title, organizer, tags))
@@ -33,7 +35,7 @@ class Meetups:
         meetups = cursor.fetchall()
         return meetups
 
-    def getOne(self, meetup_id):
+    def getOne(self, meetup_id, meetupdata):
         """ contains method for getting one meetup """
         cursor = connect().cursor(cursor_factory=RealDictCursor)
 
