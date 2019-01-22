@@ -6,10 +6,12 @@ import os
 
 def connect():
     try:
-        con = psycopg2.connect("dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
+        con = psycopg2.connect(
+            "dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
         return con
     except (Exception, psycopg2.DatabaseError) as error:
         raise error
+
 
 def close():
     con = connect()
@@ -21,31 +23,31 @@ def close():
 
 def create_tables():
     try:
-    
-                con = psycopg2.connect("dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
-                cursor = con.cursor()
-                tables = migrations.tables()
 
-                for query in tables:
-                    cursor.execute(query)
-                con.commit()
-                print("Tables created successfully in PostgreSQL ")
-    except (Exception, psycopg2.DatabaseError) as error :
-            print ("Error while creating PostgreSQL table", error)
+        con = psycopg2.connect(
+            "dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
+        cursor = con.cursor()
+        tables = migrations.tables()
+
+        for query in tables:
+            cursor.execute(query)
+        con.commit()
+        print("Tables created successfully in PostgreSQL ")
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while creating PostgreSQL table", error)
     finally:
-            #closing database connection.
-                if(con):
-                    cursor.close()
-                    con.close()
-                    print("PostgreSQL connection is closed")
-
-
+        # closing database connection.
+        if(con):
+            cursor.close()
+            con.close()
+            print("PostgreSQL connection is closed")
 
 
 def destroy_database():
     """ Drops all tables """
 
-    con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
+    con = psycopg2.connect(
+        "dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
     cursor = con.cursor()
 
     cursor.execute("DROP SCHEMA public CASCADE;")
@@ -54,18 +56,19 @@ def destroy_database():
 
     con.commit()
 
+
 def connect_test():
-        ''' sets up database for testing '''
-    
-        con = psycopg2.connect("dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
-        cursor = con.cursor()
-        tables = migrations.tables()
+    ''' sets up database for testing '''
 
-        for query in tables:
-                cursor.execute(query)
-        con.commit()
+    con = psycopg2.connect(
+        "dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
+    cursor = con.cursor()
+    tables = migrations.tables()
 
-        print("test tables created successfully in PostgreSQL ")
+    for query in tables:
+        cursor.execute(query)
+    con.commit()
 
+    print("test tables created successfully in PostgreSQL ")
 
-        return con
+    return con
