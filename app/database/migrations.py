@@ -16,7 +16,8 @@ def tables():
 
     meetups = """CREATE TABLE IF NOT EXISTS meetups(
         id serial PRIMARY KEY NOT NULL,
-        happenningOn date NOT NULL,
+        username numeric NOT NULL,
+        happeningOn date NOT NULL,
         location character varying(50) NULL,
         images text NULL,
         title character varying(200) NOT NULL,
