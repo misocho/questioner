@@ -15,14 +15,13 @@ class TestUsers(unittest.TestCase):
         self.app_context = self.app
         self.db = connect_test()
         print(os.getenv('FLASK_ENV'))
-      
 
         self.user = {
-            "firstname" : "Brian",
-            "lastname" : "misocho",
-            "othername" : "morang'a",
-            "email" : "misochofelix@gmail.com",
-            "phoneNumber" : "+254798734967",
+            "firstname": "Brian",
+            "lastname": "misocho",
+            "othername": "morang'a",
+            "email": "misochofelix@gmail.com",
+            "phoneNumber": "+254798734967",
             "username": "felix",
             "password": "@Scorpion234"
         }
@@ -32,10 +31,9 @@ class TestUsers(unittest.TestCase):
             "password": "@Scorpion234"
         }
 
-
     def post_user(self):
         return self.client.post(
-                "api/v2/auth/signup", data=json.dumps(self.user), content_type='application/json')
+            "api/v2/auth/signup", data=json.dumps(self.user), content_type='application/json')
 
     def test_signup_user(self):
         """ tests signup user """
@@ -57,6 +55,7 @@ class TestUsers(unittest.TestCase):
         """ Destroys data before rinnung each test """
         destroy_database()
         self.db.close()
+
 
 if __name__ == "__main__":
     unittest.main()

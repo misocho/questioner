@@ -26,7 +26,6 @@ def tables():
         createdOn timestamp default current_timestamp
     );"""
 
-
     questions = """CREATE TABLE IF NOT EXISTS questions(
         id serial PRIMARY KEY NOT NULL,
         meetup_id numeric NOT NULL,
@@ -43,6 +42,6 @@ def tables():
         response character varying(30) NOT NULL
     );"""
 
-    tables =[users,meetups,questions,rsvps]
+    tables = [users, meetups, questions, rsvps]
 
     return tables

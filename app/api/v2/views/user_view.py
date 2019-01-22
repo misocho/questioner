@@ -2,6 +2,9 @@ from flask import Blueprint, jsonify, make_response, request
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from ..models.user_model import Users
+from app.api.v2.utils.auth import Auth
+
+authenticate = Auth()
 
 auth = Blueprint('auth', __name__, url_prefix='/api/v2/auth')
 
@@ -32,8 +35,12 @@ def signup():
 
     res = user.signup(firstname, lastname, othername, email,
                       phoneNumber, username, password, isAdmin)
+
+    # Generates token when user signs up
+    token = authenticate.generate_token(username, isAdmin)
+
     return jsonify({
-        "data": [res],
+        "data": [{"token": token}, res],
         "status": 201,
         "message": "registration was successful"
     }), 201
@@ -60,10 +67,12 @@ def sigin():
     if data:
         check = check_password_hash(data['password'], password)
         if check:
+            isAdmin = user.check_isAdmin(username)
+            token = authenticate.generate_token(username, isAdmin)
             return jsonify({
+                "token": token,
                 "status": 200,
-                "message": "Successfully \
-                signed is as {}".format(data['username'])
+                "message": "Successfully signed is as {}".format(data['username'])
             }), 200
 
         else:
