@@ -56,3 +56,17 @@ class Meetups:
         cursor.execute(query)
         db.commit()
         cursor.close()
+
+    def rsvp(self, meetup_id, username, response):
+        """ contains method for making a meetup rsvp """
+        db = connect()
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        query = "INSERT INTO rsvps (meetup_id, username, response) VALUES (%s, %s, %s) RETURNING id, username, response"
+
+        cursor.execute(query, (meetup_id, username, response))
+        rsvp_data = cursor.fetchone()
+        db.commit()
+        cursor.close()
+
+        return rsvp_data

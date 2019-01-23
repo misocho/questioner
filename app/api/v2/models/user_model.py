@@ -13,7 +13,7 @@ class Users:
 
     def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
-        
+
         if os.getenv('FLASK_ENV') == 'development':
             db = connect()
         else:
