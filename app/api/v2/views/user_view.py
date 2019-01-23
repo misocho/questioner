@@ -24,19 +24,32 @@ def signup():
             "message": "Data not in json"
         }), 400
 
-    firstname = data.get('firstname')
-    lastname = data.get('lastname')
-    othername = data.get('othername')
+    required = ['firstname', 'lastname', 'othername', 'email',
+                'phoneNumber', 'username', 'password']
+
+###### checks if all required fields are provided #####
+    for value in required:
+        if not (data.get(value) and data.get(value).replace(' ', '')):
+            return jsonify({
+                "status": 400,
+                "message": "Please provide {}".format(value)
+            }), 400
+
+    firstname = data.get('firstname').replace(' ', '')
+    lastname = data.get('lastname').replace(' ', '')
+    othername = data.get('othername').replace(' ', '')
     email = data.get('email')
     phoneNumber = data.get('phoneNumber')
-    username = data.get('username')
+    username = data.get('username').replace(' ', '')
     isAdmin = data.get('isAdmin')
     password = data.get('password')
 
     check_email = validate.check_exist('users', 'email', email)
-    check_phonenumber = validate.check_exist('users', 'phoneNumber', phoneNumber)
+    check_phonenumber = validate.check_exist(
+        'users', 'phoneNumber', phoneNumber)
     check_username = validate.check_exist('users', 'username', username)
-    not_valid = (check_email or check_phonenumber or check_username) # checks if username , phonemuber and password exists
+    # checks if username , phonemuber and password exists
+    not_valid = (check_email or check_phonenumber or check_username)
     if not not_valid:
         password = generate_password_hash(password)
 

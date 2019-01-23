@@ -1,8 +1,11 @@
 from datetime import datetime
 import os
+from psycopg2.extras import RealDictCursor
 
 from ....database.db_con import connect, connect_test
-from psycopg2.extras import RealDictCursor
+from app.api.v2.utils.validations import Validations
+
+validate = Validations()
 
 
 class Users:
@@ -10,6 +13,7 @@ class Users:
 
     def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
+        
         if os.getenv('FLASK_ENV') == 'development':
             db = connect()
         else:
