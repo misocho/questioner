@@ -80,10 +80,18 @@ def sigin():
             "message": "Data not in json"
         })
 
-    username = data.get('username')
+    required = ['username', 'password']
+    for value in required:
+        if not (data.get(value) and data.get(value).replace(' ', '')):
+            return jsonify({
+                "status": 400,
+                "message": "Please provide {}".format(value)
+            }), 400
+
+    username = data.get('username').replace(' ', '')
     password = data.get('password')
 
-    userdata = "id, firstname, lastname, username, password, email"
+    userdata = "username, password"
 
     data = user.signin(userdata, username)
 
