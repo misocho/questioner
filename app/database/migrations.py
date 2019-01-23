@@ -39,10 +39,17 @@ def tables():
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
         id serial PRIMARY KEY NOT NULL,
         meetup_id serial NOT NULL,
-        user_id serial NOT NULL,
+        username character varying(100) NOT NULL,
         response character varying(30) NOT NULL
     );"""
 
-    tables = [users, meetups, questions, rsvps]
+    votes = """CREATE TABLE IF NOT EXISTS votes(
+        id serial PRIMARY KEY NOT NULL,
+        question_id serial NOT NULL,
+        username character varying(100) NOT NULL,
+        
+    );"""
+
+    tables = [users, meetups, questions, rsvps, votes]
 
     return tables
