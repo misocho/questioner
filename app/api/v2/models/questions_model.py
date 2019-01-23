@@ -19,3 +19,18 @@ class Questions:
         cursor.close()
 
         return question_details
+
+    def up_vote(self, username, question_id):
+
+        db = connect()
+
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
+
+        query_2 = """ UPDATE questions SET votes = %s WHERE question_id = %s """
+
+        cursor.execute(query_1, (username, question_id))
+        db.commit()
+
+        cursor.close()
