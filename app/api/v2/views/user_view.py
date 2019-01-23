@@ -3,8 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from ..models.user_model import Users
 from app.api.v2.utils.auth import Auth
+from app.api.v2.utils.validations import Validations
 
 authenticate = Auth()
+validate = Validations()
 
 auth = Blueprint('auth', __name__, url_prefix='/api/v2/auth')
 
@@ -22,28 +24,49 @@ def signup():
             "message": "Data not in json"
         }), 400
 
-    firstname = data.get('firstname')
-    lastname = data.get('lastname')
-    othername = data.get('othername')
+    required = ['firstname', 'lastname', 'othername', 'email',
+                'phoneNumber', 'username', 'password']
+
+###### checks if all required fields are provided #####
+    for value in required:
+        if not (data.get(value) and data.get(value).replace(' ', '')):
+            return jsonify({
+                "status": 400,
+                "message": "Please provide {}".format(value)
+            }), 400
+
+    firstname = data.get('firstname').replace(' ', '')
+    lastname = data.get('lastname').replace(' ', '')
+    othername = data.get('othername').replace(' ', '')
     email = data.get('email')
     phoneNumber = data.get('phoneNumber')
-    username = data.get('username')
+    username = data.get('username').replace(' ', '')
     isAdmin = data.get('isAdmin')
     password = data.get('password')
 
-    password = generate_password_hash(password)
+    check_email = validate.check_exist('users', 'email', email)
+    check_phonenumber = validate.check_exist(
+        'users', 'phoneNumber', phoneNumber)
+    check_username = validate.check_exist('users', 'username', username)
+    # checks if username , phonemuber and password exists
+    not_valid = (check_email or check_phonenumber or check_username)
+    if not not_valid:
+        password = generate_password_hash(password)
 
-    res = user.signup(firstname, lastname, othername, email,
-                      phoneNumber, username, password, isAdmin)
+        res = user.signup(firstname, lastname, othername, email,
+                          phoneNumber, username, password, isAdmin)
 
-    # Generates token when user signs up
-    token = authenticate.generate_token(username, isAdmin)
+        # Generates token when user signs up
+        token = authenticate.generate_token(username, isAdmin)
 
-    return jsonify({
-        "data": [{"token": token}, res],
-        "status": 201,
-        "message": "registration was successful"
-    }), 201
+        return jsonify({
+            "data": [{"token": token}, res],
+            "status": 201,
+            "message": "registration was successful"
+        }), 201
+
+    else:
+        return not_valid
 
 
 @auth.route('/signin', methods=['POST'])
@@ -57,10 +80,18 @@ def sigin():
             "message": "Data not in json"
         })
 
-    username = data.get('username')
+    required = ['username', 'password']
+    for value in required:
+        if not (data.get(value) and data.get(value).replace(' ', '')):
+            return jsonify({
+                "status": 400,
+                "message": "Please provide {}".format(value)
+            }), 400
+
+    username = data.get('username').replace(' ', '')
     password = data.get('password')
 
-    userdata = "id, firstname, lastname, username, password, email"
+    userdata = "username, password"
 
     data = user.signin(userdata, username)
 

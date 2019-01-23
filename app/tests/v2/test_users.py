@@ -12,9 +12,7 @@ class TestUsers(unittest.TestCase):
         """ set up method for tests """
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client()
-        self.app_context = self.app
         self.db = connect_test()
-        print(os.getenv('FLASK_ENV'))
 
         self.user = {
             "firstname": "Brian",
