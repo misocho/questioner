@@ -80,7 +80,7 @@ def admin_required(f):
             user = data['username']
             if user:
                 if isAdmin == 'True':  # checks if user is an admin
-                    return f(*args, **kwargs, current_user=user, isAdmin=isAdmin)
+                    return f(*args, **kwargs, current_user=user)
                 else:
                     return jsonify({
                         "status": 401,

@@ -17,7 +17,7 @@ parser = RequestParser()
 
 @meetup_v2.route('/meetups', methods=['POST'])
 @admin_required
-def create_meetup(current_user, isAdmin):
+def create_meetup(current_user):
     """ endpoint for posting a meetup"""
     try:
         data = request.get_json()
@@ -25,7 +25,7 @@ def create_meetup(current_user, isAdmin):
     except:
         return jsonify({
             "status": 400,
-            "message": "Data not in json"
+            "error": "Data not in json"
         }), 400
 
     required = ['title', 'organizer',
@@ -36,7 +36,7 @@ def create_meetup(current_user, isAdmin):
         if not (data.get(value) and data.get(value).replace(' ', '')):
             return jsonify({
                 "status": 400,
-                "message": "Please provide {}".format(value)
+                "error": "Please provide {}".format(value)
             }), 400
 
     username = current_user
@@ -59,7 +59,6 @@ def create_meetup(current_user, isAdmin):
                              location, happeningOn, tags, images)
 
     return jsonify({
-        "isAdmin": isAdmin,
         "data": [res],
         "status": 201,
         "message": "meetup was successfully posted"
@@ -93,5 +92,19 @@ def get_one(meetup_id, current_user):
     else:
         return jsonify({
             "status": 404,
-            "message": "Meetup does not exist"
+            "error": "Meetup does not exist"
         }), 404
+
+
+@meetup_v2.route('meetups/<int:meetup_id>', methods=['DELETE'])
+@admin_required
+def delete_meetup(meetup_id, current_user):
+    """ endpoint for deleting a meetup """
+
+    meetup.remove(meetup_id)
+
+    return jsonify(
+        {"status": 200,
+         "message": "meetup id {} was successfully deleted".format(meetup_id)
+         }
+    ), 200
