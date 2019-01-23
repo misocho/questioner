@@ -36,7 +36,7 @@ class Meetups:
         return meetups
 
     def getOne(self, meetup_id, meetupdata):
-        """ contains method for getting one meetup """
+        """ contains method for geting one meetup """
         cursor = connect().cursor(cursor_factory=RealDictCursor)
 
         query = " SELECT {} FROM meetups WHERE id = '{}'".format(
@@ -45,3 +45,14 @@ class Meetups:
         cursor.execute(query)
         data = cursor.fetchone()
         return data
+
+    def remove(self, meetup_id):
+        """ contains method for deleting a meetup """
+        db = connect()
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        query = "DELETE FROM meetups WHERE id = '{}';".format(meetup_id)
+
+        cursor.execute(query)
+        db.commit()
+        cursor.close()
