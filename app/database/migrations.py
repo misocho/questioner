@@ -29,8 +29,8 @@ def tables():
     questions = """CREATE TABLE IF NOT EXISTS questions(
         id serial PRIMARY KEY NOT NULL,
         meetup_id numeric NOT NULL,
-        user_id numeric NOT NULL,
-        postedBy numeric NOT NULL,
+        user numeric NOT NULL,
+        title text NOT NULL,
         body text NOT NULL,
         votes integer DEFAULT 0
     );"""
