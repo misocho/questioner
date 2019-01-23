@@ -22,3 +22,19 @@ class Validations:
             }), 409
         else:
             return False
+
+    def made_rsvp(self, table, meetup_id, username):
+        """ method to check if user made a rsvp """
+        cursor = connect().cursor()
+
+        query = "SELECT username FROM {0} WHERE meetup_id = {1}".format(
+            table, meetup_id)
+
+        cursor.execute(query)
+        data = cursor.fetchone()
+
+        if data:
+            if username in data:
+                return True
+        else:
+            return False
