@@ -38,9 +38,9 @@ def tables():
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
         id serial NOT NULL,
         meetup_id numeric NOT NULL,
-        user_id numeric NOT NULL,
-        response character varying(30) NOT NULL
-        PRIMARY KEY (meetup_id, user_id)
+        username character varying(100) NOT NULL,
+        response character varying(30) NOT NULL,
+        PRIMARY KEY(meetup_id, username)
     );"""
 
     tables = [users, meetups, questions, rsvps]
