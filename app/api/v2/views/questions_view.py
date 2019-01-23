@@ -21,7 +21,12 @@ def post_question(current_user):
             "error": "Data not in json"
         }), 400
 
-    required = ['title', 'meetup_id', 'body']
+    required = ['title', 'body']
+    if not data.get('meetup_id'):
+        return jsonify({
+            "status": 400,
+            "error": "Please provide a meetup_id"
+        }), 400
 
 ###### checks if all required fields are provided #####
     for value in required:
@@ -36,9 +41,9 @@ def post_question(current_user):
     meetup_id = data.get('meetup_id')
     body = data.get('body')
 
-    res = question.post_question(user, title, meetup_id, body)
+    res = question.post_question(current_user, title, meetup_id, body)
 
     return jsonify({
-        "data": [res],
+        "data": res,
         "status": 201
     }), 201

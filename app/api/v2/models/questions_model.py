@@ -1,4 +1,4 @@
-from app.database.db_con import connect()
+from app.database.db_con import connect
 from psycopg2.extras import RealDictCursor
 
 
@@ -11,11 +11,10 @@ class Questions:
 
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        query = """ INSERT INTO questions (meetup_id, user, title, body) VALUES ({}, {}, {}, 
-        {}) RETURNING * """.formart(meetup_id, user, title, body)
+        query = """ INSERT INTO questions (meetup_id, username, title, body) VALUES (%s, %s, %s, %s) RETURNING  createdOn, meetup_id, username, title, body, votes"""
 
         cursor.execute(query, (meetup_id, user, title, body))
-        question_details = cursor.fetchone()
+        question_details = cursor.fetchall()
         db.commit()
         cursor.close()
 
