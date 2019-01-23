@@ -5,7 +5,6 @@ from ..models.meetup_model import Meetups
 from app.api.v2.utils.validations import Validations
 from datetime import datetime
 
-
 val = Validations()
 
 meetup_v2 = Blueprint('meetup_v2', __name__, url_prefix='/api/v2')
@@ -108,3 +107,61 @@ def delete_meetup(meetup_id, current_user):
          "message": "meetup id {} was successfully deleted".format(meetup_id)
          }
     ), 200
+
+
+@meetup_v2.route('meetups/<int:meetup_id>/rsvp', methods=['POST'])
+@login_required
+def rsvp_meetup(meetup_id, current_user):
+    """ endpoint for rsvp meetup """
+
+    try:
+        data = request.get_json()
+
+    except:
+        return jsonify({
+            "status": 400,
+            "error": "Data not in json"
+        }), 400
+
+    if not (data.get('rsvp') and data.get('rsvp').replace(' ', '')):
+        return jsonify({
+            "error": "Please provide an rsvp",
+            "status": 400
+        }), 400
+
+    response = data.get('rsvp')
+
+    meetupdata = "id"
+    search_meetup = meetup.getOne(meetup_id, meetupdata)
+
+    if search_meetup:
+        made_rsvp = val.made_rsvp('rsvps', meetup_id, current_user)
+        if not made_rsvp:
+
+            if response not in ['yes', 'no', 'maybe']:
+                return jsonify({
+                    "error": "Your response should be either a yes, no, or maybe",
+                    "status": 400
+                }), 400
+
+            response = meetup.rsvp(meetup_id, current_user, response)
+
+            if response:
+                return jsonify({
+                    "data": [response],
+                    "status": 201,
+                    "message": "RSVP was successfull"
+                }), 201
+        else:
+            return jsonify({
+                "error": "{} already made a rsvp for meetup {}".format(current_user, meetup_id),
+                "status": 409
+            }), 409
+
+    else:
+        return jsonify(
+            {
+                "error": "Meetup {} does not exist".format(meetup_id),
+                "status": 404
+            }
+        ), 404
