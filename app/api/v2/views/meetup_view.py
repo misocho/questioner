@@ -3,6 +3,7 @@ from app.api.v2.utils.auth import login_required, admin_required
 from flask_restful.reqparse import RequestParser
 from ..models.meetup_model import Meetups
 from app.api.v2.utils.validations import Validations
+from datetime import datetime
 
 
 val = Validations()
@@ -24,14 +25,33 @@ def create_meetup(current_user, isAdmin):
     except:
         return jsonify({
             "status": 400,
-            "message": "Data not injson"
+            "message": "Data not in json"
         }), 400
+
+    required = ['title', 'organizer',
+                'location', 'happeningOn']
+
+###### checks if all required fields are provided #####
+    for value in required:
+        if not (data.get(value) and data.get(value).replace(' ', '')):
+            return jsonify({
+                "status": 400,
+                "message": "Please provide {}".format(value)
+            }), 400
 
     username = current_user
     title = data.get('title')
     organizer = data.get('organizer')
     location = data.get('location')
-    happeningOn = data.get('happeningOn')
+
+    try:
+        happeningOn = datetime.strptime(
+            data.get('happeningOn'), r'%m-%d-%Y %I:%M%p')
+    except:
+        return jsonify({
+            "error": "Time should be in the format mm-dd-yyy H:Mam/pm",
+            "status": 400
+        })
     tags = data.get('tags')
     images = data.get('images')
 
