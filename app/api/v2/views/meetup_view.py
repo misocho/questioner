@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, make_response, request
 from app.api.v2.utils.auth import login_required, admin_required
-from flask_restful.reqparse import RequestParser
 from ..models.meetup_model import Meetups
 from app.api.v2.utils.validations import Validations
 from datetime import datetime
@@ -11,8 +10,6 @@ meetup_v2 = Blueprint('meetup_v2', __name__, url_prefix='/api/v2')
 
 
 meetup = Meetups()
-parser = RequestParser()
-
 
 @meetup_v2.route('/meetups', methods=['POST'])
 @admin_required
