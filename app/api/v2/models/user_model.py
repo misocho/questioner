@@ -23,7 +23,8 @@ class Users:
 
         cursor = db.cursor(cursor_factory=RealDictCursor)
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
-                username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING * """
+                username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING firstname, lastname, othername, email, phoneNumber,
+                username, isAdmin"""
 
         cursor.execute(query, (firstname, lastname, othername,
                                email, phoneNumber, username, password, isAdmin))
