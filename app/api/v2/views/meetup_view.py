@@ -78,7 +78,7 @@ def all_meetups(current_user):
     }), 200
 
 
-@meetup_v2.route('/meetups/<meetup_id>')
+@meetup_v2.route('/meetups/<int:meetup_id>')
 @login_required
 def get_one(meetup_id, current_user):
     """ endpoint for getting one meetup """
