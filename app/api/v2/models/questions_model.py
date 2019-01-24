@@ -20,6 +20,17 @@ class Questions:
 
         return question_details
 
+    def getOne(self, question_id, questiondata):
+        """ contains method for getting one question """
+        cursor = connect().cursor(cursor_factory=RealDictCursor)
+
+        query = " SELECT {} FROM questions WHERE id = '{}'".format(
+            questiondata, question_id)
+
+        cursor.execute(query)
+        data = cursor.fetchone()
+        return data        
+
     def up_vote(self, username, question_id):
 
         db = connect()
@@ -28,9 +39,13 @@ class Questions:
 
         query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
 
-        query_2 = """ UPDATE questions SET votes = %s WHERE question_id = %s """
+        query_2 = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(question_id)
 
+        cursor.execute(query_2)
+        data = cursor.fetchone()
+        
         cursor.execute(query_1, (username, question_id))
         db.commit()
-
         cursor.close()
+
+        return data
