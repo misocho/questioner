@@ -131,11 +131,11 @@ def rsvp_meetup(meetup_id, current_user):
     meetupdata = "id"
     search_meetup = meetup.getOne(meetup_id, meetupdata)
 
-    if search_meetup:
+    if search_meetup: # checks if meetup exists
         made_rsvp = val.made_rsvp('rsvps', meetup_id, current_user)
-        if not made_rsvp:
+        if not made_rsvp: # checks is the user has already made a RSVP
 
-            if response not in ['yes', 'no', 'maybe']:
+            if response not in ['yes', 'no', 'maybe']: # checks if user input is a yes, no, or maybe
                 return jsonify({
                     "error": "Your response should be either a yes, no, or maybe",
                     "status": 400
