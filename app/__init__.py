@@ -6,6 +6,7 @@ from .api.v1.views.user_views import user_blueprint
 from .api.v2.views.user_view import auth
 from .api.v2.views.meetup_view import meetup_v2
 from .api.v2.views.questions_view import quest_v2
+from .api.v2.views.comments_views import comment_v2
 from .database import db_con
 
 
@@ -22,6 +23,7 @@ def create_app(config_name="development"):
     app.register_blueprint(auth)
     app.register_blueprint(meetup_v2)
     app.register_blueprint(quest_v2)
+    app.register_blueprint(comment_v2)
 
     @app.errorhandler(405)
     def handle_method_not_allowed(error):
