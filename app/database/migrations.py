@@ -28,7 +28,7 @@ def tables():
 
     questions = """CREATE TABLE IF NOT EXISTS questions(
         id serial PRIMARY KEY NOT NULL,
-        meetup_id serial NOT NULL,
+        meetup_id integer NOT NULL,
         createdOn timestamp default current_timestamp,
         username character varying(100) NOT NULL,
         title text NOT NULL,
@@ -37,16 +37,16 @@ def tables():
     );"""
 
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
-        id serial PRIMARY KEY NOT NULL,
-        meetup_id serial NOT NULL,
+        id serial NOT NULL,
+        meetup_id integer NOT NULL,
         username character varying(100) NOT NULL,
         response character varying(30) NOT NULL,
         PRIMARY KEY (meetup_id, username)
     );"""
 
     votes = """CREATE TABLE IF NOT EXISTS votes(
-        id serial PRIMARY KEY NOT NULL,
-        question_id serial NOT NULL,
+        id serial NOT NULL,
+        question_id integer NOT NULL,
         username character varying(100) NOT NULL,
         PRIMARY KEY (question_id, username) 
     );"""
