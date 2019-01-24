@@ -29,7 +29,7 @@ class Questions:
 
         cursor.execute(query)
         data = cursor.fetchone()
-        return data        
+        return data
 
     def up_vote(self, username, question_id):
         """ contains method for up-voting a question """
@@ -39,11 +39,32 @@ class Questions:
 
         query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
 
-        query_2 = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(question_id)
+        query_2 = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(
+            question_id)
 
         cursor.execute(query_2)
         data = cursor.fetchone()
-        
+
+        cursor.execute(query_1, (username, question_id))
+        db.commit()
+        cursor.close()
+
+        return data
+
+    def down_vote(self, username, question_id):
+        """ contains method for down-voting a question """
+        db = connect()
+
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
+
+        query_2 = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
+            question_id)
+
+        cursor.execute(query_2)
+        data = cursor.fetchone()
+
         cursor.execute(query_1, (username, question_id))
         db.commit()
         cursor.close()
