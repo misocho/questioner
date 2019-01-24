@@ -38,3 +38,18 @@ class Validations:
                 return True
         else:
             return False
+
+    def voted(self, username, question_id):
+        """ method to check if user has voted """
+        cursor = connect().cursor()
+
+        query = "SELECT username FROM votes WHERE question_id = {}".format(question_id)
+
+        cursor.execute(query)
+        data = cursor.fetchone()
+
+        if data:
+            if username in data:
+                return True
+        else:
+            return False
