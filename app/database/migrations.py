@@ -40,14 +40,15 @@ def tables():
         id serial PRIMARY KEY NOT NULL,
         meetup_id serial NOT NULL,
         username character varying(100) NOT NULL,
-        response character varying(30) NOT NULL
+        response character varying(30) NOT NULL,
+        PRIMARY KEY (meetup_id, username)
     );"""
 
     votes = """CREATE TABLE IF NOT EXISTS votes(
         id serial PRIMARY KEY NOT NULL,
         question_id serial NOT NULL,
         username character varying(100) NOT NULL,
-        
+        PRIMARY KEY (question_id, username) 
     );"""
 
     tables = [users, meetups, questions, rsvps, votes]
