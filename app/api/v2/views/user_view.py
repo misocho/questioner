@@ -4,6 +4,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from ..models.user_model import Users
 from app.api.v2.utils.auth import Auth
 from app.api.v2.utils.validations import Validations
+from app.validators import validator
+
+user_validation = validator.BaseValidations()
 
 authenticate = Auth()
 validate = Validations()
@@ -39,10 +42,28 @@ def signup():
     lastname = data.get('lastname').replace(' ', '')
     othername = data.get('othername').replace(' ', '')
     email = data.get('email')
+    # verify email address
+    if not user_validation.valid_email(email):
+        return jsonify({
+            "error": "Please provide a valid email address",
+            "status": 409
+        }), 409
     phoneNumber = data.get('phoneNumber')
+
+    # verify phone number
+    if not user_validation.verify_phonenumber(phoneNumber):
+        return jsonify({
+            "error": "Please provide a valid phonenumber",
+            "status": 409
+        }), 409
+
     username = data.get('username').replace(' ', '')
     isAdmin = data.get('isAdmin')
     password = data.get('password')
+    # verify password
+    if not user_validation.strong_pass(password) or len(password) < 6:
+        return jsonify({"error": "Password should have  atleast 6 characters, one uppercase, special character and digit",
+                        "status": 409}), 409
 
     check_email = validate.check_exist('users', 'email', email)
     check_phonenumber = validate.check_exist(
