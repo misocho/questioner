@@ -51,13 +51,13 @@ def tables():
         PRIMARY KEY (question_id, username) 
     );"""
 
-    comments = """CREATE TABLE IF NOT EXISTS votes(
+    comments = """CREATE TABLE IF NOT EXISTS comments(
         id serial NOT NULL,
         question_id integer NOT NULL,
         question_title text NOT NULL,
         question_body text NOT NULL,
         comment text NOT NULL,
-        username character varying(100) NOT NULL,
+        username character varying(100) NOT NULL
     );"""
 
     tables = [users, meetups, questions, rsvps, votes, comments]
