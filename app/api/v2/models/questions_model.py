@@ -11,7 +11,7 @@ class Questions:
 
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        query = """ INSERT INTO questions (meetup_id, username, title, body) VALUES (%s, %s, %s, %s) RETURNING  createdOn, meetup_id, username, title, body, votes"""
+        query = """ INSERT INTO questions (meetup_id, username, title, body) VALUES (%s, %s, %s, %s) RETURNING  id, createdOn, meetup_id, username, title, body, votes"""
 
         cursor.execute(query, (meetup_id, user, title, body))
         question_details = cursor.fetchall()
