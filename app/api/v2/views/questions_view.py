@@ -123,7 +123,7 @@ def getQuestion(question_id, current_user):
 
     get_question = question.getOne(question_id, questiondata)
 
-    if question:
+    if get_question:
         return jsonify({
             "data": get_question,
             "status": 200
@@ -131,6 +131,6 @@ def getQuestion(question_id, current_user):
 
     else:
         return jsonify({
-            "error": "QUestion {} does not exist".format(question_id),
+            "error": "Question {} does not exist".format(question_id),
             "status": 404
         })
