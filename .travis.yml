@@ -1,0 +1,27 @@
+language: python
+
+matrix:
+  include:
+    python: 3.5.2
+    sudo: true
+
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database questioner_db;' -U postgres
+  - psql -c 'create database test_questioner;' -U postgres
+  - export SECRET_KEY=b'\xb2\xa9J\xbec\x8e8d}\x16\xe8[\x9f\x10\xc9j\xaf7:\x955\xa8eT'
+
+ 
+script:
+  - pytest --cov=app/
+  
+after_success:
+  - coveralls
+
+cache: pip
