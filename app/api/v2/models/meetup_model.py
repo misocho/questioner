@@ -70,3 +70,20 @@ class Meetups:
         cursor.close()
 
         return rsvp_data
+
+    def get_upcoming(self):
+        """ method for getting upcoming meetups """
+
+        meetups = self.getall()
+
+        db = connect()
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        now = datetime.now()
+
+        query = "SELECT * from meetups WHERE happeningOn > '{}'".format(now)
+        cursor.execute(query)
+        meetups = cursor.fetchall()
+        return meetups
+
+

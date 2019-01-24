@@ -11,6 +11,7 @@ meetup_v2 = Blueprint('meetup_v2', __name__, url_prefix='/api/v2')
 
 meetup = Meetups()
 
+
 @meetup_v2.route('/meetups', methods=['POST'])
 @admin_required
 def create_meetup(current_user):
@@ -131,11 +132,12 @@ def rsvp_meetup(meetup_id, current_user):
     meetupdata = "id"
     search_meetup = meetup.getOne(meetup_id, meetupdata)
 
-    if search_meetup: # checks if meetup exists
+    if search_meetup:  # checks if meetup exists
         made_rsvp = val.made_rsvp('rsvps', meetup_id, current_user)
-        if not made_rsvp: # checks is the user has already made a RSVP
+        if not made_rsvp:  # checks is the user has already made a RSVP
 
-            if response not in ['yes', 'no', 'maybe']: # checks if user input is a yes, no, or maybe
+            # checks if user input is a yes, no, or maybe
+            if response not in ['yes', 'no', 'maybe']:
                 return jsonify({
                     "error": "Your response should be either a yes, no, or maybe",
                     "status": 400
@@ -162,3 +164,15 @@ def rsvp_meetup(meetup_id, current_user):
                 "status": 404
             }
         ), 404
+
+
+@meetup_v2.route('meetups/upcoming')
+@login_required
+def get_upcoming(current_user):
+
+    res = meetup.get_upcoming()
+
+    return jsonify({
+        "data": [res],
+        "status": 200
+    }), 200
