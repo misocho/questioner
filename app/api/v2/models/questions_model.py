@@ -3,7 +3,7 @@ from psycopg2.extras import RealDictCursor
 
 
 class Questions:
-    """ contains metods for questions models """
+    """ contains methods for questions models """
 
     def post_question(self, user, title, meetup_id, body):
 
@@ -32,7 +32,7 @@ class Questions:
         return data        
 
     def up_vote(self, username, question_id):
-
+        """ contains method for up-voting a question """
         db = connect()
 
         cursor = db.cursor(cursor_factory=RealDictCursor)

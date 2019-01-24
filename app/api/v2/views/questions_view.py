@@ -45,7 +45,7 @@ def post_question(current_user):
     meetup_id = data.get('meetup_id')
     body = data.get('body')
 
-    check_meetup = meetup.getOne(meetup_id, "id")
+    check_meetup = meetup.getOne(meetup_id, "id")  # checks if meetup exists
     if check_meetup:
 
         res = question.post_question(current_user, title, meetup_id, body)
@@ -65,8 +65,9 @@ def post_question(current_user):
 @quest_v2.route('/questions/<int:question_id>/upvote', methods=['PATCH'])
 @login_required
 def upvote(question_id, current_user):
-
+    """ endpoint for upvoting a question """
     questiondata = "id"
+    # checks if the question exists
     search_question = question.getOne(question_id, questiondata)
 
     if search_question:
@@ -91,6 +92,7 @@ def upvote(question_id, current_user):
 @quest_v2.route('/questions/<int:question_id>', methods=['GET'])
 @login_required
 def getQuestion(question_id, current_user):
+    """ endpoint for getting one question """
 
     questiondata = "*"
 
