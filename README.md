@@ -25,6 +25,23 @@ Questioner is a web application that crowd-sources questions for a meetup. Quest
 | POST | api/v1/auth/signup | Signup user |
 | POST | api/v1/auth/signin | Signin user |
 
+# List of functining v2 endpoints
+| Method | Endpoint | Functionality |
+|--------|----------|---------------|
+| POST | /api/v2/meetups | Creates a meetup record|
+| POST | /api/v2/questions | Creates a question record|
+| GET | /api/v2/questions | Creates all questions|
+| GET | /api/v2/questions/<question_id> | Get a specific question record|
+| PATCH | /api/v2/meetups/<meetup_id>/rsvp |Rsvp for a meetup |
+| PATCH | /api/v2/questions/<question_id>/upvote | Upvote a question |
+| POST | api/v2/questions/<question_id>/downvote | Downvote a question |
+| GET | api/v2/meetups | Get all meetups |
+| GET | api/v2/meetups/upcoming | Get all upcoming meetups |
+| GET | api/v2/meetups/<meeutp_id>/ | Get a specific meetup |
+| POST | api/v2/auth/signup | Signup user |
+| POST | api/v2/auth/signin | Signin user |
+| POST | api/v2/<question_id>/comment | Post a comment|
+
 # Installation
  Make sure you have git, python3 and pip installed
 * Git clone this repo and navigate to the project directory
