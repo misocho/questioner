@@ -17,7 +17,8 @@ class Meetups:
         query = """INSERT INTO meetups (username, happeningOn, location,
         images, title, organizer,tags) VALUES (%s, %s, %s, %s, %s, %s, %s)
         RETURNING * """
-
+        
+        cursor.execute
         cursor.execute(query, (username, happeningOn, location,
                                images, title, organizer, tags))
         meetup_data = cursor.fetchone()

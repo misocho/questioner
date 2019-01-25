@@ -48,12 +48,19 @@ def post_question(current_user):
     check_meetup = meetup.getOne(meetup_id, "id")  # checks if meetup exists
     if check_meetup:
 
-        res = question.post_question(current_user, title, meetup_id, body)
+        try:
+            res = question.post_question(current_user, title, meetup_id, body)
 
-        return jsonify({
-            "data": res,
-            "status": 201
-        }), 201
+            return jsonify({
+                "data": res,
+                "status": 201
+            }), 201
+
+        except:
+            return jsonify({
+                "error": "Question already exists",
+                "status": 409
+            }), 409
 
     else:
         return jsonify({
@@ -134,3 +141,15 @@ def getQuestion(question_id, current_user):
             "error": "Question {} does not exist".format(question_id),
             "status": 404
         })
+
+@quest_v2.route('/questions')
+@login_required
+def get_questions(current_user):
+    """ endpoint for getting all questions """
+
+    res = question.get_all()
+
+    return jsonify({
+        "data": [res],
+        "status": 200
+    }), 200

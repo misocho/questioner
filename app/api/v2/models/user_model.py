@@ -14,12 +14,8 @@ class Users:
     def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
 
-        if os.getenv('FLASK_ENV') == 'development':
-            db = connect()
-        else:
-            db = connect_test()
-        if isAdmin is None:
-            isAdmin = False
+        db = connect()
+        if not isAdmin: isAdmin = False
 
         cursor = db.cursor(cursor_factory=RealDictCursor)
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
@@ -36,10 +32,8 @@ class Users:
 
     def signin(self, userdata, username):
         """ creates user signin model """
-        if os.getenv('FLASK_ENV') == 'development':
-            db = connect()
-        else:
-            db = connect_test()
+       
+        db = connect()
         cursor = db.cursor(cursor_factory=RealDictCursor)
         query = " SELECT {} FROM users WHERE username = '{}' ".format(
             userdata, username)
