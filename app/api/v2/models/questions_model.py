@@ -70,3 +70,17 @@ class Questions:
         cursor.close()
 
         return data
+
+    def get_all(self):
+        """ contains method for getting all questions """
+        db = connect()
+
+        cursor = db.cursor(cursor_factory=RealDictCursor)
+
+        query = """SELECT * FROM questions """
+
+        cursor.execute(query)
+        data = cursor.fetchone()
+
+        return data
+
