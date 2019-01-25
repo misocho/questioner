@@ -19,12 +19,15 @@ def tables():
         username character varying(100) NOT NULL,
         happeningOn timestamp NOT NULL,
         location character varying(100) NULL,
-        images text NULL,
+        images varchar [],
         title character varying(200) NOT NULL,
         organizer character varying(100) NOT NULL,
-        tags text NULL,
+        tags varchar [],
         createdOn timestamp default current_timestamp
     );"""
+
+    unique_meetups = """ALTER TABLE meetups 
+                ADD CONSTRAINT duplicate UNIQUE (happeningOn, location, title);"""
 
     questions = """CREATE TABLE IF NOT EXISTS questions(
         id serial PRIMARY KEY NOT NULL,
@@ -35,6 +38,9 @@ def tables():
         body text NOT NULL,
         votes integer DEFAULT 0
     );"""
+
+    unique_questions = """ALTER TABLE questions 
+                ADD CONSTRAINT dup_question UNIQUE (meetup_id, title, body);"""
 
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
         id serial NOT NULL,
@@ -60,6 +66,6 @@ def tables():
         username character varying(100) NOT NULL
     );"""
 
-    tables = [users, meetups, questions, rsvps, votes, comments]
+    tables = [users, meetups, questions, rsvps, votes, comments, unique_meetups, unique_questions]
 
     return tables
