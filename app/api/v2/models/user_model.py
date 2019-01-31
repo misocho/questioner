@@ -11,6 +11,9 @@ class Users:
     def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
         """ creates user signup model """
 
+        if not isAdmin:
+            isAdmin = False
+
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
                 username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING firstname, lastname, othername, email, phoneNumber,
                 username, isAdmin"""
@@ -24,4 +27,13 @@ class Users:
         """ creates user signin model """
         query = " SELECT {} FROM users WHERE username = '{}' ".format(
             userdata, username)
+        return QuestionerDB.fetch_one(query)
+
+    @classmethod
+    def check_isAdmin(cls, username):
+        """ checks if user is an admin """
+
+        query = "SELECT isAdmin FROM users WHERE username = '{}'".format(
+            username)
+
         return QuestionerDB.fetch_one(query)

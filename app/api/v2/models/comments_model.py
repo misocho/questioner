@@ -1,5 +1,3 @@
-from app.database.db_con import connect
-from psycopg2.extras import RealDictCursor
 from app.api.v2.models.questions_model import Questions
 from app.database.db_con import QuestionerDB
 

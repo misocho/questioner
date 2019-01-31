@@ -1,4 +1,3 @@
-from app.database.db_con import connect
 from psycopg2.extras import RealDictCursor
 from app.database.db_con import QuestionerDB
 
@@ -36,7 +35,7 @@ class Questions:
 
     def down_vote(self, username, question_id):
         """ contains method for down-voting a question """
-        
+
         query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
 
         query_2 = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
