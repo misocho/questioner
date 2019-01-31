@@ -44,7 +44,8 @@ class QuestionerDB:
         cls.cursor.execute(query, data)
         cls.con.commit()
         result = cls.cursor.fetchone()
-        return result
+        if result:
+            return result
 
     @classmethod
     def fetch_one(cls, query):
@@ -66,3 +67,11 @@ class QuestionerDB:
 
         cls.cursor.execute(query)
         cls.cursor.commit()
+
+    @classmethod
+    def update_vote(cls, query):
+        """ upvotes or downvotes """
+
+        cls.cursor.execute(query)
+        data = cls.cursor.fetchone()
+        return data
