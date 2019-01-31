@@ -20,7 +20,7 @@ class TestUsers(unittest.TestCase):
             "lastname": "misocho",
             "othername": "morang'a",
             "email": "misochofelix@gmail.com",
-            "phoneNumber": "+254798734967",
+            "phoneNumber": "254798734967",
             "username": "felix",
             "password": "@Scorpion234"
         }

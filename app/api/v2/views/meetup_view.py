@@ -58,13 +58,6 @@ def create_meetup(current_user):
     tags = data.get('tags')
     images = data.get('images')
 
-    if happeningOn < datetime.now():
-        return jsonify({
-            "error": "Meetup can not take place in the past",
-            "status": 409
-        }), 409
-
-
     try:
         res = meetup.post_meetup(username, title, organizer,
                              location, happeningOn, tags, images)
