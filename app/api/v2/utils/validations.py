@@ -1,4 +1,4 @@
-from ....database.db_con import connect
+from app.database.db_con import QuestionerDB
 from psycopg2.extras import RealDictCursor
 from flask import jsonify
 
@@ -8,12 +8,11 @@ class Validations:
 
     def check_exist(self, table, value, item):
         """ Method to check if a value exists in the database """
-        cursor = connect().cursor(cursor_factory=RealDictCursor)
+
         query = "SELECT {1} FROM {0} WHERE {1} = '{2}'".format(
             table, value, item)
 
-        cursor.execute(query)
-        data = cursor.fetchone()
+        data = QuestionerDB.fetch_one(query)
 
         if data:
             return jsonify({
@@ -25,31 +24,27 @@ class Validations:
 
     def made_rsvp(self, table, meetup_id, username):
         """ method to check if user made a rsvp """
-        cursor = connect().cursor()
 
         query = "SELECT username FROM {0} WHERE meetup_id = {1}".format(
             table, meetup_id)
 
-        cursor.execute(query)
-        data = cursor.fetchone()
+        rsvp = QuestionerDB.fetch_one(query)
 
-        if data:
-            if username in data:
+        if rsvp:
+            if username in rsvp:
                 return True
         else:
             return False
 
     def voted(self, username, question_id):
         """ method to check if user has voted """
-        cursor = connect().cursor()
 
         query = "SELECT username FROM votes WHERE question_id = {}".format(question_id)
 
-        cursor.execute(query)
-        data = cursor.fetchone()
+        voted = QuestionerDB.fetch_one(query)
 
-        if data:
-            if username in data:
+        if voted:
+            if username in voted:
                 return True
         else:
             return False
