@@ -49,11 +49,24 @@ def create_meetup(current_user):
             "error": "Time should be in the format mm-dd-yyy H:Mam/pm",
             "status": 400
         })
+        
+    if happeningOn < datetime.now():
+        return jsonify({
+            "error": "Meetup can not take place in the past",
+            "status": 409
+        }), 409
     tags = data.get('tags')
     images = data.get('images')
 
-    res = meetup.post_meetup(username, title, organizer,
-                             location, happeningOn, tags, images)
+    try:
+        res = meetup.post_meetup(username, title, organizer,
+                                 location, happeningOn, tags, images)
+
+    except:
+        return jsonify({
+            "error": "Meetup already exists",
+            "status": 409
+        })
 
     return jsonify({
         "data": [res],
