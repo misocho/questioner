@@ -25,8 +25,8 @@ class QuestionerDB:
                 cls.cursor.execute(query)
             cls.con.commit()
             print("Tables created successfully in PostgreSQL ")
-    except (Exception, psycopg2.DatabaseError) as error:
-        print("Error while creating PostgreSQL table", error)
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error while creating PostgreSQL table", error)
 
     @classmethod
     def destroy_tables(cls):
@@ -75,3 +75,4 @@ class QuestionerDB:
         cls.cursor.execute(query)
         data = cls.cursor.fetchone()
         return data
+
