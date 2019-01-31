@@ -49,6 +49,12 @@ def create_meetup(current_user):
             "error": "Time should be in the format mm-dd-yyy H:Mam/pm",
             "status": 400
         })
+        
+    if happeningOn < datetime.now():
+        return jsonify({
+            "error": "Meetup can not take place in the past",
+            "status": 409
+        }), 409
     tags = data.get('tags')
     images = data.get('images')
 

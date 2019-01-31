@@ -11,18 +11,18 @@ class Config():
 class Development(Config):
     DEBUG = True
     TESTING = False
-    DATABASE_URL = os.getenv('DB_URL')
+    DB_URL = os.getenv('DB_URL')
 
 
 class Production(Config):
     DEBUG = False
     TESTING = False
-    DATABASE_URL = os.getenv('TEST_DB_URL')
 
 
 class Testing(Config):
     DEBUG = True
     TESTING = True
+    DB_URL = os.getenv('TEST_DB_URL')
 
 
 app_config = {

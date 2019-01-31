@@ -2,73 +2,77 @@ import psycopg2
 from flask import current_app
 from app.database import migrations
 import os
+from psycopg2.extras import RealDictCursor
 
 
-def connect():
-    try:
-        con = psycopg2.connect(
-            "dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
-        return con
-    except (Exception, psycopg2.DatabaseError) as error:
-        raise error
+class QuestionerDB:
+    """ DB connection class """
 
+    @classmethod
+    def connect(cls, url):
+        try:
+            cls.con = psycopg2.connect(url)
+            cls.cursor = cls.con.cursor(cursor_factory=RealDictCursor)
+        except (Exception, psycopg2.DatabaseError) as error:
+            raise error
 
-def close():
-    con = connect()
-    cursor = con.cursor()
-    if (con):
-        cursor.close()
-        con.close()
+    @classmethod
+    def create_tables(cls):
+        try:
+            tables = migrations.tables()
 
+            for query in tables:
+                cls.cursor.execute(query)
+            cls.con.commit()
+            print("Tables created successfully in PostgreSQL ")
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error while creating PostgreSQL table", error)
 
-def create_tables():
-    try:
+    @classmethod
+    def destroy_tables(cls):
+        """ Drops all tables """
 
-        con = psycopg2.connect(
-            "dbname='questioner_db' host='localhost'user='postgres' password='scorpion234' port=5432")
-        cursor = con.cursor()
-        tables = migrations.tables()
+        query = """DROP TABLE IF EXISTS users, meetups, questions, rsvps,\
+        comments, votes;"""
+        cls.cursor.execute(query)
+        cls.con.commit()
 
-        for query in tables:
-            cursor.execute(query)
-        con.commit()
-        print("Tables created successfully in PostgreSQL ")
-    except (Exception, psycopg2.DatabaseError) as error:
-        print("Error while creating PostgreSQL table", error)
-    finally:
-        # closing database connection.
-        if(con):
-            cursor.close()
-            con.close()
-            print("PostgreSQL connection is closed")
+    @classmethod
+    def save(cls, query, data):
+        """ Saves a user in the database """
 
+        cls.cursor.execute(query, data)
+        cls.con.commit()
+        result = cls.cursor.fetchone()
+        if result:
+            return result
 
-def destroy_database():
-    """ Drops all tables """
+    @classmethod
+    def fetch_one(cls, query):
+        """ Returns a specified item """
 
-    con = psycopg2.connect(
-        "dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
-    cursor = con.cursor()
+        cls.cursor.execute(query)
+        return cls.cursor.fetchone()
 
-    cursor.execute("DROP SCHEMA public CASCADE;")
-    cursor.execute("CREATE SCHEMA public;")
-    cursor.execute("GRANT USAGE ON SCHEMA public To postgres;")
+    @classmethod
+    def fetch_all(cls, query):
+        """ Returns all specified items """
 
-    con.commit()
+        cls.cursor.execute(query)
+        return cls.cursor.fetchall()
 
+    @classmethod
+    def delete_one(cls, query):
+        """ Deletes a specified item """
 
-def connect_test():
-    ''' sets up database for testing '''
+        cls.cursor.execute(query)
+        cls.cursor.commit()
 
-    con = psycopg2.connect(
-        "dbname='test_questioner' host='localhost' user='postgres' password='scorpion234' port=5432")
-    cursor = con.cursor()
-    tables = migrations.tables()
+    @classmethod
+    def update_vote(cls, query):
+        """ upvotes or downvotes """
 
-    for query in tables:
-        cursor.execute(query)
-    con.commit()
+        cls.cursor.execute(query)
+        data = cls.cursor.fetchone()
+        return data
 
-    print("test tables created successfully in PostgreSQL ")
-
-    return con

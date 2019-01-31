@@ -2,7 +2,7 @@ import unittest
 import os
 from ... import create_app
 import json
-from ...database.db_con import connect_test, destroy_database
+from app.database.db_con import QuestionerDB
 
 
 class TestUsers(unittest.TestCase):
@@ -12,7 +12,8 @@ class TestUsers(unittest.TestCase):
         """ set up method for tests """
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client()
-        self.db = connect_test()
+        self.app_context = self.app
+        self.app.testing = True
 
         self.user = {
             "firstname": "Brian",
@@ -51,8 +52,7 @@ class TestUsers(unittest.TestCase):
 
     def tearDown(self):
         """ Destroys data before rinnung each test """
-        destroy_database()
-        self.db.close()
+        QuestionerDB.destroy_tables()
 
 
 if __name__ == "__main__":
