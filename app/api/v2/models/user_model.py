@@ -15,8 +15,8 @@ class Users:
                 username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING firstname, lastname, othername, email, phoneNumber,
                 username, isAdmin"""
 
-        data = firstname, lastname, othername, email, phoneNumber,
-        username, password, isAdmin
+        data = (firstname, lastname, othername, email, phoneNumber,
+                username, password, isAdmin)
 
         return QuestionerDB.save(query, data)
 

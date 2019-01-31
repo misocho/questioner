@@ -12,8 +12,9 @@ class Meetups:
         images, title, organizer,tags) VALUES (%s, %s, %s, %s, %s, %s, %s)
         RETURNING * """
 
-        data = username, happeningOn, location,
-        images, title, organizer, tags
+        data = (username, happeningOn, location,
+                images, title, organizer, tags)
+
         return QuestionerDB.save(query, data)
 
     def getall(self):
@@ -50,5 +51,5 @@ class Meetups:
         now = datetime.now()
 
         query = "SELECT * from meetups WHERE happeningOn > '{}'".format(now)
-        
+
         return QuestionerDB.fetch_all(query)
