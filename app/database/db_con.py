@@ -38,16 +38,31 @@ class QuestionerDB:
         cls.con.commit()
 
     @classmethod
-    def save(cls, query):
+    def save(cls, query, data):
         """ Saves a user in the database """
 
-        cls.cursor.execute(query)
+        cls.cursor.execute(query, data)
         cls.con.commit()
-        data = cls.cursor.fetchone()
-        return data
+        result = cls.cursor.fetchone()
+        return result
 
     @classmethod
     def fetch_one(cls, query):
         """ Returns a specified item """
+
         cls.cursor.execute(query)
         return cls.cursor.fetchone()
+
+    @classmethod
+    def fetch_all(cls, query):
+        """ Returns all specified items """
+
+        cls.cursor.execute(query)
+        return cls.cursor.fetchall()
+
+    @classmethod
+    def delete_one(cls, query):
+        """ Deletes a specified item """
+
+        cls.cursor.execute(query)
+        cls.cursor.commit()
