@@ -1,25 +1,32 @@
 import os
 
+
 class Config():
-   DEBUG = False
-   TESTING = False
-   CSRF_ENABLE = True
-   SECRET_KEY = os.getenv('SECRET_KEY')
+    DEBUG = False
+    TESTING = False
+    CSRF_ENABLE = True
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 class Development(Config):
-   DEBUG = True
-   TESTING = False
+    DEBUG = True
+    TESTING = False
+    DB_URL = os.getenv('DB_URL')
+
 
 class Production(Config):
-   DEBUG = False
-   TESTING = False
+    DEBUG = False
+    TESTING = False
+
 
 class Testing(Config):
-   DEBUG = True
-   TESTING = True
+    DEBUG = True
+    TESTING = True
+    DB_URL = os.getenv('TEST_DB_URL')
+
 
 app_config = {
-   "development" : Development,
-   "testing" : Testing,
-   "production" : Production
+    "development": Development,
+    "testing": Testing,
+    "production": Production
 }
