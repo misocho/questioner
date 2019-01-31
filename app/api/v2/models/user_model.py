@@ -25,6 +25,7 @@ class Users:
 
     def signin(self, userdata, username):
         """ creates user signin model """
+
         query = " SELECT {} FROM users WHERE username = '{}' ".format(
             userdata, username)
         return QuestionerDB.fetch_one(query)

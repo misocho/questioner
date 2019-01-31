@@ -7,12 +7,11 @@ class BaseValidations():
     """ Class method checks if email is valid """
 
     @classmethod
-
     def verifyinput(cls, input):
-        if input and input.replace(' ',''):
+        if input and input.replace(' ', ''):
             return True
         return False
-        
+
     @classmethod
     def valid_email(cls, email):
         """ Below is a regular expressoin to match an email """
@@ -22,7 +21,6 @@ class BaseValidations():
             if match:
                 return True
         return False
-
 
     @classmethod
     def strong_pass(cls, password):
@@ -37,4 +35,10 @@ class BaseValidations():
                 and digit_regex.search(password) is not None
                 and special_char.search(password) is not None)
 
-
+    @classmethod
+    def verify_phonenumber(cls, phonenumber):
+        """ Class to check if phonenumber is valid """
+        if len(phonenumber) == 10 and phonenumber.isdigit():
+            return True
+        else:
+            return False
