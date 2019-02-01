@@ -14,3 +14,16 @@ class TestMeetups(BaseTests):
         res = self.post_meetup()
 
         self.assertEqual(res.status_code, 201)
+    
+    def test_getall_meetups(self):
+        """ tests get all meetups endpoint """
+
+        res = self.get_meetups()
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_getone_meetup(self):
+        """ tests get specific meetup endpoint """
+
+        res = self.get_one_meetup()
+        self.assertEqual(res.status_code, 200)

@@ -70,11 +70,23 @@ class BaseTests(unittest.TestCase):
         self.post_meetup()
         return self.client.post("api/v2/questions", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.question), content_type='application/json')
 
+    def get_one_meetup(self):
+        """ metho for getting one meetup """
+        self.post_meetup()
+        return self.client.get("api/v2/meetups/1", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.meetup), content_type='application/json')
+
+    def get_meetups(self):
+        """ method for getting all meetups """
+
+        self.post_meetup()
+        return self.client.get("api/v2/meetups", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.meetup), content_type='application/json')
+
     def get_questions(self):
         """ method for getting all questions """
         self.post_meetup()
         self.post_question()
         return self.client.get("api/v2/questions", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.question), content_type='application/json')
+
     def tearDown(self):
         """ Destroys data before running each test """
         QuestionerDB.destroy_tables()
