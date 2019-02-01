@@ -69,7 +69,7 @@ def admin_required(f):
             try:
                 data = jwt.decode(
                     token, os.getenv("SECRET_KEY"),
-                    algorithm='HS256'
+                    algorithms='HS256'
                 )
             except jwt.ExpiredSignatureError:
                 return jsonify({
