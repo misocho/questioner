@@ -49,14 +49,9 @@ class Questions:
 
     def get_all(self):
         """ contains method for getting all questions """
-        db = connect()
-
-        cursor = db.cursor(cursor_factory=RealDictCursor)
 
         query = """SELECT * FROM questions """
+        questions = QuestionerDB.fetch_all(query)
 
-        cursor.execute(query)
-        data = cursor.fetchone()
-
-        return data
+        return questions
 
