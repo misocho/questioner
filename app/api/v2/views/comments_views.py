@@ -43,7 +43,7 @@ def post_comment(current_user, question_id):
             return jsonify({
                 "data": [res],
                 "status": 201
-            })
+            }), 201
         else:
             return jsonify({
                 "status": 404,

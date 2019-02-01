@@ -43,6 +43,12 @@ class BaseTests(unittest.TestCase):
             "body": "Who will facilitate themetup?"
         }
 
+        self.comment = {
+            "comment": "Good work"
+        }
+
+        self.rsvp = {"rsvp": "yes"}
+
     def post_user(self):
         res = self.client.post(
             "api/v2/auth/signup", data=json.dumps(self.user), content_type='application/json')
@@ -83,9 +89,13 @@ class BaseTests(unittest.TestCase):
 
     def get_questions(self):
         """ method for getting all questions """
-        self.post_meetup()
         self.post_question()
         return self.client.get("api/v2/questions", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.question), content_type='application/json')
+
+    def post_comment(self):
+        """ method for posting a comment """
+        self.post_question()
+        return self.client.post("api/v2/1/comments", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.comment), content_type='application/json')
 
     def tearDown(self):
         """ Destroys data before running each test """
