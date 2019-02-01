@@ -22,7 +22,7 @@ class Auth:
         token = jwt.encode(token_details, os.getenv(
             "SECRET_KEY"), algorithm='HS256').decode('utf-8')
 
-        return str(token)
+        return token
 
 
 def login_required(f):
@@ -79,7 +79,7 @@ def admin_required(f):
             isAdmin = data['isAdmin']
             user = data['username']
             if user:
-                if isAdmin is True:  # checks if user is an admin
+                if isAdmin is not False:  # checks if user is an admin
                     return f(*args, **kwargs, current_user=user)
                 else:
                     return jsonify({
