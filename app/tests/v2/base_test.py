@@ -97,6 +97,10 @@ class BaseTests(unittest.TestCase):
         self.post_question()
         return self.client.post("api/v2/1/comments", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.comment), content_type='application/json')
 
+    def post_rsvp(self):
+        """ method for adding a rsvp """
+        self.post_meetup()
+        return self.client.post('api/v2/meetups/1/rsvp', headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.rsvp), content_type='application/json')
     def tearDown(self):
         """ Destroys data before running each test """
         QuestionerDB.destroy_tables()

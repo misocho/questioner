@@ -27,3 +27,9 @@ class TestMeetups(BaseTests):
 
         res = self.get_one_meetup()
         self.assertEqual(res.status_code, 200)
+
+    def test_rsvp_meetup(self):
+        """ tests rsvp meetup endpoint """
+
+        res = self.post_rsvp()
+        self.assertEqual(res.status_code, 201)
