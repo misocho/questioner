@@ -2,7 +2,6 @@ import unittest
 import os
 from app import create_app
 import json
-from app.database.db_con import QuestionerDB
 from app.tests.v2.base_test import BaseTests
 
 

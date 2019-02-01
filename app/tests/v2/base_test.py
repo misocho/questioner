@@ -37,6 +37,12 @@ class BaseTests(unittest.TestCase):
             "happeningOn": "05-25-2019 08:50am"
         }
 
+        self.question = {
+            "title": "More detalis",
+            "meetup_id": 1,
+            "body": "Who will facilitate themetup?"
+        }
+
     def post_user(self):
         res = self.client.post(
             "api/v2/auth/signup", data=json.dumps(self.user), content_type='application/json')
@@ -46,19 +52,23 @@ class BaseTests(unittest.TestCase):
         self.post_user()
         res = self.client.post(
             "api/v2/auth/signin", data=json.dumps(self.signin_user), content_type='application/json')
-        
+
         return res
-    
+
     def token(self):
         res = self.login_user()
         res_data = json.loads(res.data.decode())
         token = res_data['token']
-        print(token)
         return token
 
     def post_meetup(self):
         """ method for posting a meetup """
         return self.client.post("api/v2/meetups", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.meetup), content_type='application/json')
+
+    def post_question(self):
+        """ method for posting a question """
+        self.post_meetup()
+        return self.client.post("api/v2/questions", headers={"Authorization": "{}".format(self.token())}, data=json.dumps(self.question), content_type='application/json')
 
     def tearDown(self):
         """ Destroys data before running each test """
