@@ -84,7 +84,7 @@ def upvote(question_id, current_user):
 
         except:
             return jsonify({
-                "error": "user {} has already voted for question {}".format(current_user, question_id),
+                "error": "user {} has alreadry voted for question {}".format(current_user, question_id),
                 "status": 409
             }), 409
 

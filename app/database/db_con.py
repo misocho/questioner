@@ -31,11 +31,13 @@ class QuestionerDB:
     @classmethod
     def destroy_tables(cls):
         """ Drops all tables """
+        try:
+            query = """DROP TABLE IF EXISTS users, meetups, questions, rsvps, votes, comments;"""
+            cls.cursor.execute(query)
+            cls.con.commit()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print("Error while dropping PostgreSQL table", error)
 
-        query = """DROP TABLE IF EXISTS users, meetups, questions, rsvps,\
-        comments, votes;"""
-        cls.cursor.execute(query)
-        cls.con.commit()
 
     @classmethod
     def save(cls, query, data):

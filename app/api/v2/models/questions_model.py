@@ -23,15 +23,16 @@ class Questions:
     def up_vote(self, username, question_id):
         """ contains method for up-voting a question """
 
-        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
+        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) RETURNING * """
 
+        data =  (username, question_id)
         query_2 = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        data = QuestionerDB.update_vote(query_1)
+        votes = QuestionerDB.save(query_1, data)
 
-        QuestionerDB.save(query_2)
-        return data
+        QuestionerDB.update_vote(query_2)
+        return votes
 
     def down_vote(self, username, question_id):
         """ contains method for down-voting a question """
@@ -41,22 +42,20 @@ class Questions:
         query_2 = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        data = QuestionerDB.update_vote(query_1)
+        data =  (username, question_id)
 
-        QuestionerDB.save(query_2)
-        return data
+        votes = QuestionerDB.save(query_1, data)
+
+        QuestionerDB.update_vote(query_2)
+        return votes
+
 
 
     def get_all(self):
         """ contains method for getting all questions """
-        db = connect()
-
-        cursor = db.cursor(cursor_factory=RealDictCursor)
 
         query = """SELECT * FROM questions """
+        questions = QuestionerDB.fetch_all(query)
 
-        cursor.execute(query)
-        data = cursor.fetchone()
-
-        return data
+        return questions
 

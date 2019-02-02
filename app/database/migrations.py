@@ -26,9 +26,6 @@ def tables():
         createdOn timestamp default current_timestamp
     );"""
 
-    unique_meetups = """ALTER TABLE meetups 
-                ADD CONSTRAINT duplicate UNIQUE (happeningOn, location, title);"""
-
     questions = """CREATE TABLE IF NOT EXISTS questions(
         id serial PRIMARY KEY NOT NULL,
         meetup_id integer NOT NULL,
@@ -39,8 +36,6 @@ def tables():
         votes integer DEFAULT 0
     );"""
 
-    unique_questions = """ALTER TABLE questions 
-                ADD CONSTRAINT dup_question UNIQUE (meetup_id, title, body);"""
 
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
         id serial NOT NULL,
@@ -66,6 +61,6 @@ def tables():
         username character varying(100) NOT NULL
     );"""
 
-    tables = [users, meetups, questions, rsvps, votes, comments, unique_meetups, unique_questions]
+    tables = [users, meetups, questions, rsvps, votes, comments]
 
     return tables

@@ -38,7 +38,7 @@ class BaseValidations():
     @classmethod
     def verify_phonenumber(cls, phonenumber):
         """ Class to check if phonenumber is valid """
-        if len(phonenumber) == 10 and phonenumber.isdigit():
+        if len(phonenumber) == 12 and phonenumber.isdigit():
             return True
         else:
             return False
