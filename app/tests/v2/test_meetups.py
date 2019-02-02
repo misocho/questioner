@@ -33,3 +33,9 @@ class TestMeetups(BaseTests):
 
         res = self.post_rsvp()
         self.assertEqual(res.status_code, 201)
+
+    def test_upcoming_meetups(self):
+        """ test for get upcoming meetups """
+
+        res = self.get_upcoming_meetups()
+        self.assertEqual(res.status_code, 200)
