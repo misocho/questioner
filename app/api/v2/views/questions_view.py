@@ -78,15 +78,18 @@ def upvote(question_id, current_user):
     search_question = question.getOne(question_id, questiondata)
 
     if search_question:
-        try:
-            vote = question.up_vote(current_user, question_id)
-            return jsonify(vote)
-
-        except:
+        if q_validate.voted(current_user, question_id):
             return jsonify({
-                "error": "user {} has alreadry voted for question {}".format(current_user, question_id),
+                "error": "User {} has already voted for question {}".format(current_user, question_id),
                 "status": 409
             }), 409
+        else:
+            vote = question.up_vote(current_user, question_id)
+            question.save_votes(current_user, question_id)
+        return jsonify({
+            "data": [vote],
+            "status": 200
+        }), 200
 
     else:
         return jsonify({
@@ -104,21 +107,25 @@ def downvote(question_id, current_user):
     search_question = question.getOne(question_id, questiondata)
 
     if search_question:
-        try:
-            vote = question.down_vote(current_user, question_id)
-            return jsonify(vote)
-
-        except:
+        if q_validate.voted(current_user, question_id):
             return jsonify({
-                "error": "user {} has already voted for question {}".format(current_user, question_id),
+                "error": "User {} has already voted for question {}".format(current_user, question_id),
                 "status": 409
             }), 409
+        else:
+            vote = question.down_vote(current_user, question_id)
+            question.save_votes(current_user, question_id)
+        return jsonify({
+            "data": [vote], 
+            "status": "200"
+            }), 200
 
-    else:
+    else:        
         return jsonify({
             "error": "Question {} does not exist".format(question_id),
             "status": 404
         }), 404
+
 
 
 @quest_v2.route('/questions/<int:question_id>', methods=['GET'])
