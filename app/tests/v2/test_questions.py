@@ -19,3 +19,11 @@ class TestQuestions(BaseTests):
 
         res = self.get_questions()
         self.assertEqual(res.status_code, 200)
+
+    def test_upvote_question(self):
+        """ test upvote question endpoint """
+
+        res = self.upvote_question()
+        res_data = json.loads(res.data.decode())
+        print(res_data)
+        self.assertEqual(res.status_code, 200)
