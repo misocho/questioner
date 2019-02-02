@@ -23,32 +23,27 @@ class Questions:
     def up_vote(self, username, question_id):
         """ contains method for up-voting a question """
 
-        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) RETURNING * """
-
-        data =  (username, question_id)
-        query_2 = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(
+        query = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        votes = QuestionerDB.save(query_1, data)
-
-        QuestionerDB.update_vote(query_2)
+        votes = QuestionerDB.update_vote(query)
         return votes
 
     def down_vote(self, username, question_id):
         """ contains method for down-voting a question """
 
-        query_1 = """ INSERT INTO votes (username, question_id) VALUES (%s, %s) """
-
-        query_2 = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
+        query = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        data =  (username, question_id)
-
-        votes = QuestionerDB.save(query_1, data)
-
-        QuestionerDB.update_vote(query_2)
+        votes = QuestionerDB.update_vote(query)
         return votes
 
+    def save_votes(self, username, question_id):
+        """ updates votes table """
+
+        query = """ INSERT INTO votes (username, question_id) VALUES (%s, %s)RETURNING * """
+        data = (username, question_id)
+        QuestionerDB.save(query, data)
 
 
     def get_all(self):

@@ -24,6 +24,10 @@ class TestQuestions(BaseTests):
         """ test upvote question endpoint """
 
         res = self.upvote_question()
-        res_data = json.loads(res.data.decode())
-        print(res_data)
+        self.assertEqual(res.status_code, 200)
+
+    def test_downvote_question(self):
+        """ test downvote endpoint """
+
+        res = self.downvote_question()
         self.assertEqual(res.status_code, 200)

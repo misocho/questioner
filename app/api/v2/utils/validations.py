@@ -41,10 +41,9 @@ class Validations:
 
         query = "SELECT username FROM votes WHERE question_id = {}".format(question_id)
 
-        voted = QuestionerDB.fetch_one(query)
+        voted = QuestionerDB.fetch_all(query)
 
-        if voted:
-            if username in voted:
+        for value in voted:
+            if value["username"] == username:
                 return True
-        else:
-            return False
+        return False
