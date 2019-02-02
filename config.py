@@ -17,6 +17,7 @@ class Development(Config):
 class Production(Config):
     DEBUG = False
     TESTING = False
+    DB_URL = os.getenv('DB_URL')
 
 
 class Testing(Config):
