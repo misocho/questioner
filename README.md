@@ -1,7 +1,7 @@
 # Questioner
 Questioner is a web application that crowd-sources questions for a meetup. Questioner helps the meetup organizer prioritize questions to be answered. Other users can vote on asked questions and they bubble to the top or bottom of the log.
 
-[![Build Status](https://travis-ci.org/misocho/questioner.svg?branch=develop)](https://travis-ci.org/misocho/questioner)           [![Coverage Status](https://coveralls.io/repos/github/misocho/questioner/badge.svg)](https://coveralls.io/github/misocho/questioner)  [![Maintainability](https://api.codeclimate.com/v1/badges/7ee445560f8a76810e01/maintainability)](https://codeclimate.com/github/misocho/questioner/maintainability)
+[![Build Status](https://travis-ci.org/misocho/questioner.svg?branch=develop)](https://travis-ci.org/misocho/questioner)          [![Coverage Status](https://coveralls.io/repos/github/misocho/questioner/badge.svg?branch=develop)](https://coveralls.io/github/misocho/questioner?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/7ee445560f8a76810e01/maintainability)](https://codeclimate.com/github/misocho/questioner/maintainability)
 
 # The required API endpoints that enable one:
 * Create a meetup record.
