@@ -108,6 +108,12 @@ class BaseTests(unittest.TestCase):
         return self.client.patch('api/v2/questions/1/upvote',
                                  headers={"Authorization": "{}".format(self.token())})
 
+    def downvote_question(self):
+        """ method for downvoting a question """
+        self.post_question()
+        return self.client.patch('api/v2/questions/1/downvote',
+                                 headers={"Authorization": "{}".format(self.token())})
+
     def tearDown(self):
         """ Destroys data before running each test """
         QuestionerDB.destroy_tables()
