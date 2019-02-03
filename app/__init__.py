@@ -13,7 +13,7 @@ from .database.db_con import QuestionerDB
 def create_app(config_name="development"):
     app = Flask(__name__)
     app.config.from_object(app_config[config_name])
-    QuestionerDB.connect(app.config['DB_URL'])
+    QuestionerDB.connect(app.config['DATABASE_URL'])
     QuestionerDB.create_tables()
 
     app.register_blueprint(meetup_blueprint)
