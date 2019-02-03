@@ -17,7 +17,7 @@ class Development(Config):
 class Production(Config):
     DEBUG = False
     TESTING = False
-    DB_URL = "postgres://vmywlvzmqzipkn:f63cc30ffc8ceb424ad31fdee4d5a358397bb8cdb44c096c09527872a04ef8af@ec2-54-235-67-106.compute-1.amazonaws.com:5432/de9nm0u7qtkkkj"
+    DB_URL = os.environ['DATABASE_URL']
 
 
 class Testing(Config):
