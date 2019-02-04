@@ -9,11 +9,10 @@ function register(event) {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
     fetch('https://misocho01-questioner.herokuapp.com/api/v2/auth/signup', {
-        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'ContentType': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             firstname: firstname,
