@@ -13,6 +13,7 @@ from .database.db_con import QuestionerDB
 
 def create_app(config_name="development"):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(app_config[config_name])
     QuestionerDB.connect(app.config['DATABASE_URL'])
     QuestionerDB.create_tables()
@@ -48,5 +49,4 @@ def create_app(config_name="development"):
             "message": "Not Found",
             "status": 404
         }), 404
-    CORS(app)
     return app
