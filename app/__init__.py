@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from config import app_config
+from flask_cors import CORS
 from .api.v1.views.meetup_views import meetup_blueprint
 from .api.v1.views.questions_views import question_blueprint
 from .api.v1.views.user_views import user_blueprint
@@ -47,5 +48,5 @@ def create_app(config_name="development"):
             "message": "Not Found",
             "status": 404
         }), 404
-
+    CORS(app)
     return app
