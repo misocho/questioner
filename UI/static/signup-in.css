@@ -97,7 +97,7 @@ input:focus{
     margin: 0;
 }
 
-#signup-btn{
+.signup-btn{
     padding: 10px;
     background: #d13239;
     font-size: 1rem;
@@ -107,6 +107,6 @@ input:focus{
     width: 100%;
 }
 
-#signup-btn:hover{
+.signup-btn:hover{
     opacity: 0.85;
 }
