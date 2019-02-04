@@ -106,3 +106,7 @@ input:focus{
     border-radius: 6px;
     width: 100%;
 }
+
+#signup-btn:hover{
+    opacity: 0.85;
+}
