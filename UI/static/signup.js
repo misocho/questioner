@@ -27,7 +27,7 @@ function register(event) {
     })
         .then((resp) => resp.json())
         .then((data) => {
-            if (data.status == 200) {
+            if (data.status == 201) {
                 window.location.href = '../templates/index.html'
                 window.alert(data.data)
             } else {
