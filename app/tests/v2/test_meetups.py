@@ -39,3 +39,9 @@ class TestMeetups(BaseTests):
 
         res = self.get_upcoming_meetups()
         self.assertEqual(res.status_code, 200)
+
+    def test_duplicate_meetups(self):
+        """ test for posting a duplicate meetup """
+
+        res = self.post_duplicate_meetup()
+        self.assertEqual(res.status_code, 409)
