@@ -61,3 +61,16 @@ class Validations:
                 return True
 
         return False
+
+    def posted_question(self, title, body, meetup_id):
+        """ method to check if a question is posted """
+
+        query = "SELECT title, body, meetup_id FROM questions"
+
+        questions = QuestionerDB.fetch_all(query)
+
+        for question in questions:
+            if (question["title"], question["body"], question["meetup_id"]) == (title, body, meetup_id):
+                return True
+            
+        return False
