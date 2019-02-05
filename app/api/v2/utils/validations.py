@@ -39,11 +39,25 @@ class Validations:
     def voted(self, username, question_id):
         """ method to check if user has voted """
 
-        query = "SELECT username FROM votes WHERE question_id = {}".format(question_id)
+        query = "SELECT username FROM votes WHERE question_id = {}".format(
+            question_id)
 
         voted = QuestionerDB.fetch_all(query)
 
         for value in voted:
             if value["username"] == username:
                 return True
+        return False
+
+    def posted_meetup(self, title, happeningOn, location):
+        """ method to check if meetup is posted """
+
+        query = "SELECT title, happeningOn, location FROM meetups"
+
+        posted = QuestionerDB.fetch_all(query)
+
+        for meetup in posted:
+            if (meetup["happeningon"], meetup["title"], meetup["location"]) == (happeningOn, title, location):
+                return True
+
         return False

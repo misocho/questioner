@@ -6,14 +6,13 @@ class Meetups:
     """ contains methods for meetup models """
 
     def post_meetup(self, username, title, organizer, location,
-                    happeningOn, tags, images):
+                    happeningOn):
 
         query = """INSERT INTO meetups (username, happeningOn, location,
-        images, title, organizer,tags) VALUES (%s, %s, %s, %s, %s, %s, %s)
+        title, organizer) VALUES (%s, %s, %s, %s, %s)
         RETURNING * """
 
-        data = (username, happeningOn, location,
-                images, title, organizer, tags)
+        data = (username, happeningOn, location, title, organizer)
 
         return QuestionerDB.save(query, data)
 
