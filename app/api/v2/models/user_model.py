@@ -8,11 +8,9 @@ validate = Validations()
 class Users:
     """ Contains methods for user models """
 
-    def signup(self, firstname, lastname, othername, email, phoneNumber, username, password, isAdmin=None):
+    def signup(self, firstname, lastname, othername, email, phoneNumber, username, password , isAdmin=False):
         """ creates user signup model """
 
-        if not isAdmin:
-            isAdmin = False
 
         query = """ INSERT INTO users (firstname, lastname, othername, email, phoneNumber,
                 username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING firstname, lastname, othername, email, phoneNumber,

@@ -3,7 +3,6 @@ import os
 from functools import wraps
 from datetime import datetime, timedelta
 from flask import request, jsonify
-from app.api.v2.models.user_model import Users
 
 
 class Auth:

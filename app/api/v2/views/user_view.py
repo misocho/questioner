@@ -58,7 +58,6 @@ def signup():
         }), 409
 
     username = data.get('username').replace(' ', '')
-    isAdmin = data.get('isAdmin')
     password = data.get('password')
     # verify password
     if not user_validation.strong_pass(password) or len(password) < 6:
@@ -75,10 +74,10 @@ def signup():
         password = generate_password_hash(password)
 
         res = user.signup(firstname, lastname, othername, email,
-                          phoneNumber, username, password, isAdmin)
+                          phoneNumber, username, password)
 
         # Generates token when user signs up
-        token = authenticate.generate_token(username, isAdmin)
+        token = authenticate.generate_token(username, isAdmin=False)
 
         return jsonify({
             "data": [{"token": token}, res],
