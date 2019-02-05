@@ -47,8 +47,8 @@ def post_question(current_user):
 
     check_meetup = meetup.getOne(meetup_id, "id")  # checks if meetup exists
     if check_meetup:
-
-        try:
+        posted = q_validate.posted_question(title, body, meetup_id)
+        if not posted:
             res = question.post_question(current_user, title, meetup_id, body)
 
             return jsonify({
@@ -56,7 +56,7 @@ def post_question(current_user):
                 "status": 201
             }), 201
 
-        except:
+        else:
             return jsonify({
                 "error": "Question already exists",
                 "status": 409

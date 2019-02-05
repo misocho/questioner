@@ -31,3 +31,9 @@ class TestQuestions(BaseTests):
 
         res = self.downvote_question()
         self.assertEqual(res.status_code, 200)
+
+    def test_duplicate_question(self):
+        """ test pposting a duplicate question """
+
+        res = self.post_duplicate_question()
+        self.assertEqual(res.status_code, 409)

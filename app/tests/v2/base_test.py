@@ -119,6 +119,18 @@ class BaseTests(unittest.TestCase):
         return self.client.get('api/v2/meetups/upcoming',
                                headers={"Authorization": "{}".format(self.token())})
 
+    def post_duplicate_meetup(self):
+        """ method for posting duplicate meetups """
+
+        self.post_meetup()
+        return self.post_meetup()
+
+    def post_duplicate_question(self):
+        """ method for posting duplicate question """
+
+        self.post_question()
+        return self.post_question()
+
     def tearDown(self):
         """ Destroys data before running each test """
         QuestionerDB.destroy_tables()
