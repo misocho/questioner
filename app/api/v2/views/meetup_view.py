@@ -43,12 +43,12 @@ def create_meetup(current_user):
 
     try:
         happeningOn = datetime.strptime(
-            data.get('happeningOn'), r'%m-%d-%Y %I:%M%p')
+            data.get('happeningOn'), r'%m-%d-%Y %H:%M')
     except:
         return jsonify({
-            "error": "Time should be in the format mm-dd-yyy H:Mam/pm",
+            "error": "Time should be in the format mm-dd-yyy HH:mm",
             "status": 400
-        })
+        }), 400
 
     if happeningOn < datetime.now():
         return jsonify({
