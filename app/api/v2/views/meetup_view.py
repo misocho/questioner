@@ -68,7 +68,7 @@ def create_meetup(current_user):
         }), 201
     else:
         return jsonify({
-            "errer": "Meetup already exists",
+            "error": "Meetup already exists",
             "status": 409
         }), 409
 
