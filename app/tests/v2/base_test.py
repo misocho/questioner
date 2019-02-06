@@ -34,7 +34,7 @@ class BaseTests(unittest.TestCase):
             "title": "Andela ALC Nairobi",
             "organizer": "Andela",
             "location": "Andela, kenya",
-            "happeningOn": "05-25-2019 08:50am"
+            "happeningOn": "05-25-2019 08:50"
         }
 
         self.question = {
