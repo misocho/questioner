@@ -19,7 +19,8 @@ function login(event) {
         .then((resp) => resp.json())
         .then((data) => {
             if (data.status == 200) {
-                window.location.href = '../templates/index.html'
+                localStorage.setItem('token', data.token);
+                window.location.href = '../templates/index.html';
             } else {
                 window.alert(data.error);
             }
