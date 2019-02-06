@@ -45,8 +45,6 @@ function create(event) {
                 console.log(data.message)
             }
         })
-    var happeningOn2 = date + " " + time;
-    console.log(happeningOn2);
 }
 
 createMeetup.addEventListener('click', create)
