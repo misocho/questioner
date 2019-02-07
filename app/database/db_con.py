@@ -71,7 +71,7 @@ class QuestionerDB:
         cls.cursor.commit()
 
     @classmethod
-    def update_vote(cls, query):
+    def update(cls, query):
         """ upvotes or downvotes """
 
         cls.cursor.execute(query)

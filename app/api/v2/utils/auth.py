@@ -29,7 +29,7 @@ def login_required(f):
     @wraps(f)
     def authenticate(*args, **kwargs):
         """ decorator for login authentication """
-        if 'Authorization' in request.headers:
+        if 'Authorization' in request.headers and request.headers['Authorization']:
             token = request.headers['Authorization']
             try:
                 data = jwt.decode(
@@ -63,7 +63,7 @@ def admin_required(f):
     @wraps(f)
     def authent(*args, **kwargs):
         """ decorator for admin authentication """
-        if 'Authorization' in request.headers:
+        if 'Authorization' in request.headers and request.headers['Authorization']:
             token = request.headers['Authorization']
             try:
                 data = jwt.decode(

@@ -26,7 +26,7 @@ class Questions:
         query = """ UPDATE questions SET votes = votes+1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        votes = QuestionerDB.update_vote(query)
+        votes = QuestionerDB.update(query)
         return votes
 
     def down_vote(self, username, question_id):
@@ -35,7 +35,7 @@ class Questions:
         query = """ UPDATE questions SET votes = votes-1 WHERE id = {} RETURNING * """.format(
             question_id)
 
-        votes = QuestionerDB.update_vote(query)
+        votes = QuestionerDB.update(query)
         return votes
 
     def save_votes(self, username, question_id):
