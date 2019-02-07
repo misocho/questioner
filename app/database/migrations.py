@@ -19,7 +19,7 @@ def tables():
         username character varying(100) NOT NULL,
         happeningOn timestamp NOT NULL,
         location character varying(100) NULL,
-        images varchar [],
+        images text,
         title character varying(200) NOT NULL,
         organizer character varying(100) NOT NULL,
         tags varchar [],
