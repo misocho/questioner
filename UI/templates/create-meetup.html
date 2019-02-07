@@ -36,15 +36,15 @@
                                         <div class="meetup-form">
                                             <form>
                                                 <div class="textbox">
-                                                    <input type="text" placeholder="Event title" name="" value=""
+                                                    <input type="text" placeholder="Event title" id="title" value=""
                                                         autofocus>
                                                 </div>
 
                                                 <div class="textbox">
-                                                    <input type="text" placeholder="Event organizer" name="" value="">
+                                                    <input type="text" placeholder="Event organizer" id="organizer" value="">
                                                 </div>
                                                 <div class="textbox">
-                                                    <input type="text" placeholder="Event organizer" name="" value="">
+                                                    <input type="text" placeholder="Location" id="location" value="">
                                                 </div>
 
                                             </form>
@@ -56,39 +56,33 @@
                         <div id="right-box">
                             <div class="box-content">
                                 <div id="details-box">
-                                    <div class="box-title">Date and time</div>
+                                    <div class="box-title">Happening On</div>
                                     <div id="datetime-box">
                                         <div class="datetime-left">
-                                            <div class="datebox-title">from</div>
+                                            <div class="datebox-title">Date</div>
                                             <div class="textbox">
-                                                <input type="date" placeholder="Event organizer" name="" value="">
+                                                <input type="date"  id="date" value="">
                                             </div>
-                                            <div class="textbox">
-                                                    <input type="time" placeholder="Event organizer" name="" value="">
-                                                </div>
                                         </div>
                                         <div class="datetime-right">
-                                                <div class="datebox-title">to</div>
+                                                <div class="datebox-title">Time</div>
                                                 <div class="textbox">
-                                                    <input type="date" placeholder="Event organizer" name="" value="">
+                                                    <input type="time"  id="time" value="">
                                                 </div>
-                                                <div class="textbox">
-                                                        <input type="time" placeholder="Event organizer" name="" value="">
-                                                    </div>
+                                                
                                             </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="submit-discard-button">
-                        <button class="submit-button">Submit</button>
-                        <button class="discard-button">discard</button>
+                    <div>
+                        <button id="submit-btn" class="submit-button">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="../static/create_meetup.js"></script>
 </body>
-
 </html>

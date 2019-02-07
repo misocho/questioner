@@ -144,16 +144,6 @@ input:focus{
     margin: 20px;
 }
 
-.discard-button{
-    border: 3px solid #c2c2cc;;
-    padding: 0.5em 1.5em;
-    color: #242729;
-    border-radius: 6px;
-    font-size: 1.3em;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: Quicksand;
-    font-weight: 600;
-    margin: 20px;
+.submit-button:hover{
+    opacity: 0.85;
 }
-
