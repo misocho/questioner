@@ -10,7 +10,7 @@ function previewImage(event) {
             ImageField.src = reader.result;
             ImageField.style.width = "100%";
             uploadField.style.display = "none";
-            console.log(reader.result);
+            let image = reader.result;
         }
     }
 
