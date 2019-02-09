@@ -22,7 +22,7 @@ def uploadImage(meetup_id, current_user):
             "error": "Data not in json"
         }), 400
 
-    required = ['image', 'extension']
+    required = ['image']
 
     for value in required:
         if not (data.get(value) and data.get(value).replace(' ', '')):
@@ -32,12 +32,11 @@ def uploadImage(meetup_id, current_user):
             }), 400
 
     image = data.get('image')
-    extension = data.get('extension')
     meetup_data = "id"
     search_meetup = meetup.getOne(meetup_id, meetup_data)
 
     if search_meetup:
-        data = img.saveToImage(meetup_id, imageFile=image, extension=extension)
+        data = img.saveToImage(meetup_id, imageFile=image)
         return jsonify({
             'data': [data],
             "status": 201,
