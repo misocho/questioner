@@ -1,6 +1,5 @@
 var createMeetup = document.getElementById('submit-btn');
 
-
 function changeDateFormat(inputDate) {  // expects Y-m-d
     var splitDate = inputDate.split('-');
     if (splitDate.count == 0) {
@@ -21,7 +20,6 @@ function previewImage(event) {
     let uploadField = document.getElementById('upload-field')
     let ImageField = document.getElementById("image-field");
     let imageContainer = document.getElementById("img-container");
-
 
     reader.onload = function () {
         if (reader.readyState == 2) {
@@ -119,3 +117,5 @@ function uploadImgur(event) {
         })
 }
 save.addEventListener('click', uploadImgur);
+
+
