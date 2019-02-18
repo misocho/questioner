@@ -60,7 +60,8 @@ def create_meetup(current_user):
 
     posted = val.posted_meetup(title, happeningOn, location)
     if not posted:
-        res = meetup.post_meetup(username, title, organizer, location, happeningOn)
+        res = meetup.post_meetup(
+            username, title, organizer, location, happeningOn)
         return jsonify({
             "data": [res],
             "status": 201,
@@ -74,7 +75,6 @@ def create_meetup(current_user):
 
 
 @meetup_v2.route('/meetups')
-@login_required
 def all_meetups(current_user):
     """ endpoint for getting all meetups """
     res = meetup.getall()
@@ -86,7 +86,6 @@ def all_meetups(current_user):
 
 
 @meetup_v2.route('/meetups/<int:meetup_id>')
-@login_required
 def get_one(meetup_id, current_user):
     """ endpoint for getting one meetup """
 
@@ -178,7 +177,6 @@ def rsvp_meetup(meetup_id, current_user):
 
 
 @meetup_v2.route('meetups/upcoming')
-@login_required
 def get_upcoming(current_user):
 
     res = meetup.get_upcoming()
