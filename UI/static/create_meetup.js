@@ -9,7 +9,7 @@ function changeDateFormat(inputDate) {  // expects Y-m-d
     var year = splitDate[0];
     var month = splitDate[1];
     var day = splitDate[2];
-
+ 
     return month + '-' + day + '-' + year;
 }
 
