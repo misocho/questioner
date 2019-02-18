@@ -129,8 +129,7 @@ def downvote(question_id, current_user):
 
 
 @quest_v2.route('/questions/<int:question_id>', methods=['GET'])
-@login_required
-def getQuestion(question_id, current_user):
+def getQuestion(question_id):
     """ endpoint for getting one question """
 
     questiondata = "*"
@@ -150,8 +149,7 @@ def getQuestion(question_id, current_user):
         })
 
 @quest_v2.route('/questions')
-@login_required
-def get_questions(current_user):
+def get_questions():
     """ endpoint for getting all questions """
 
     res = question.get_all()
