@@ -41,13 +41,31 @@
                                                 </div>
 
                                                 <div class="textbox">
-                                                    <input type="text" placeholder="Event organizer" id="organizer" value="">
+                                                    <input type="text" placeholder="Event organizer" id="organizer"
+                                                        value="">
                                                 </div>
                                                 <div class="textbox">
                                                     <input type="text" placeholder="Location" id="location" value="">
                                                 </div>
+                                                <div class="box-title">Happening On</div>
+                                                <div id="datetime-box">
+                                                    <div class="datetime-left">
+                                                        <div class="datebox-title">Date</div>
+                                                        <div class="textbox">
+                                                            <input type="date" id="date" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="datetime-right">
+                                                        <div class="datebox-title">Time</div>
+                                                        <div class="textbox">
+                                                            <input type="time" id="time" value="">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
 
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -56,21 +74,26 @@
                         <div id="right-box">
                             <div class="box-content">
                                 <div id="details-box">
-                                    <div class="box-title">Happening On</div>
-                                    <div id="datetime-box">
-                                        <div class="datetime-left">
-                                            <div class="datebox-title">Date</div>
-                                            <div class="textbox">
-                                                <input type="date"  id="date" value="">
-                                            </div>
-                                        </div>
-                                        <div class="datetime-right">
-                                                <div class="datebox-title">Time</div>
-                                                <div class="textbox">
-                                                    <input type="time"  id="time" value="">
-                                                </div>
-                                                
-                                            </div>
+                                    <div class="upload-box" id="upload-field">
+                                        <input type="file" id="upload" class="upload" accept="image/*">
+                                        <label for="upload"><span>
+                                                <svg class="upload-svg" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M2 20h20V4H2v16zm1-1h18V5H3v14z"></path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M16.5 7C15.1 7 14 8.1 14 9.5s1.1 2.5 2.5 2.5S19 10.9 19 9.5 17.9 7 16.5 7zm0 4c-.8 0-1.5-.7-1.5-1.5S15.7 8 16.5 8s1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM15.5 13l-.7.8-3.5-3.8-6.4 7H19.1l-3.6-4zm-8.3 3l4.1-4.4 2.7 3 .7.8.7-.8 1.4 1.5H7.2z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                Click here to add an image
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div id="img-container">
+                                        <image src="" id="image-field"></image>
+                                        <button id="save-btn" class="submit-button">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +106,8 @@
             </div>
         </div>
     </div>
+    <script src="../static/upload_image.js"></script>
     <script src="../static/create_meetup.js"></script>
 </body>
+
 </html>
