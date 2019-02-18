@@ -26,14 +26,12 @@ function previewImage(event) {
             ImageField.src = reader.result;
             ImageField.style.width = "100%";
             uploadField.style.display = "none";
-            ImageField.style.height = "276px";
             imageContainer.style.display = "contents";
+
         }
     }
 
     reader.readAsDataURL(event.target.files[0]);
-
-
 }
 
 inputImage.addEventListener('change', previewImage);
