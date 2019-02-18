@@ -75,7 +75,7 @@ def create_meetup(current_user):
 
 
 @meetup_v2.route('/meetups')
-def all_meetups(current_user):
+def all_meetups():
     """ endpoint for getting all meetups """
     res = meetup.getall()
 
@@ -86,7 +86,7 @@ def all_meetups(current_user):
 
 
 @meetup_v2.route('/meetups/<int:meetup_id>')
-def get_one(meetup_id, current_user):
+def get_one(meetup_id):
     """ endpoint for getting one meetup """
 
     meetupdata = "id, title, location, happeningOn, tags"
@@ -177,7 +177,7 @@ def rsvp_meetup(meetup_id, current_user):
 
 
 @meetup_v2.route('meetups/upcoming')
-def get_upcoming(current_user):
+def get_upcoming():
 
     res = meetup.get_upcoming()
 
