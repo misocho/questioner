@@ -23,7 +23,8 @@ function Meetup() {
                 month = splitDate[2];
                 date = splitDate[1];
                 if (meetup[i].images == null){
-                    imageThumbnail = "../images/dafault_image.svg";
+                    imageThumbnail = `../images/no-image.png"
+                    `;
                 } else {
                     url = 'https://i.imgur.com/'
                     image_url = meetup[i].images.replace(url, '');
