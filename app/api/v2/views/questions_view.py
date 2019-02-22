@@ -45,7 +45,7 @@ def post_question(current_user):
     meetup_id = data.get('meetup_id')
     body = data.get('body')
 
-    check_meetup = meetup.getOne(meetup_id, "id")  # checks if meetup exists
+    check_meetup = meetup.getOne(meetup_id, "meetups.id")  # checks if meetup exists
     if check_meetup:
         posted = q_validate.posted_question(title, body, meetup_id)
         if not posted:

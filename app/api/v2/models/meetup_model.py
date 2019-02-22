@@ -24,11 +24,16 @@ class Meetups:
 
     def getOne(self, meetup_id, meetupdata):
         """ contains method for geting one meetup """
+        question_data = """questions.title as question_title, questions.body as
+        question_body, questions.username as user"""
+        query = """ SELECT {0}, {2} FROM meetups
+        JOIN questions ON meetups.id = questions.meetup_id
+        WHERE meetups.id = {1}""".format(
+            meetupdata, meetup_id, question_data)
 
-        query = " SELECT {} FROM meetups WHERE id = '{}'".format(
-            meetupdata, meetup_id)
+        meetup = QuestionerDB.fetch_one(query)
 
-        return QuestionerDB.fetch_one(query)
+        return meetup
 
     def remove(self, meetup_id):
         """ contains method for deleting a meetup """
