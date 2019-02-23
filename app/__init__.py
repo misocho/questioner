@@ -18,6 +18,7 @@ def create_app(config_name="development"):
     CORS(app)
     app.config.from_object(app_config[config_name])
     app.config['BASE_DIR'] = os.path.dirname(os.path.abspath(__file__))
+    app.url_map.strict_slashes = False
     QuestionerDB.connect(app.config['DATABASE_URL'])
     QuestionerDB.create_tables()
 
