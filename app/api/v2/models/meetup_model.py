@@ -1,7 +1,8 @@
 from datetime import datetime
 from app.database.db_con import QuestionerDB
+from app.api.v2.models.questions_model import Questions
 
-
+q = Questions()
 class Meetups:
     """ contains methods for meetup models """
 
@@ -24,16 +25,13 @@ class Meetups:
 
     def getOne(self, meetup_id, meetupdata):
         """ contains method for geting one meetup """
-        question_data = """questions.title as question_title, questions.body as
-        question_body, questions.username as user"""
-        query = """ SELECT {0}, {2} FROM meetups
-        JOIN questions ON meetups.id = questions.meetup_id
-        WHERE meetups.id = {1}""".format(
-            meetupdata, meetup_id, question_data)
 
+        query = " SELECT {} FROM meetups WHERE id = '{}'".format(
+            meetupdata, meetup_id)
         meetup = QuestionerDB.fetch_one(query)
+        question = dict(questions = q.get_meetup_questions(meetup_id))
 
-        return meetup
+        return {**meetup, **question}
 
     def remove(self, meetup_id):
         """ contains method for deleting a meetup """
