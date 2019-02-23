@@ -8,7 +8,7 @@ def tables():
         othername character varying(100) NOT NULL,
         email  character varying(100) UNIQUE,
         phoneNumber character varying(100) UNIQUE,
-        username character varying(100) NOT NULL,
+        username character varying(100) UNIQUE,
         password character varying(250) NOT NULL,
         isAdmin boolean,
         registered timestamp default current_timestamp
@@ -33,9 +33,10 @@ def tables():
         username character varying(100) NOT NULL,
         title text NOT NULL,
         body text NOT NULL,
-        votes integer DEFAULT 0
+        votes integer DEFAULT 0,
+        FOREIGN KEY(meetup_id) REFERENCES meetups(id),
+        FOREIGN KEY(username) REFERENCES users(username)
     );"""
-
 
     rsvps = """CREATE TABLE IF NOT EXISTS rsvps(
         id serial NOT NULL,
