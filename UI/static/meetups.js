@@ -12,19 +12,18 @@ function Meetup() {
         .then((data) => {
             let meetup = data.data[0];
             let meetupHtml = '';
-            console.log(meetup[1]);
             let image_url = '';
             for (let i = 0; i < meetup.length; i += 1) {
-                console.log(meetup[i]);
+                console.log(meetup[i].id);
                 let date = meetup[i].happeningon
                 let imageThumbnail = ''
                 var splitDate = date.split(' ');
-                console.log(splitDate)
+                let meetup_id = meetup[i].id;
+                let question_url = `questions.html?id=${meetup_id}`; 
                 month = splitDate[2];
                 date = splitDate[1];
                 if (meetup[i].images == null){
-                    imageThumbnail = `../images/no-image.png"
-                    `;
+                    imageThumbnail = `../images/no-image.png`;
                 } else {
                     url = 'https://i.imgur.com/'
                     image_url = meetup[i].images.replace(url, '');
@@ -32,7 +31,6 @@ function Meetup() {
                     fileName = file[0] + 'm';
                     fileExtension = file[1];
                     imageThumbnail = url + fileName +'.'+ fileExtension;
-                    console.log(imageThumbnail);
                 }
 
                 meetupHtml += ` <div class="card">
@@ -51,7 +49,7 @@ function Meetup() {
                             <div class="in-card-text">
                                 <div class="meetup-text">
                                     <div class="meetup-title">
-                                        <a href="questions.html">${meetup[i].title}</a>
+                                        <a href="${question_url}">${meetup[i].title}</a>
                                     </div>
                                     <div class="meetup-details">
                                         <p>${meetup[i].happeningon}</p>

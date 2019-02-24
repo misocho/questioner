@@ -46,10 +46,11 @@
 
 
 #side-image{
-    background: url(../images/macbook2.png);
     border-top-left-radius: 6px;
     height: 100%;
     width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #meetup-details{
