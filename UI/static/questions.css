@@ -157,6 +157,16 @@
 .summary{
     text-align: justify;
 }
+
+.question-description{
+    color: #6F7287;
+    font-size: 1em;
+    margin-top: 15px;
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
 .q-summary{
     overflow: hidden;
     border-bottom: 1px solid #0a0a0a2f;

@@ -25,6 +25,7 @@ function PostQuestion(event) {
             }
             else {
                 console.log(data);
+                location.reload();
             }
         })
 } 
