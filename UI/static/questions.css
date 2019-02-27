@@ -243,10 +243,10 @@ label {
     transition: .3s;
 }
 #post-button{
-    display: block;
     margin:10px;
     text-align: right;
     width: auto;
+    display: none;
 }
 
 #post-btn{

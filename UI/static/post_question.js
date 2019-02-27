@@ -1,5 +1,20 @@
 var postQuestion = document.getElementById('post-button');
 
+function DisplayPostButton(event) {
+    let title = document.getElementById('title-textarea').value;
+    let body = document.getElementById('description-textarea').value;
+
+    if (title.length & body.length){
+        postQuestion.style.display = 'block';
+    }
+
+    else{
+        postQuestion.style.display = 'none';
+    }
+}
+
+
+
 function PostQuestion(event) {
     event.preventDefault()
     let title = document.getElementById('title-textarea').value;
@@ -29,5 +44,5 @@ function PostQuestion(event) {
             }
         })
 } 
-
+window.addEventListener('keyup', DisplayPostButton);
 postQuestion.addEventListener('click', PostQuestion);
