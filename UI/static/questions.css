@@ -97,6 +97,7 @@
 .button{
     padding: 15px;
     margin: 0;
+    cursor: pointer;
 }
 
 .btn{
@@ -107,7 +108,11 @@
     border: #d13239 solid 3px;
     border-radius: 6px;
     width: 100%;
+    cursor: pointer;
 }
+ .btn:hover{
+     opacity: 0.85;
+ }
 
 #attending{
     bottom: 0px;
@@ -117,12 +122,18 @@
 #bottom-content{
     margin: 20px;
     margin-top: 50px;
+    text-align: center;
 }
 
 #questions-section{
     width: 90%;
+    display: inline-block;
 }
 
+.questions-content{
+    width: 100%;
+    display: inline-block;
+}
 .line{
     font-size: 1rem;
     font-weight: 400;
@@ -146,6 +157,16 @@
 .summary{
     text-align: justify;
 }
+
+.question-description{
+    color: #6F7287;
+    font-size: 1em;
+    margin-top: 15px;
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
 .q-summary{
     overflow: hidden;
     border-bottom: 1px solid #0a0a0a2f;
@@ -188,37 +209,44 @@
     color: #242729;
     text-align: justify;
 }
-#ask-question{
-    display: flex;
-    padding: 25px 25px;
-    background: #fff;
-    border-radius: 6px;
+.ask-question{
+    margin: 20px;
 }
-#ask-textarea{
-    margin-right: 35px;
+.ask-textarea{
+    padding: 10px;
     border: none;
     resize: none;
     font-family: Quicksand;
-    width: 85%;
-    float: left;
-    overflow: hidden;
+    width: 100%;
     overflow-wrap: break-word;
-    height: 78px;
     position: relative;
     font-size: 16px;
     background: transparent;
     line-height: 20px;
-}
-
-#ask-textarea:focus{
     outline: none;
 }
 
+label {
+    float: left;
+    padding: 0 10px;
+    font-size: 1.0em;
+    font-weight: 600;
+}
+
+.ask-textarea{
+    border-bottom: 2px solid #6f7287;
+}
+
+.ask-textarea:focus{
+    border-bottom: 2px solid #d13239;
+    outline: none !important;
+    transition: .3s;
+}
 #post-button{
-    display: -webkit-box;
-    margin-top:15px;
-    text-align: center;
+    margin:10px;
+    text-align: right;
     width: auto;
+    display: none;
 }
 
 #post-btn{
