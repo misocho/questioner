@@ -23,7 +23,7 @@ function GetMeetup() {
             let splitDate = date.split(' ');
             let month = splitDate[2];
             date = splitDate[1];
-            console.log(date);
+            console.log(data);
             if (meetup.images == null) {
                 imageThumbnail = `../images/no-image.png`;
             } else {
