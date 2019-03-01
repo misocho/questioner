@@ -89,7 +89,7 @@ def all_meetups():
 def get_one(meetup_id):
     """ endpoint for getting one meetup """
 
-    meetupdata = "id, title, location, happeningOn, images, tags"
+    meetupdata = "id, title, location, happeningOn, tags, organizer"
     res = meetup.getOne(meetup_id, meetupdata)
     if res:
         return jsonify({

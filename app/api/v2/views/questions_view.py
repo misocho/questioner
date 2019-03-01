@@ -74,18 +74,19 @@ def post_question(current_user):
 def upvote(question_id, current_user):
     """ endpoint for upvoting a question """
     questiondata = "id"
+    vote_type = "upvote"
     # checks if the question exists
     search_question = question.getOne(question_id, questiondata)
 
     if search_question:
-        if q_validate.voted(current_user, question_id):
+        if q_validate.voted(current_user, vote_type, question_id):
             return jsonify({
-                "error": "User {} has already voted for question {}".format(current_user, question_id),
+                "error": "User {} has already upvoted-voted for question {}".format(current_user, question_id),
                 "status": 409
             }), 409
         else:
             vote = question.up_vote(current_user, question_id)
-            question.save_votes(current_user, question_id)
+            question.save_votes(current_user, vote_type, question_id)
         return jsonify({
             "data": [vote],
             "status": 200
@@ -103,18 +104,19 @@ def upvote(question_id, current_user):
 def downvote(question_id, current_user):
     """ endpoint for downvoting a question """
     questiondata = "id"
+    vote_type = "downvote"
     # checks if the question exists
     search_question = question.getOne(question_id, questiondata)
 
     if search_question:
-        if q_validate.voted(current_user, question_id):
+        if q_validate.voted(current_user, vote_type, question_id):
             return jsonify({
-                "error": "User {} has already voted for question {}".format(current_user, question_id),
+                "error": "User {} has already down-voted for question {}".format(current_user, question_id),
                 "status": 409
             }), 409
         else:
             vote = question.down_vote(current_user, question_id)
-            question.save_votes(current_user, question_id)
+            question.save_votes(current_user, vote_type, question_id)
         return jsonify({
             "data": [vote], 
             "status": "200"

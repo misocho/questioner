@@ -3,6 +3,8 @@ from app.database.db_con import QuestionerDB
 from app.api.v2.models.questions_model import Questions
 
 q = Questions()
+
+
 class Meetups:
     """ contains methods for meetup models """
 
@@ -29,7 +31,7 @@ class Meetups:
         query = " SELECT {} FROM meetups WHERE id = '{}'".format(
             meetupdata, meetup_id)
         meetup = QuestionerDB.fetch_one(query)
-        question = dict(questions = q.get_meetup_questions(meetup_id))
+        question = dict(questions=q.get_meetup_questions(meetup_id))
 
         return {**meetup, **question}
 
