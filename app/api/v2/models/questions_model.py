@@ -58,6 +58,6 @@ class Questions:
         """ get questions relaed to a meetup """
 
         query = """ SELECT title as question_title, id as question_id, body as question_body, votes as question_votes, meetup_id FROM questions 
-            WHERE meetup_id = '{}'""".format(meetup_id)
+            WHERE meetup_id = '{}' ORDER BY votes DESC""".format(meetup_id)
 
         return QuestionerDB.fetch_all(query)
