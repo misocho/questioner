@@ -50,6 +50,7 @@ def tables():
         id serial NOT NULL,
         question_id integer NOT NULL,
         username character varying(100) NOT NULL,
+        vote character varying(100) NOT NULL,
         PRIMARY KEY (question_id, username) 
     );"""
 

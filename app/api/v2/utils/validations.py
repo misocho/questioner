@@ -36,16 +36,16 @@ class Validations:
         else:
             return False
 
-    def voted(self, username, question_id):
+    def voted(self, username, vote, question_id):
         """ method to check if user has voted """
 
-        query = "SELECT username FROM votes WHERE question_id = {}".format(
+        query = "SELECT username, vote FROM votes WHERE question_id = {}".format(
             question_id)
 
         voted = QuestionerDB.fetch_all(query)
 
         for value in voted:
-            if value["username"] == username:
+            if value["username"] == username and value["vote"] == vote:
                 return True
         return False
 
