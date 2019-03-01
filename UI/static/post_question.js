@@ -4,7 +4,7 @@ function DisplayPostButton(event) {
     let title = document.getElementById('title-textarea').value;
     let body = document.getElementById('description-textarea').value;
 
-    if (title.length & body.length){
+    if (title.length && body.length){
         postQuestion.style.display = 'block';
     }
 
