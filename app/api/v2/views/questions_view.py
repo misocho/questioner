@@ -80,13 +80,16 @@ def upvote(question_id, current_user):
 
     if search_question:
         if q_validate.voted(current_user, vote_type, question_id):
-            return jsonify({
-                "error": "User {} has already upvoted-voted for question {}".format(current_user, question_id),
-                "status": 409
-            }), 409
-        else:
-            vote = question.up_vote(current_user, question_id)
-            question.save_votes(current_user, vote_type, question_id)
+            if q_validate.check_vote(vote_type, current_user):
+                return jsonify({
+                    "error": "User {} has already upvoted-voted for question {}".format(current_user, question_id),
+                    "status": 409
+                }), 409
+            else:
+                question.update_vote(current_user, vote_type)
+
+        vote = question.up_vote(current_user, question_id)
+        question.save_votes(current_user, vote_type, question_id)
         return jsonify({
             "data": [vote],
             "status": 200
@@ -110,24 +113,26 @@ def downvote(question_id, current_user):
 
     if search_question:
         if q_validate.voted(current_user, vote_type, question_id):
-            return jsonify({
-                "error": "User {} has already down-voted for question {}".format(current_user, question_id),
-                "status": 409
-            }), 409
-        else:
-            vote = question.down_vote(current_user, question_id)
-            question.save_votes(current_user, vote_type, question_id)
-        return jsonify({
-            "data": [vote], 
-            "status": "200"
-            }), 200
+            if q_validate.check_vote(vote_type, current_user):
+                return jsonify({
+                    "error": "User {} has already down-voted for question {}".format(current_user, question_id),
+                    "status": 409
+                }), 409
+            else:
+                question.update_vote(current_user, vote_type)
 
-    else:        
+        vote = question.down_vote(current_user, question_id)
+        question.save_votes(current_user, vote_type, question_id)
+        return jsonify({
+            "data": [vote],
+            "status": "200"
+        }), 200
+
+    else:
         return jsonify({
             "error": "Question {} does not exist".format(question_id),
             "status": 404
         }), 404
-
 
 
 @quest_v2.route('/questions/<int:question_id>', methods=['GET'])
@@ -149,6 +154,7 @@ def getQuestion(question_id):
             "error": "Question {} does not exist".format(question_id),
             "status": 404
         })
+
 
 @quest_v2.route('/questions')
 def get_questions():
