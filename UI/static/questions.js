@@ -18,6 +18,7 @@ function GetMeetup() {
             let meetup = data.data;
             let questions = meetup.questions;
             let meetup_title = meetup.title;
+            let meetup_organizer = meetup.organizer;
             let image_url = '';
             let date = meetup.happeningon;
             let imageThumbnail = '';
@@ -49,7 +50,7 @@ function GetMeetup() {
                    ${meetup_title}
                 </div>
                 <div id="meetup-by">
-                    by <span id="host-name">Strathmore GDG</span>
+                    by <span id="host-name">${meetup_organizer}</span>
                 </div>
             </div>
             <div id="attending">
