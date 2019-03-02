@@ -47,11 +47,10 @@ def tables():
     );"""
 
     votes = """CREATE TABLE IF NOT EXISTS votes(
-        id serial NOT NULL,
+        id serial PRIMARY KEY NOT NULL,
         question_id integer NOT NULL,
         username character varying(100) NOT NULL,
-        vote character varying(100) NOT NULL,
-        PRIMARY KEY (question_id, username) 
+        vote character varying(100) NOT NULL 
     );"""
 
     comments = """CREATE TABLE IF NOT EXISTS comments(

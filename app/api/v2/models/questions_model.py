@@ -39,11 +39,19 @@ class Questions:
         return votes
 
     def save_votes(self, username, vote, question_id):
-        """ updates votes table """
+        """ saves vote to votes table """
 
         query = """ INSERT INTO votes (username, question_id, vote) VALUES (%s, %s, %s) RETURNING username, question_id, vote"""
         data = (username, question_id, vote)
         QuestionerDB.save(query, data)
+
+    def update_vote(self, username, vote):
+        """ updates vote in votes table """
+
+        query = """ UPDATE votes SET vote = '{}' 
+        WHERE username = '{}' RETURNING *""".format(vote, username)
+
+        QuestionerDB.update(query)
 
     def get_all(self):
         """ contains method for getting all questions """
