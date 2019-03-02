@@ -80,7 +80,7 @@ def upvote(question_id, current_user):
 
     if search_question:
         if q_validate.voted(current_user, vote_type, question_id):
-            if q_validate.check_vote(vote_type, current_user):
+            if q_validate.check_vote(vote_type, current_user, question_id):
                 return jsonify({
                     "error": "User {} has already upvoted-voted for question {}".format(current_user, question_id),
                     "status": 409
@@ -113,7 +113,7 @@ def downvote(question_id, current_user):
 
     if search_question:
         if q_validate.voted(current_user, vote_type, question_id):
-            if q_validate.check_vote(vote_type, current_user):
+            if q_validate.check_vote(vote_type, current_user, question_id):
                 return jsonify({
                     "error": "User {} has already down-voted for question {}".format(current_user, question_id),
                     "status": 409

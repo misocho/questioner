@@ -49,11 +49,11 @@ class Validations:
                 return True
         return False
 
-    def check_vote(self, vote, username):
+    def check_vote(self, vote, username, question_id):
         """ method to check vote """
 
-        query = "SELECT vote FROM votes WHERE username = '{}'".format(
-            username)
+        query = "SELECT vote FROM votes WHERE username = '{}' AND question_id = {}".format(
+            username, question_id)
 
         votes = QuestionerDB.fetch_all(query)
 
