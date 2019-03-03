@@ -19,7 +19,7 @@ function PostedMeetups(){
             meetupHtml += ` <div class="meetup-container">
             <li class="list-item"><a href="${meetup_url}">${title}</a>
                 <div class="delete-meetup">
-                    <div class="delete-icon">
+                    <div class="delete-icon" onclick=DeleteMeetup(${meetup_id})>
                         <svg id="Layer_1" style="enable-background:new 0 0 64 64;" version="1.1"
                             viewBox="0 0 64 64" xml:space="preserve"
                             xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +57,4 @@ function PostedMeetups(){
         document.getElementById('meetups').innerHTML = meetupHtml;
     })
 }
-
-
 window.addEventListener('load', PostedMeetups);
