@@ -108,13 +108,21 @@ def get_one(meetup_id):
 def delete_meetup(meetup_id, current_user):
     """ endpoint for deleting a meetup """
 
-    meetup.remove(meetup_id)
+    res = meetup.getOne(meetup_id, '*')
 
-    return jsonify(
-        {"status": 200,
-         "message": "meetup id {} was successfully deleted".format(meetup_id)
-         }
-    ), 200
+    if res:
+        meetup.remove(meetup_id)
+
+        return jsonify(
+            {"status": 200,
+            "message": "meetup id {} was successfully deleted".format(meetup_id)
+            }
+        ), 200
+    else:
+        return jsonify({
+            "status": 404,
+            "error": "Meetup does not exist"
+        }), 404
 
 
 @meetup_v2.route('meetups/<int:meetup_id>/rsvp', methods=['POST'])

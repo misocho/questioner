@@ -32,20 +32,36 @@ class Meetups:
             meetupdata, meetup_id)
         meetup = QuestionerDB.fetch_one(query)
         question = dict(questions=q.get_meetup_questions(meetup_id))
+        if question and meetup:
+            return {**meetup, **question}
+        else:
+            return meetup
 
-        return {**meetup, **question}
+    def delete_question(self, meetup_id):
+        """ Deletes questions of relvant meetups """
+
+        query = """ DELETE FROM questions WHERE
+         meetup_id = '{}' """.format(meetup_id)
+
+        QuestionerDB.delete_one(query)
 
     def remove(self, meetup_id):
         """ contains method for deleting a meetup """
 
         query = "DELETE FROM meetups WHERE id = '{}';".format(meetup_id)
+        query1 = """SELECT * FROM questions 
+        WHERE meetup_id = {}""".format(meetup_id)
+
+        questions = QuestionerDB.fetch_all(query1)
+        if questions:
+            self.delete_question(meetup_id)
+        
         QuestionerDB.delete_one(query)
 
     def rsvp(self, meetup_id, username, response):
         """ contains method for making a meetup rsvp """
 
         query = "INSERT INTO rsvps (meetup_id, username, response) VALUES (%s, %s, %s) RETURNING id, username, response"
-
         data = (meetup_id, username, response)
         return QuestionerDB.save(query, data)
 

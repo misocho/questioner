@@ -68,7 +68,7 @@ class QuestionerDB:
         """ Deletes a specified item """
 
         cls.cursor.execute(query)
-        cls.cursor.commit()
+        cls.con.commit()
 
     @classmethod
     def update(cls, query):
