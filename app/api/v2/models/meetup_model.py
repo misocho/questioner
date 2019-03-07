@@ -32,8 +32,10 @@ class Meetups:
             meetupdata, meetup_id)
         meetup = QuestionerDB.fetch_one(query)
         question = dict(questions=q.get_meetup_questions(meetup_id))
-
-        return {**meetup, **question}
+        if question and meetup:
+            return {**meetup, **question}
+        else:
+            return meetup
 
     def delete_question(self, meetup_id):
         """ Deletes questions of relvant meetups """
