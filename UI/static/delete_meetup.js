@@ -8,8 +8,14 @@ function DeleteMeetup(meetup_id) {
             'Authorization': `${localStorage.getItem('token')}`
         }
     }).then((resp) => resp.json())
-    .then((data) => {
-        console.log(data)
-    })
+        .then((data) => {
+            if (data.status !== 200) {
+                console.log(data.error)
+            }
+            else {
+                console.log(data.message);
+                location.reload();
+            }
+        })
 
 }
