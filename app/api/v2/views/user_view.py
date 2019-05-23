@@ -24,7 +24,7 @@ def signup():
     except:
         return jsonify({
             "status": 400,
-            "message": "Data not in json"
+            "error": "Data not in json"
         }), 400
 
     required = ['firstname', 'lastname', 'othername', 'email',
@@ -97,7 +97,7 @@ def sigin():
     except:
         return jsonify({
             "status": 400,
-            "message": "Data not in json"
+            "error": "Data not in json"
         })
 
     required = ['username', 'password']
@@ -105,7 +105,7 @@ def sigin():
         if not (data.get(value) and data.get(value).replace(' ', '')):
             return jsonify({
                 "status": 400,
-                "message": "Please provide {}".format(value)
+                "error": "Please provide {}".format(value)
             }), 400
 
     username = data.get('username').replace(' ', '')
@@ -130,11 +130,11 @@ def sigin():
 
             return jsonify({
                 "status": 401,
-                "message": "Invalid password"
+                "error": "Invalid username or password"
             }), 401
 
     else:
         return jsonify({
             "status": 404,
-            "message": "User {} does not exist".format(username)
+            "error": "User {} does not exist".format(username)
         }), 404
