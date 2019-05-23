@@ -35,7 +35,7 @@ def signup():
         if not (data.get(value) and data.get(value).replace(' ', '')):
             return jsonify({
                 "status": 400,
-                "message": "Please provide {}".format(value)
+                "error": "Please provide {}".format(value)
             }), 400
 
     firstname = data.get('firstname').replace(' ', '')
