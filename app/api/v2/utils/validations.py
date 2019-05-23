@@ -17,7 +17,7 @@ class Validations:
         if data:
             return jsonify({
                 "status": 409,
-                "message": "{} already exists".format(item)
+                "error": "{} already exists".format(item)
             }), 409
         else:
             return False
