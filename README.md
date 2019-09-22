@@ -87,5 +87,5 @@ $ pytest --cov=app/
 # Acknowledgements
 * Andela workshops
 * Team 8
-# Author: Brian Misocho
+# Author: Brian Misocho Morang'a
 
